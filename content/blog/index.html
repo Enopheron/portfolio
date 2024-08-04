@@ -24,6 +24,7 @@ ul.task-list li input[type="checkbox"] {
 
 
 <script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
 <script src="../../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
@@ -79,7 +80,7 @@ ul.task-list li input[type="checkbox"] {
     }
 
     const options = {
-      valueNames: ['listing-title','listing-subtitle','listing-author','listing-description','listing-date','listing-image','listing-reading-time',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] }],
+      valueNames: ['listing-title','listing-categories','listing-date','listing-image','listing-reading-time',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] }],
       
       searchColumns: ["listing-title","listing-date","listing-author"],
     };
@@ -99,6 +100,7 @@ ul.task-list li input[type="checkbox"] {
   })
   </script>
 <style>html{ scroll-behavior: smooth; }</style>
+<style>:root{--animate-duration:3s;--animate-delay:2s;--animate-repeat:1}</style>
 <style>:root{--animate-duration:3s;--animate-delay:2s;--animate-repeat:1}</style>
 <style>:root{--animate-duration:3s;--animate-delay:2s;--animate-repeat:1}</style>
 <style>:root{--animate-duration:3s;--animate-delay:2s;--animate-repeat:1}</style>
@@ -135,16 +137,6 @@ window.Quarto = {
 </script>
 
 <link rel="stylesheet" href="../../styles.css">
-<link rel="alternate" type="application/rss+xml" title="Владимир Шевченко" href="index.xml" data-external="1"><meta property="og:title" content="Владимир Шевченко - Блог">
-<meta property="og:description" content="Здесь вы можете познакомиться с моими попытками обучения, а также прочитать о других полезных моментах.">
-<meta property="og:image" content="https://eno.github.io/content/blog/cover.png">
-<meta property="og:site_name" content="Владимир Шевченко">
-<meta name="twitter:title" content="Шевченко Владимир">
-<meta name="twitter:description" content="Здесь вы можете познакомиться с моими попытками обучения, а также прочитать о других полезных моментах.">
-<meta name="twitter:image" content="https://eno.github.io/content/blog/cover.png">
-<meta name="twitter:creator" content="@Eno">
-<meta name="twitter:site" content="@Eno">
-<meta name="twitter:card" content="summary_large_image">
 </head>
 
 <body class="nav-fixed">
@@ -187,7 +179,6 @@ window.Quarto = {
 </ul>
           </div> <!-- /navcollapse -->
           <div class="quarto-navbar-tools">
-    <a href="https://github.com/Enopheron" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-code-slash"></i></a>
 </div>
       </div> <!-- /container-fluid -->
     </nav>
@@ -220,7 +211,7 @@ window.Quarto = {
 </header>
 
 
-<p><span class="animate__animated animate__fadeInDown" style="display: inline-block;">Здесь вы можете познакомиться с моими попытками обучения, а также прочитать о других полезных моментах.</span></p>
+<p><span class="animate__animated animate__fadeInDown" style="display: inline-block;">На этой странице я делюсь своим опытом, новыми знаниями и интересными находками</span></p>
 <div class="animate__animated animate__slideInLeft animate__duration-250ms">
 <!-- ### Featured Posts
 :::{#featured}
@@ -243,9 +234,6 @@ window.Quarto = {
          <option value="listing-date-sort" data-direction="desc">
           Дата - Новейшие
         </option>
-         <option value="listing-author" data-direction="asc">
-          Автор
-        </option>
      </select>
   </div>
     <div class="input-group input-group-sm quarto-listing-filter">
@@ -254,7 +242,7 @@ window.Quarto = {
     </div>
 </div>
 <div class="list quarto-listing-default">
-<div class="quarto-post image-left" data-index="0" data-categories="pkm,org,roam" data-listing-date-sort="1722546000000" data-listing-file-modified-sort="1722787986189" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="393">
+<div class="quarto-post image-left" data-index="0" data-categories="pkm,org,roam" data-listing-date-sort="1722546000000" data-listing-file-modified-sort="1723186061755" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="393">
 <div class="thumbnail">
 <p><a href="../../content/blog/posts/b2.html" class="no-external"></a></p><a href="../../content/blog/posts/b2.html" class="no-external">
 <p class="card-img-top"><img src="images/b2/Roam_UI.png"  class="thumbnail-image card-img"/></p>
@@ -265,10 +253,18 @@ window.Quarto = {
 <a href="../../content/blog/posts/b2.html" class="no-external">Персональная база знаний</a>
 </h3>
 <div class="listing-subtitle">
-<a href="../../content/blog/posts/b2.html" class="no-external"></a>
-</div>
-<div class="listing-description">
 <a href="../../content/blog/posts/b2.html" class="no-external">Org Roam</a>
+</div>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('pkm'); return false;">
+pkm
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('org'); return false;">
+org
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('roam'); return false;">
+roam
+</div>
 </div>
 </div>
 <div class="metadata">
@@ -282,7 +278,7 @@ window.Quarto = {
 </a>
 </div>
 </div>
-<div class="quarto-post image-left" data-index="1" data-categories="emacs,vscode,neovim,IDE" data-listing-date-sort="1720645200000" data-listing-file-modified-sort="1722787976519" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="772">
+<div class="quarto-post image-left" data-index="1" data-categories="emacs,vscode,neovim,IDE" data-listing-date-sort="1720645200000" data-listing-file-modified-sort="1723185967538" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="754">
 <div class="thumbnail">
 <p><a href="../../content/blog/posts/b1.html" class="no-external"></a></p><a href="../../content/blog/posts/b1.html" class="no-external">
 <p class="card-img-top"><img src="images/b1/emacs_vanille.png"  class="thumbnail-image card-img"/></p>
@@ -293,10 +289,21 @@ window.Quarto = {
 <a href="../../content/blog/posts/b1.html" class="no-external">Emacs против других IDE</a>
 </h3>
 <div class="listing-subtitle">
-<a href="../../content/blog/posts/b1.html" class="no-external"></a>
-</div>
-<div class="listing-description">
 <a href="../../content/blog/posts/b1.html" class="no-external">знакомы с Emacs?</a>
+</div>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('emacs'); return false;">
+emacs
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('vscode'); return false;">
+vscode
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('neovim'); return false;">
+neovim
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('IDE'); return false;">
+IDE
+</div>
 </div>
 </div>
 <div class="metadata">
@@ -403,7 +410,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   });
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("https:\/\/eno\.github\.io\/");
+      var filterRegex = new RegExp('/' + window.location.host + '/');
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }

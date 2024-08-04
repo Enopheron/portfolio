@@ -24,6 +24,7 @@ ul.task-list li input[type="checkbox"] {
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
 <script src="site_libs/clipboard/clipboard.min.js"></script>
 <script src="site_libs/quarto-search/autocomplete.umd.js"></script>
 <script src="site_libs/quarto-search/fuse.min.js"></script>
@@ -78,9 +79,9 @@ ul.task-list li input[type="checkbox"] {
     }
 
     const options = {
-      valueNames: ['listing-date','listing-title','listing-author','listing-image','listing-description',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
+      valueNames: ['listing-title','listing-categories','listing-image','listing-date','listing-reading-time',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
       
-      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description"],
+      searchColumns: ["listing-date","listing-title","listing-author","listing-subtitle","listing-image","listing-description"],
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
@@ -106,7 +107,7 @@ ul.task-list li input[type="checkbox"] {
     }
 
     const options = {
-      valueNames: ['listing-title','listing-author','listing-date','listing-image','listing-description',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
+      valueNames: ['listing-title','listing-image','listing-date',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
       
       searchColumns: ["listing-title","listing-author","listing-date","listing-image","listing-description"],
     };
@@ -126,6 +127,7 @@ ul.task-list li input[type="checkbox"] {
   })
   </script>
 <style>html{ scroll-behavior: smooth; }</style>
+<style>:root{--animate-duration:3s;--animate-delay:2s;--animate-repeat:1}</style>
 <style>:root{--animate-duration:3s;--animate-delay:2s;--animate-repeat:1}</style>
 <style>:root{--animate-duration:3s;--animate-delay:2s;--animate-repeat:1}</style>
 <style>:root{--animate-duration:3s;--animate-delay:2s;--animate-repeat:1}</style>
@@ -164,16 +166,6 @@ window.Quarto = {
 </script>
 
 <link rel="stylesheet" href="styles.css">
-<meta property="og:title" content="Владимир Шевченко - Приветствую на сайте!">
-<meta property="og:description" content="Портфолио">
-<meta property="og:image" content="https://eno.github.io/cover.png">
-<meta property="og:site_name" content="Владимир Шевченко">
-<meta name="twitter:title" content="Шевченко Владимир">
-<meta name="twitter:description" content="Сайт Eno!">
-<meta name="twitter:image" content="https://eno.github.io/cover.png">
-<meta name="twitter:creator" content="@Eno">
-<meta name="twitter:site" content="@Eno">
-<meta name="twitter:card" content="summary_large_image">
 </head>
 
 <body class="nav-fixed">
@@ -216,7 +208,6 @@ window.Quarto = {
 </ul>
           </div> <!-- /navcollapse -->
           <div class="quarto-navbar-tools">
-    <a href="https://github.com/Enopheron" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-code-slash"></i></a>
 </div>
       </div> <!-- /container-fluid -->
     </nav>
@@ -233,8 +224,6 @@ window.Quarto = {
 
 
 <div class="quarto-about-jolla content column-page">
-  <img src="assets/images/profile.jpg" class="about-image
-  round " style="height: 15em; width: 15em;">
  <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title"><span class="animate__animated animate__bounceIn" style="display: inline-block;">Приветствую на сайте!</span></h1>
@@ -243,9 +232,9 @@ window.Quarto = {
   </div>
 </header><div id="about-eno" class="animate__animated animate__zoomInDown">
 <ul>
-<li>Дополнительно</li>
+<li>На сайте можно ознакомиться с моим портфолио, а так же посетить блог</li>
 <li>Подробнее обо мне <a href="./about.html">здесь</a>.</li>
-<li>Не стесняйтесь связаться со мной с помощью кнопок ниже!</li>
+<li>Не стесняйтесь связаться со мной по ссылкам ниже!</li>
 </ul>
 </div> 
   <hr class="about-sep">
@@ -271,7 +260,7 @@ window.Quarto = {
 <p>Перейдите по <a href="./content/blog/index.html">ссылке</a> для просмотра публикаций в блоге</p>
 <div id="listing-landing-posts" class="quarto-listing quarto-listing-container-default">
 <div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="pkm,org,roam" data-listing-date-sort="1722546000000" data-listing-file-modified-sort="1722787986189" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="393">
+<div class="quarto-post image-right" data-index="0" data-categories="pkm,org,roam" data-listing-date-sort="1722546000000" data-listing-file-modified-sort="1723186061755" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="393">
 <div class="thumbnail">
 <p><a href="./content/blog/posts/b2.html" class="no-external"></a></p><a href="./content/blog/posts/b2.html" class="no-external">
 <p class="card-img-top"><img src="content/blog/images/b2/Roam_UI.png"  class="thumbnail-image card-img"/></p>
@@ -282,21 +271,32 @@ window.Quarto = {
 <a href="./content/blog/posts/b2.html" class="no-external">Персональная база знаний</a>
 </h3>
 <div class="listing-subtitle">
-<a href="./content/blog/posts/b2.html" class="no-external"></a>
-</div>
-<div class="listing-description">
 <a href="./content/blog/posts/b2.html" class="no-external">Org Roam</a>
+</div>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('pkm'); return false;">
+pkm
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('org'); return false;">
+org
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('roam'); return false;">
+roam
+</div>
 </div>
 </div>
 <div class="metadata">
 <a href="./content/blog/posts/b2.html" class="no-external">
 <div class="listing-date">
-2 авг. 2024 г.
+02 авг.
+</div>
+<div class="listing-reading-time">
+2 минут
 </div>
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="1" data-categories="emacs,vscode,neovim,IDE" data-listing-date-sort="1720645200000" data-listing-file-modified-sort="1722787976519" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="772">
+<div class="quarto-post image-right" data-index="1" data-categories="emacs,vscode,neovim,IDE" data-listing-date-sort="1720645200000" data-listing-file-modified-sort="1723185967538" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="754">
 <div class="thumbnail">
 <p><a href="./content/blog/posts/b1.html" class="no-external"></a></p><a href="./content/blog/posts/b1.html" class="no-external">
 <p class="card-img-top"><img src="content/blog/images/b1/emacs_vanille.png"  class="thumbnail-image card-img"/></p>
@@ -307,16 +307,30 @@ window.Quarto = {
 <a href="./content/blog/posts/b1.html" class="no-external">Emacs против других IDE</a>
 </h3>
 <div class="listing-subtitle">
-<a href="./content/blog/posts/b1.html" class="no-external"></a>
-</div>
-<div class="listing-description">
 <a href="./content/blog/posts/b1.html" class="no-external">знакомы с Emacs?</a>
+</div>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('emacs'); return false;">
+emacs
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('vscode'); return false;">
+vscode
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('neovim'); return false;">
+neovim
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('IDE'); return false;">
+IDE
+</div>
 </div>
 </div>
 <div class="metadata">
 <a href="./content/blog/posts/b1.html" class="no-external">
 <div class="listing-date">
-11 июл. 2024 г.
+11 июля
+</div>
+<div class="listing-reading-time">
+4 минут
 </div>
 </a>
 </div>
@@ -332,7 +346,7 @@ window.Quarto = {
 <p>Перейдите по <a href="./content/portfolio/index.html">ссылке</a> для просмотра публикаций в портфолио</p>
 <div id="listing-landing-portfolio" class="quarto-listing quarto-listing-container-grid">
 <div class="list grid quarto-listing-cols-3">
-<div class="g-col-1" data-index="0" data-categories="Python,Веб-скрейпинг" data-listing-date-sort="1721422800000" data-listing-file-modified-sort="1722788006739" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="9" data-listing-word-count-sort="1728">
+<div class="g-col-1" data-index="0" data-categories="Python,Веб-скрейпинг" data-listing-date-sort="1721422800000" data-listing-file-modified-sort="1723185591305" data-listing-date-modified-sort="1722891600000" data-listing-reading-time-sort="10" data-listing-word-count-sort="1975">
 <a href="./content/portfolio/posts/p5.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
 <p class="card-img-top"><img src="content/portfolio/images/p5/result_hh_xlsx.png" style="height: 150px;"  class="thumbnail-image card-img"/></p>
@@ -340,22 +354,16 @@ window.Quarto = {
 <h5 class="no-anchor card-title listing-title">
 Веб-скрейпинг
 </h5>
-<div class="card-text listing-description">
-requests bs4
-</div>
-<div class="card-attribution card-text-small justify">
-<div class="listing-author">
-
-</div>
+<div class="card-attribution card-text-small end">
 <div class="listing-date">
-20 июл. 2024 г.
+20 июля 2024
 </div>
 </div>
 </div>
 </div>
 </a>
 </div>
-<div class="g-col-1" data-index="1" data-categories="R,xlsx" data-listing-date-sort="1720558800000" data-listing-file-modified-sort="1722788001689" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="612">
+<div class="g-col-1" data-index="1" data-categories="R,xlsx" data-listing-date-sort="1720558800000" data-listing-file-modified-sort="1723185559305" data-listing-date-modified-sort="1720558800000" data-listing-reading-time-sort="4" data-listing-word-count-sort="612">
 <a href="./content/portfolio/posts/p4.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
 <p class="card-img-top"><img src="content/portfolio/images/p4/custome_export_date.png" style="height: 150px;"  class="thumbnail-image card-img"/></p>
@@ -363,22 +371,16 @@ requests bs4
 <h5 class="no-anchor card-title listing-title">
 Красивый экспорт в Excel (xlsx)
 </h5>
-<div class="card-text listing-description">
-openxlsx
-</div>
-<div class="card-attribution card-text-small justify">
-<div class="listing-author">
-
-</div>
+<div class="card-attribution card-text-small end">
 <div class="listing-date">
-10 июл. 2024 г.
+10 июля 2024
 </div>
 </div>
 </div>
 </div>
 </a>
 </div>
-<div class="g-col-1" data-index="2" data-categories="R,Графики" data-listing-date-sort="1720213200000" data-listing-file-modified-sort="1722698801886" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="101">
+<div class="g-col-1" data-index="2" data-categories="R,Графики" data-listing-date-sort="1720213200000" data-listing-file-modified-sort="1723184962648" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="101">
 <a href="./content/portfolio/posts/p3.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
 <p class="card-img-top"><img src="content/portfolio/posts/p3_files/figure-html/unnamed-chunk-2-1.png" style="height: 150px;"  class="thumbnail-image card-img"/></p>
@@ -386,22 +388,16 @@ openxlsx
 <h5 class="no-anchor card-title listing-title">
 Продажа твердого сыра
 </h5>
-<div class="card-text listing-description">
-plotrix
-</div>
-<div class="card-attribution card-text-small justify">
-<div class="listing-author">
-
-</div>
+<div class="card-attribution card-text-small end">
 <div class="listing-date">
-6 июл. 2024 г.
+06 июля 2024
 </div>
 </div>
 </div>
 </div>
 </a>
 </div>
-<div class="g-col-1" data-index="3" data-categories="R,Python,Графики" data-listing-date-sort="1719954000000" data-listing-file-modified-sort="1722698709553" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="170">
+<div class="g-col-1" data-index="3" data-categories="R,Python,Графики" data-listing-date-sort="1719954000000" data-listing-file-modified-sort="1723184871758" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="170">
 <a href="./content/portfolio/posts/p2.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
 <p class="card-img-top"><img src="content/portfolio/posts/p2_files/figure-html/unnamed-chunk-2-1.png" style="height: 150px;"  class="thumbnail-image card-img"/></p>
@@ -409,22 +405,16 @@ plotrix
 <h5 class="no-anchor card-title listing-title">
 Разрез выручки
 </h5>
-<div class="card-text listing-description">
-webr, plotly
-</div>
-<div class="card-attribution card-text-small justify">
-<div class="listing-author">
-
-</div>
+<div class="card-attribution card-text-small end">
 <div class="listing-date">
-3 июл. 2024 г.
+03 июля 2024
 </div>
 </div>
 </div>
 </div>
 </a>
 </div>
-<div class="g-col-1" data-index="4" data-categories="R,Графики" data-listing-date-sort="1719781200000" data-listing-file-modified-sort="1722698588053" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="847">
+<div class="g-col-1" data-index="4" data-categories="R,Графики" data-listing-date-sort="1719781200000" data-listing-file-modified-sort="1723639792483" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="847">
 <a href="./content/portfolio/posts/p1.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
 <p class="card-img-top"><img src="content/portfolio/posts/p1_files/figure-html/unnamed-chunk-2-1.png" style="height: 150px;"  class="thumbnail-image card-img"/></p>
@@ -432,15 +422,9 @@ webr, plotly
 <h5 class="no-anchor card-title listing-title">
 Продажи предприятий
 </h5>
-<div class="card-text listing-description">
-ggplot2, scales
-</div>
-<div class="card-attribution card-text-small justify">
-<div class="listing-author">
-
-</div>
+<div class="card-attribution card-text-small end">
 <div class="listing-date">
-1 июл. 2024 г.
+01 июля 2024
 </div>
 </div>
 </div>
@@ -534,7 +518,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   });
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("https:\/\/eno\.github\.io\/");
+      var filterRegex = new RegExp('/' + window.location.host + '/');
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }

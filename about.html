@@ -24,6 +24,7 @@ ul.task-list li input[type="checkbox"] {
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
 <script src="site_libs/clipboard/clipboard.min.js"></script>
 <script src="site_libs/quarto-search/autocomplete.umd.js"></script>
 <script src="site_libs/quarto-search/fuse.min.js"></script>
@@ -74,19 +75,10 @@ ul.task-list li input[type="checkbox"] {
 <style>:root{--animate-duration:3s;--animate-delay:2s;--animate-repeat:1}</style>
 <style>:root{--animate-duration:3s;--animate-delay:2s;--animate-repeat:1}</style>
 <style>:root{--animate-duration:3s;--animate-delay:2s;--animate-repeat:1}</style>
+<style>:root{--animate-duration:3s;--animate-delay:2s;--animate-repeat:1}</style>
 
 
 <link rel="stylesheet" href="styles.css">
-<meta property="og:title" content="Владимир Шевченко - Шевченко Владимир Владимирович">
-<meta property="og:description" content="Портфолио">
-<meta property="og:image" content="https://eno.github.io/cover.png">
-<meta property="og:site_name" content="Владимир Шевченко">
-<meta name="twitter:title" content="Шевченко Владимир">
-<meta name="twitter:description" content="Сайт Eno!">
-<meta name="twitter:image" content="https://eno.github.io/cover.png">
-<meta name="twitter:creator" content="@Eno">
-<meta name="twitter:site" content="@Eno">
-<meta name="twitter:card" content="summary_large_image">
 </head>
 
 <body class="nav-fixed fullcontent">
@@ -129,7 +121,6 @@ ul.task-list li input[type="checkbox"] {
 </ul>
           </div> <!-- /navcollapse -->
           <div class="quarto-navbar-tools">
-    <a href="https://github.com/Enopheron" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-code-slash"></i></a>
 </div>
       </div> <!-- /container-fluid -->
     </nav>
@@ -487,7 +478,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   });
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("https:\/\/eno\.github\.io\/");
+      var filterRegex = new RegExp('/' + window.location.host + '/');
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }

@@ -6,7 +6,6 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="description" content="plotrix">
 
 <title>Владимир Шевченко - Продажа твердого сыра</title>
 <style>
@@ -25,12 +24,13 @@ ul.task-list li input[type="checkbox"] {
 
 
 <script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
 <script src="../../../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
 <script src="../../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../../">
-<link href="../../../_assets/images/icons/favicon.ico" rel="icon">
+<link href="../../../assets/images/icons/favicon.ico" rel="icon">
 <script src="../../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -71,16 +71,6 @@ ul.task-list li input[type="checkbox"] {
 
 
 <link rel="stylesheet" href="../../../styles.css">
-<meta property="og:title" content="Владимир Шевченко - Продажа твердого сыра">
-<meta property="og:description" content="Портфолио">
-<meta property="og:image" content="https://eno.github.io/content/portfolio/posts/cover.png">
-<meta property="og:site_name" content="Владимир Шевченко">
-<meta name="twitter:title" content="Шевченко Владимир">
-<meta name="twitter:description" content="Сайт Eno!">
-<meta name="twitter:image" content="https://eno.github.io/content/portfolio/posts/cover.png">
-<meta name="twitter:creator" content="@Eno">
-<meta name="twitter:site" content="@Eno">
-<meta name="twitter:card" content="summary_large_image">
 </head>
 
 <body class="nav-fixed">
@@ -123,13 +113,12 @@ ul.task-list li input[type="checkbox"] {
 </ul>
           </div> <!-- /navcollapse -->
           <div class="quarto-navbar-tools">
-    <a href="https://github.com/Enopheron" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-code-slash"></i></a>
 </div>
       </div> <!-- /container-fluid -->
     </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
@@ -137,36 +126,32 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Содержание</h2>
    
   <ul>
-  <li><a href="#продажи-в-разрезе-видов-продукта" id="toc-продажи-в-разрезе-видов-продукта" class="nav-link active" data-scroll-target="#продажи-в-разрезе-видов-продукта"><span class="header-section-number">1</span> Продажи в разрезе видов продукта</a></li>
+  <li><a href="#продажи-в-разрезе-видов-продукта" id="toc-продажи-в-разрезе-видов-продукта" class="nav-link active" data-scroll-target="#продажи-в-разрезе-видов-продукта">Продажи в разрезе видов продукта</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content column-page-left" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">Продажа твердого сыра</h1>
+<p class="subtitle lead">plotrix</p>
   <div class="quarto-categories">
     <div class="quarto-category">R</div>
     <div class="quarto-category">Графики</div>
   </div>
   </div>
 
-<div>
-  <div class="description">
-    plotrix
-  </div>
-</div>
 
 
-<div class="quarto-title-meta">
+<div class="quarto-title-meta column-page-left">
 
     
     <div>
     <div class="quarto-title-meta-heading">Дата публикации</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">суббота, 06 июля 2024</p>
+      <p class="date">6 июля 2024 г.</p>
     </div>
   </div>
   
@@ -178,8 +163,8 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="продажи-в-разрезе-видов-продукта" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> Продажи в разрезе видов продукта</h1>
+<section id="продажи-в-разрезе-видов-продукта" class="level1">
+<h1>Продажи в разрезе видов продукта</h1>
 <p>Пример круговой диаграммы используя библиотеку <strong>plotrix</strong></p>
 <div class="cell">
 <div class="cell-output-display">
@@ -276,7 +261,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   });
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("https:\/\/eno\.github\.io\/");
+      var filterRegex = new RegExp('/' + window.location.host + '/');
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
@@ -632,7 +617,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   </li>  
     <li class="nav-item compact">
     <a class="nav-link" href="mailto:Владимир_Владимирович+enopheron@yandex.ru">
-      <i class="bi bi-envelope" role="img">
+      <i class="bi bi-envelope-fill" role="img">
 </i> 
     </a>
   </li>  

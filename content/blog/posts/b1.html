@@ -6,7 +6,6 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="description" content="знакомы с Emacs?">
 
 <title>Владимир Шевченко - Emacs против других IDE</title>
 <style>
@@ -25,12 +24,13 @@ ul.task-list li input[type="checkbox"] {
 
 
 <script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
 <script src="../../../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
 <script src="../../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../../">
-<link href="../../../_assets/images/icons/favicon.ico" rel="icon">
+<link href="../../../assets/images/icons/favicon.ico" rel="icon">
 <script src="../../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -71,16 +71,6 @@ ul.task-list li input[type="checkbox"] {
 
 
 <link rel="stylesheet" href="../../../styles.css">
-<meta property="og:title" content="Владимир Шевченко - Emacs против других IDE">
-<meta property="og:description" content="Портфолио">
-<meta property="og:image" content="https://eno.github.io/content/blog/posts/cover.png">
-<meta property="og:site_name" content="Владимир Шевченко">
-<meta name="twitter:title" content="Шевченко Владимир">
-<meta name="twitter:description" content="Сайт Eno!">
-<meta name="twitter:image" content="https://eno.github.io/content/blog/posts/cover.png">
-<meta name="twitter:creator" content="@Eno">
-<meta name="twitter:site" content="@Eno">
-<meta name="twitter:card" content="summary_large_image">
 </head>
 
 <body class="nav-fixed">
@@ -123,13 +113,12 @@ ul.task-list li input[type="checkbox"] {
 </ul>
           </div> <!-- /navcollapse -->
           <div class="quarto-navbar-tools">
-    <a href="https://github.com/Enopheron" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-code-slash"></i></a>
 </div>
       </div> <!-- /container-fluid -->
     </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
@@ -150,11 +139,12 @@ ul.task-list li input[type="checkbox"] {
 </nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content column-page-left" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">Emacs против других IDE</h1>
+<p class="subtitle lead">знакомы с Emacs?</p>
   <div class="quarto-categories">
     <div class="quarto-category">emacs</div>
     <div class="quarto-category">vscode</div>
@@ -163,20 +153,15 @@ ul.task-list li input[type="checkbox"] {
   </div>
   </div>
 
-<div>
-  <div class="description">
-    знакомы с Emacs?
-  </div>
-</div>
 
 
-<div class="quarto-title-meta">
+<div class="quarto-title-meta column-page-left">
 
     
     <div>
     <div class="quarto-title-meta-heading">Дата публикации</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">четверг, 11 июля 2024</p>
+      <p class="date">11 июля 2024 г.</p>
     </div>
   </div>
   
@@ -197,19 +182,21 @@ ul.task-list li input[type="checkbox"] {
 <p><img src="../images/b1/emacs_vanille.png" class="img-fluid"></p>
 <p>Не очень привлекательно…<br> Но внеся изменения в файл конфигурации можно получить такой вид</p>
 <p><img src="../images/b1/demacs.png" class="img-fluid"></p>
-<p>Впрочем, это только визуалальная сторона, <em>Emacs</em> так же может удивить по функциональности</p>
+<p>Впрочем, это только визуалальная сторона, Emacs так же может удивить по функциональности</p>
 </section>
 <section id="функциональность" class="level2">
 <h2 class="anchored" data-anchor-id="функциональность">Функциональность</h2>
-<p><em>Emacs</em> - это не просто текстовый редактор, у него есть терминал, браузер, файловый менеджер, менеджер задач, возможность просматривать изображения, pdf файлы… А еще есть org mode! И все это “из коробки”! Казалось бы, это не редактор, это контейнер с утилитами, он наверное долго грузиться и медленно работает? Запускается <em>emacs</em> за <strong><em>&gt;0.1s!</em></strong> при этом потребляет <strong><em>~30мб</em></strong> ОЗУ! Да… Умели раньше делать софт!</p>
-<p>Конечно в этом есть подвох, это показатели “ванильного” Emacs, то есть, Emacs из коробки без настроек (вспомним первое фото поста), мой рабочий(настроенный) emacs запускается за <strong><em>~0.45сек</em></strong> и потребляет <strong><em>~90мб</em></strong>, сравните с популярными IDE (а я дальше сравню!)</p>
+<p><em>Emacs</em> - это не просто текстовый редактор, у него есть терминал, браузер, файловый менеджер, менеджер задач, возможность просматривать изображения, pdf файлы… А еще есть org mode! И все это “из коробки”! Казалось бы, это не редактор, это контейнер с утилитами, он наверное долго грузиться и медленно работает? Запускается emacs за <strong><em>&gt;0.1s!</em></strong> при этом потребляет <strong><em>~30мб</em></strong> ОЗУ! Да… Умели раньше делать софт!</p>
+<blockquote class="blockquote">
+<p>Конечно в этом есть подвох, это показатели “ванильного”, без настроек (вспомним первое фото поста), мой рабочий(настроенный) emacs запускается за <strong><em>~0.45сек</em></strong> и потребляет <strong><em>~90мб</em></strong>, сравните с популярными IDE</p>
+</blockquote>
 <p>Ванильный Emacs представляет собой ядро на которое налаживаются пакеты и настройки для того что бы подстроить редактор под себя. Начиная от внешнего вида, заканчивая горячими клавишами. <br> Можно задаться вопросом, разве популярные IDE не дают возможность настроить hotkeys и темы? Да, дают, но в меру, очень быстро можно упереться в потолок. Emacs это GUI для языка Emacs Lisp, используя этот язык можно программировать сам Emacs, его поведение, реализовывать дополнительный функционал, это не просто визуальная настройка, это реализация недостающего функционала. Кто увлекается программированием, и не сторонник “IDE из коробки работает - мне этого хватает” - того Emacs может приятно удивить</p>
 </section>
 <section id="org-mode-и-agenda" class="level2">
 <h2 class="anchored" data-anchor-id="org-mode-и-agenda">Org mode и Agenda</h2>
 <p>У Emacs есть много режимов, вкратце затрагивал в разделе <a href="#функциональность">функциональность</a>, но о 2х режимах расскажу немного больше.</p>
 <p><strong>Org mode</strong> - этот режим дает возможность писать наподобие markdown (по возможностям markdown это верхушка айсберга). В org mode можно использовать маркировки для выделения текста, ставить оглавления, вставлять блоки кода, таблицы, сноски, а так же можно экспортировать блоки кода в файл(ы) и экспортировать в другие форматы… Это очень мощный мод в котором я пишу конфигурации к приложениям.<br> Это уникальный подход, который дает удобно описывать (комментировать) вне блоков кода, а сам код экспортировать в нужный файл без комментариев.</p>
-<p><strong><em>Agenda</em></strong> - менеджер задач, который берет задачи из org файлов. Задачам можно назначить приоритет, статус, теги, можно настроить иерархию отображения, назначить scheduled и deadlaine, effort и множество других опций</p>
+<p><strong>Agenda</strong> - менеджер задач, который берет задачи из org файлов. Задачам можно назначить приоритет, статус, теги, можно настроить иерархию отображения, назначить scheduled и deadlaine, effort и множество других опций</p>
 </section>
 </section>
 <section id="emacs-vs-ide" class="level1">
@@ -223,9 +210,11 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="заключение" class="level1">
 <h1>Заключение</h1>
-<p>Я использовал <strong>VSCode</strong>, <strong>RStudio</strong> а так же <strong>Nvim</strong> но <em>Emacs</em> существенно увеличил мою продуктивность, его мощные режимы отточенные десятилетиями включают в себя 99% того что мне нужно (а 1% так уж и быть, я допишу =).<br> Множество пакетов, единая экосистема, высокая оптимизация и свободный код - ставит Emacs выше конкурентов</p>
-<p>Как я использую Emacs:<br> Пишу на <em>Python</em>, <em>R</em>, <em>Go</em>, <em>Quarto</em>, к слову этот пост так же пишу в Emacs, пишу конфигурации в Org режиме, и часто бегаю по файлам в файловом менеджере Emacs! <br>Моя персональная база знаний pkm в Emacs (пакет <strong>org-roam</strong> и <strong>org-roam-ui</strong>), а так же использую agenda как менеджер задач, читаю книги в pdf в настроенной тёмной теме (не инвертированной, а настроенной цвет фона и текста в ручную, пакет <strong>pdf-tools</strong>, который дает возможность аннотировать).</p>
-<p>Могу продолжать дальше, но пусть эти “открытия” (в каких областях еще можно использовать Emacs) останутся для тех кто все же решиться его попробовать<br></p>
+<p>Я использовал <strong>VSCode</strong>, <strong>RStudio</strong> а так же <strong>Nvim</strong> но <em>Emacs</em> существенно увеличил мою продуктивность, его мощные режимы отточенные десятилетиями включают хороший функционал который работает без сюрпризов.<br> Множество пакетов, единая экосистема, высокая оптимизация и свободный код - ставит Emacs выше конкурентов</p>
+<blockquote class="blockquote">
+<p>Как я использую Emacs:<br> Пишу на <strong><em>Python</em></strong>, <strong><em>R</em></strong>, <strong><em>Go</em></strong>, <strong><em>Quarto</em></strong>, к слову <strong><em>этот пост</em></strong> так же пишу в Emacs, пишу <strong><em>конфигурации</em></strong> в Org режиме, и часто бегаю по файлам в <strong><em>файловом менеджере</em></strong> Emacs! <br>Моя персональная <strong><em>база знаний pkm</em></strong> в Emacs (пакет <strong>org-roam</strong> и <strong>org-roam-ui</strong>), а так же использую agenda как <strong><em>менеджер задач</em></strong>, <strong><em>читаю книги</em></strong> в pdf в настроенной тёмной теме (не инвертированной, а настроенной цвет фона и текста в ручную, пакет <strong>pdf-tools</strong>, который дает возможность аннотировать).</p>
+</blockquote>
+<p><strong><em>Могу продолжать дальше…</em></strong>, но пусть эти “открытия” (в каких областях еще можно использовать Emacs) останутся для тех кто все же решиться его попробовать<br></p>
 <p>И все это в одной программе, которая запускается за <strong><em>0.45сек</em></strong> и занимает <strong><em>~90мб</em></strong>!<br> Да… Умели раньше делать софт=)</p>
 <p>Мой внешний вид Emacs (ночная / дневная тема)</p>
 <p><img src="../images/b1/my_emacs.png" class="img-fluid"></p>
@@ -315,7 +304,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   });
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("https:\/\/eno\.github\.io\/");
+      var filterRegex = new RegExp('/' + window.location.host + '/');
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
@@ -671,7 +660,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   </li>  
     <li class="nav-item compact">
     <a class="nav-link" href="mailto:Владимир_Владимирович+enopheron@yandex.ru">
-      <i class="bi bi-envelope" role="img">
+      <i class="bi bi-envelope-fill" role="img">
 </i> 
     </a>
   </li>  

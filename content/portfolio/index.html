@@ -24,6 +24,7 @@ ul.task-list li input[type="checkbox"] {
 
 
 <script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
 <script src="../../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
@@ -79,7 +80,7 @@ ul.task-list li input[type="checkbox"] {
     }
 
     const options = {
-      valueNames: ['listing-title','listing-subtitle','listing-author','listing-description','listing-date','listing-image','listing-reading-time',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] }],
+      valueNames: ['listing-title','listing-categories','listing-date','listing-image','listing-reading-time',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] }],
       
       searchColumns: ["listing-title","listing-date","listing-auther"],
     };
@@ -99,6 +100,7 @@ ul.task-list li input[type="checkbox"] {
   })
   </script>
 <style>html{ scroll-behavior: smooth; }</style>
+<style>:root{--animate-duration:3s;--animate-delay:2s;--animate-repeat:1}</style>
 <style>:root{--animate-duration:3s;--animate-delay:2s;--animate-repeat:1}</style>
 <style>:root{--animate-duration:3s;--animate-delay:2s;--animate-repeat:1}</style>
 <style>:root{--animate-duration:3s;--animate-delay:2s;--animate-repeat:1}</style>
@@ -134,16 +136,6 @@ window.Quarto = {
 </script>
 
 <link rel="stylesheet" href="../../styles.css">
-<meta property="og:title" content="Владимир Шевченко - Портфолио">
-<meta property="og:description" content="Здесь вы можете познакомиться с моими попытками обучения, а также прочитать о других полезных моментах.">
-<meta property="og:image" content="https://eno.github.io/content/portfolio/cover.png">
-<meta property="og:site_name" content="Владимир Шевченко">
-<meta name="twitter:title" content="Шевченко Владимир">
-<meta name="twitter:description" content="Здесь вы можете познакомиться с моими попытками обучения, а также прочитать о других полезных моментах.">
-<meta name="twitter:image" content="https://eno.github.io/content/portfolio/cover.png">
-<meta name="twitter:creator" content="@Eno">
-<meta name="twitter:site" content="@Eno">
-<meta name="twitter:card" content="summary_large_image">
 </head>
 
 <body class="nav-fixed">
@@ -186,7 +178,6 @@ window.Quarto = {
 </ul>
           </div> <!-- /navcollapse -->
           <div class="quarto-navbar-tools">
-    <a href="https://github.com/Enopheron" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-code-slash"></i></a>
 </div>
       </div> <!-- /container-fluid -->
     </nav>
@@ -221,7 +212,7 @@ window.Quarto = {
 
 
 <div class="animate__animated animate__bounceInUp animate__duration-faster">
-<p>Данная страница представляет собой визуальное и текстовое приставление интересных результатов<br> Здесь я собрал наиболее яркие примеры моих работ</p>
+<p>Страница содержит визуальные и текстовые примеры интересных результатов</p>
 </div>
 <div id="listing-portfolio" class="animate__animated animate__bounceInDown animate__duration-faster quarto-listing quarto-listing-container-grid">
 <div class="listing-actions-group">
@@ -236,9 +227,6 @@ window.Quarto = {
          <option value="listing-date-sort" data-direction="desc">
           Дата - Новейшие
         </option>
-         <option value="listing-author" data-direction="asc">
-          Автор
-        </option>
      </select>
   </div>
     <div class="input-group input-group-sm quarto-listing-filter">
@@ -247,7 +235,7 @@ window.Quarto = {
     </div>
 </div>
 <div class="list grid quarto-listing-cols-3">
-<div class="g-col-1" data-index="0" data-categories="R,Python,Графики" data-listing-date-sort="1719954000000" data-listing-file-modified-sort="1722698709553" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="170">
+<div class="g-col-1" data-index="0" data-categories="R,Python,Графики" data-listing-date-sort="1719954000000" data-listing-file-modified-sort="1723184871758" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="170">
 <a href="../../content/portfolio/posts/p2.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
 <p class="card-img-top"><img src="posts/p2_files/figure-html/unnamed-chunk-2-1.png" style="height: 150px;"  class="thumbnail-image card-img"/></p>
@@ -258,13 +246,18 @@ window.Quarto = {
 <div class="listing-reading-time card-text text-muted">
 1 минут
 </div>
-<div class="card-text listing-description">
-webr, plotly
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('R'); return false;">
+R
 </div>
-<div class="card-attribution card-text-small justify">
-<div class="listing-author">
-
+<div class="listing-category" onclick="window.quartoListingCategory('Python'); return false;">
+Python
 </div>
+<div class="listing-category" onclick="window.quartoListingCategory('Графики'); return false;">
+Графики
+</div>
+</div>
+<div class="card-attribution card-text-small end">
 <div class="listing-date">
 03 июля 2024
 </div>
@@ -273,7 +266,7 @@ webr, plotly
 </div>
 </a>
 </div>
-<div class="g-col-1" data-index="1" data-categories="R,Графики" data-listing-date-sort="1719781200000" data-listing-file-modified-sort="1722698588053" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="847">
+<div class="g-col-1" data-index="1" data-categories="R,Графики" data-listing-date-sort="1719781200000" data-listing-file-modified-sort="1723639792483" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="847">
 <a href="../../content/portfolio/posts/p1.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
 <p class="card-img-top"><img src="posts/p1_files/figure-html/unnamed-chunk-2-1.png" style="height: 150px;"  class="thumbnail-image card-img"/></p>
@@ -284,13 +277,15 @@ webr, plotly
 <div class="listing-reading-time card-text text-muted">
 5 минут
 </div>
-<div class="card-text listing-description">
-ggplot2, scales
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('R'); return false;">
+R
 </div>
-<div class="card-attribution card-text-small justify">
-<div class="listing-author">
-
+<div class="listing-category" onclick="window.quartoListingCategory('Графики'); return false;">
+Графики
 </div>
+</div>
+<div class="card-attribution card-text-small end">
 <div class="listing-date">
 01 июля 2024
 </div>
@@ -299,7 +294,7 @@ ggplot2, scales
 </div>
 </a>
 </div>
-<div class="g-col-1" data-index="2" data-categories="R,Графики" data-listing-date-sort="1720213200000" data-listing-file-modified-sort="1722698801886" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="101">
+<div class="g-col-1" data-index="2" data-categories="R,Графики" data-listing-date-sort="1720213200000" data-listing-file-modified-sort="1723184962648" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="101">
 <a href="../../content/portfolio/posts/p3.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
 <p class="card-img-top"><img src="posts/p3_files/figure-html/unnamed-chunk-2-1.png" style="height: 150px;"  class="thumbnail-image card-img"/></p>
@@ -310,13 +305,15 @@ ggplot2, scales
 <div class="listing-reading-time card-text text-muted">
 1 минут
 </div>
-<div class="card-text listing-description">
-plotrix
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('R'); return false;">
+R
 </div>
-<div class="card-attribution card-text-small justify">
-<div class="listing-author">
-
+<div class="listing-category" onclick="window.quartoListingCategory('Графики'); return false;">
+Графики
 </div>
+</div>
+<div class="card-attribution card-text-small end">
 <div class="listing-date">
 06 июля 2024
 </div>
@@ -325,7 +322,7 @@ plotrix
 </div>
 </a>
 </div>
-<div class="g-col-1" data-index="3" data-categories="R,xlsx" data-listing-date-sort="1720558800000" data-listing-file-modified-sort="1722788001689" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="612">
+<div class="g-col-1" data-index="3" data-categories="R,xlsx" data-listing-date-sort="1720558800000" data-listing-file-modified-sort="1723185559305" data-listing-date-modified-sort="1720558800000" data-listing-reading-time-sort="4" data-listing-word-count-sort="612">
 <a href="../../content/portfolio/posts/p4.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
 <p class="card-img-top"><img src="images/p4/custome_export_date.png" style="height: 150px;"  class="thumbnail-image card-img"/></p>
@@ -336,13 +333,15 @@ plotrix
 <div class="listing-reading-time card-text text-muted">
 4 минут
 </div>
-<div class="card-text listing-description">
-openxlsx
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('R'); return false;">
+R
 </div>
-<div class="card-attribution card-text-small justify">
-<div class="listing-author">
-
+<div class="listing-category" onclick="window.quartoListingCategory('xlsx'); return false;">
+xlsx
 </div>
+</div>
+<div class="card-attribution card-text-small end">
 <div class="listing-date">
 10 июля 2024
 </div>
@@ -351,7 +350,7 @@ openxlsx
 </div>
 </a>
 </div>
-<div class="g-col-1" data-index="4" data-categories="Python,Веб-скрейпинг" data-listing-date-sort="1721422800000" data-listing-file-modified-sort="1722788006739" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="9" data-listing-word-count-sort="1728">
+<div class="g-col-1" data-index="4" data-categories="Python,Веб-скрейпинг" data-listing-date-sort="1721422800000" data-listing-file-modified-sort="1723185591305" data-listing-date-modified-sort="1722891600000" data-listing-reading-time-sort="10" data-listing-word-count-sort="1975">
 <a href="../../content/portfolio/posts/p5.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
 <p class="card-img-top"><img src="images/p5/result_hh_xlsx.png" style="height: 150px;"  class="thumbnail-image card-img"/></p>
@@ -360,15 +359,17 @@ openxlsx
 Веб-скрейпинг
 </h5>
 <div class="listing-reading-time card-text text-muted">
-9 минут
+10 минут
 </div>
-<div class="card-text listing-description">
-requests bs4
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('Python'); return false;">
+Python
 </div>
-<div class="card-attribution card-text-small justify">
-<div class="listing-author">
-
+<div class="listing-category" onclick="window.quartoListingCategory('Веб-скрейпинг'); return false;">
+Веб-скрейпинг
 </div>
+</div>
+<div class="card-attribution card-text-small end">
 <div class="listing-date">
 20 июля 2024
 </div>
@@ -468,7 +469,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   });
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("https:\/\/eno\.github\.io\/");
+      var filterRegex = new RegExp('/' + window.location.host + '/');
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }

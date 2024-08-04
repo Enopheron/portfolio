@@ -6,7 +6,6 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="description" content="requests bs4">
 
 <title>Владимир Шевченко - Веб-скрейпинг</title>
 <style>
@@ -59,12 +58,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
 <script src="../../../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
 <script src="../../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../../">
-<link href="../../../_assets/images/icons/favicon.ico" rel="icon">
+<link href="../../../assets/images/icons/favicon.ico" rel="icon">
 <script src="../../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -105,16 +105,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <link rel="stylesheet" href="../../../styles.css">
-<meta property="og:title" content="Владимир Шевченко - Веб-скрейпинг">
-<meta property="og:description" content="Портфолио">
-<meta property="og:image" content="https://eno.github.io/content/portfolio/posts/cover.png">
-<meta property="og:site_name" content="Владимир Шевченко">
-<meta name="twitter:title" content="Шевченко Владимир">
-<meta name="twitter:description" content="Сайт Eno!">
-<meta name="twitter:image" content="https://eno.github.io/content/portfolio/posts/cover.png">
-<meta name="twitter:creator" content="@Eno">
-<meta name="twitter:site" content="@Eno">
-<meta name="twitter:card" content="summary_large_image">
 </head>
 
 <body class="nav-fixed">
@@ -157,13 +147,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
           </div> <!-- /navcollapse -->
           <div class="quarto-navbar-tools">
-    <a href="https://github.com/Enopheron" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-code-slash"></i></a>
 </div>
       </div> <!-- /container-fluid -->
     </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
@@ -181,34 +170,36 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content column-page-left" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">Веб-скрейпинг</h1>
+<p class="subtitle lead">requests bs4</p>
   <div class="quarto-categories">
     <div class="quarto-category">Python</div>
     <div class="quarto-category">Веб-скрейпинг</div>
   </div>
   </div>
 
-<div>
-  <div class="description">
-    requests bs4
-  </div>
-</div>
 
 
-<div class="quarto-title-meta">
+<div class="quarto-title-meta column-page-left">
 
     
     <div>
     <div class="quarto-title-meta-heading">Дата публикации</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">суббота, 20 июля 2024</p>
+      <p class="date">20 июля 2024 г.</p>
     </div>
   </div>
   
+    <div>
+    <div class="quarto-title-meta-heading">Файл изменен</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date-modified">6 августа 2024 г.</p>
+    </div>
+  </div>
     
   </div>
   
@@ -221,200 +212,299 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="импорт-и-настройки" class="level1">
 <h1>Импорт и настройки</h1>
 <p>Основными библиотеками для парсинга выступают:<br> 1. <em>requests</em> - делает запрос на сайт и получает данные<br> 2. <em>bs4</em> (<strong>BeautifulSoup</strong>) - парсит результат запроса <em>requests</em></p>
-<div id="f3d06e02" class="cell" data-execution_count="1">
-<details class="code-fold">
-<summary>Код</summary>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> requests</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> bs4 <span class="im">import</span> BeautifulSoup</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> polars <span class="im">as</span> pl</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> re</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> xlsxwriter</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> time</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pl.DataFrame({             <span class="co"># 1</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Вакансия"</span>: pl.Series([], dtype<span class="op">=</span>pl.Utf8),</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Зарплата"</span>: pl.Series([], dtype<span class="op">=</span>pl.Int64),</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Keyword"</span>: pl.Series([], dtype<span class="op">=</span>pl.Utf8),</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Tags"</span>: pl.Series([], dtype<span class="op">=</span>pl.Utf8),</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">"URL"</span>: pl.Series([], dtype<span class="op">=</span>pl.Utf8)</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>})</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co">#^2</span></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>start_url <span class="op">=</span> <span class="st">"https://hh.ru/search/vacancy?experience=between1And3&amp;order_by=publication_time&amp;ored_clusters=true&amp;schedule=remote&amp;text=sql&amp;search_period=7"</span></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>url <span class="op">=</span> start_url                 <span class="co"># 3</span></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>headers <span class="op">=</span> {                     <span class="co"># 4</span></span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>    <span class="st">"User-Agent"</span>: <span class="st">"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"</span>,</span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Accept-Language"</span>: <span class="st">"en-US,en;q=0.9"</span>,</span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Accept-Encoding"</span>: <span class="st">"gzip, deflate, br"</span>,</span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Connection"</span>: <span class="st">"keep-alive"</span>,</span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Upgrade-Insecure-Requests"</span>: <span class="st">"1"</span></span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>keywords <span class="op">=</span> [<span class="st">"BPMN"</span>, <span class="st">"Jira"</span>]     <span class="co"># 5</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
+<div id="9bb92a68" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="annotated-cell-1"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-1-1"><a href="#annotated-cell-1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> requests</span>
+<span id="annotated-cell-1-2"><a href="#annotated-cell-1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> bs4 <span class="im">import</span> BeautifulSoup</span>
+<span id="annotated-cell-1-3"><a href="#annotated-cell-1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> polars <span class="im">as</span> pl</span>
+<span id="annotated-cell-1-4"><a href="#annotated-cell-1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> re</span>
+<span id="annotated-cell-1-5"><a href="#annotated-cell-1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> xlsxwriter</span>
+<span id="annotated-cell-1-6"><a href="#annotated-cell-1-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> time</span>
+<span id="annotated-cell-1-7"><a href="#annotated-cell-1-7" aria-hidden="true" tabindex="-1"></a></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-1-8" class="code-annotation-target"><a href="#annotated-cell-1-8" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pl.DataFrame({</span>
+<span id="annotated-cell-1-9"><a href="#annotated-cell-1-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"URL"</span>: pl.Series([], dtype<span class="op">=</span>pl.Utf8),</span>
+<span id="annotated-cell-1-10"><a href="#annotated-cell-1-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Вакансия"</span>: pl.Series([], dtype<span class="op">=</span>pl.Utf8),</span>
+<span id="annotated-cell-1-11"><a href="#annotated-cell-1-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Зарплата"</span>: pl.Series([], dtype<span class="op">=</span>pl.Int64),</span>
+<span id="annotated-cell-1-12"><a href="#annotated-cell-1-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Keyword"</span>: pl.Series([], dtype<span class="op">=</span>pl.Utf8),</span>
+<span id="annotated-cell-1-13"><a href="#annotated-cell-1-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Tags"</span>: pl.Series([], dtype<span class="op">=</span>pl.Utf8)</span>
+<span id="annotated-cell-1-14"><a href="#annotated-cell-1-14" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="annotated-cell-1-15"><a href="#annotated-cell-1-15" aria-hidden="true" tabindex="-1"></a></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-1-16" class="code-annotation-target"><a href="#annotated-cell-1-16" aria-hidden="true" tabindex="-1"></a>query <span class="op">=</span> <span class="st">"excel"</span></span>
+<span id="annotated-cell-1-17"><a href="#annotated-cell-1-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="annotated-cell-1-18"><a href="#annotated-cell-1-18" aria-hidden="true" tabindex="-1"></a>start_url <span class="op">=</span> <span class="ss">f"https://hh.ru/search/vacancy?experience=between1And3&amp;order_by=publication_time&amp;ored_clusters=true&amp;schedule=remote&amp;text=</span><span class="sc">{</span>query<span class="sc">}</span><span class="ss">&amp;search_period=7"</span></span>
+<span id="annotated-cell-1-19"><a href="#annotated-cell-1-19" aria-hidden="true" tabindex="-1"></a></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="3" onclick="event.preventDefault();">3</a><span id="annotated-cell-1-20" class="code-annotation-target"><a href="#annotated-cell-1-20" aria-hidden="true" tabindex="-1"></a>url <span class="op">=</span> start_url</span>
+<span id="annotated-cell-1-21"><a href="#annotated-cell-1-21" aria-hidden="true" tabindex="-1"></a></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="4" onclick="event.preventDefault();">4</a><span id="annotated-cell-1-22" class="code-annotation-target"><a href="#annotated-cell-1-22" aria-hidden="true" tabindex="-1"></a>headers <span class="op">=</span> {</span>
+<span id="annotated-cell-1-23"><a href="#annotated-cell-1-23" aria-hidden="true" tabindex="-1"></a>    <span class="st">"User-Agent"</span>: <span class="st">"Mozilla/5.0 (Windows NT 11.0; Win64; x64) AppleWebKit/538.33 (KHTML, like Gecko) Chrome/98.0.4472.124 Safari/537.36"</span>,</span>
+<span id="annotated-cell-1-24"><a href="#annotated-cell-1-24" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Accept-Language"</span>: <span class="st">"ru-RU,ru;q=0.9"</span>,</span>
+<span id="annotated-cell-1-25"><a href="#annotated-cell-1-25" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Accept-Encoding"</span>: <span class="st">"gzip, deflate, br"</span>,</span>
+<span id="annotated-cell-1-26"><a href="#annotated-cell-1-26" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Connection"</span>: <span class="st">"keep-alive"</span>,</span>
+<span id="annotated-cell-1-27"><a href="#annotated-cell-1-27" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Upgrade-Insecure-Requests"</span>: <span class="st">"1"</span></span>
+<span id="annotated-cell-1-28"><a href="#annotated-cell-1-28" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="annotated-cell-1-29"><a href="#annotated-cell-1-29" aria-hidden="true" tabindex="-1"></a></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="5" onclick="event.preventDefault();">5</a><span id="annotated-cell-1-30" class="code-annotation-target"><a href="#annotated-cell-1-30" aria-hidden="true" tabindex="-1"></a>keywords <span class="op">=</span> [<span class="st">"BPMN"</span>, <span class="st">"Jira"</span>]</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-1" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-1" data-code-lines="8,9,10,11,12,13,14" data-code-annotation="1">создаем пустую таблицу, в эту таблицу будет добавляться найденная информация о вакансиях</span>
+</dd>
+<dt data-target-cell="annotated-cell-1" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-1" data-code-lines="16,18" data-code-annotation="2">стартовая страница запроса, эта строка учитывает указанные фильтры на hh, то есть, можно перейти на hh, указать критерии поиска, выбрать фильтры, а после скопировать ссылку и вставить в скрипт</span>
+</dd>
+<dt data-target-cell="annotated-cell-1" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-cell="annotated-cell-1" data-code-lines="20" data-code-annotation="3">эта ссылка служит основной для перехода, что бы перейти на вторую страницу нужно к ссылке добавить <strong><em>page=номер страницы</em></strong>, я использую код <strong><em>url=f’{start_url}&amp;page={p}’</em></strong> который имеет константу страницы <em>start_url</em>, и конкатинацию в зависимости от итерации цикла</span>
+</dd>
+<dt data-target-cell="annotated-cell-1" data-target-annotation="4">4</dt>
+<dd>
+<span data-code-cell="annotated-cell-1" data-code-lines="22" data-code-annotation="4">эти настройки нужны при запросе <strong>requests.get()</strong>, для имитации, что запрос на страницу делает пользователь, когда сайт запрашивает данные, мы ему предоставляем данные из этого списка</span>
+</dd>
+<dt data-target-cell="annotated-cell-1" data-target-annotation="5">5</dt>
+<dd>
+<span data-code-cell="annotated-cell-1" data-code-lines="30" data-code-annotation="5">ключевые слова, которые скрипт будет искать на страницах вакансий</span>
+</dd>
+</dl>
 </div>
-<ol type="1">
-<li>Создаем пустую таблицу, в эту таблицу будет добавляться найденная информация о вакансиях</li>
-<li>Стартовая страница запроса, эта строка учитывает указанные фильтры на hh, то есть, можно перейти на hh, указать критерии поиска, выбрать фильтры, а после скопировать ссылку и вставить в скрипт</li>
-<li>Эта ссылка служит основной для перехода, что бы перейти на вторую страницу нужно к ссылке добавить <strong><em>page=номер страницы</em></strong>, я использую код <strong><em>url=f’{start_url}&amp;page={p}’</em></strong> который имеет константу страницы <em>start_url</em>, и конкатинацию в зависимости от итерации цикла</li>
-<li>Эти настройки нужны при запросе <strong>requests.get()</strong>, для имитации, что запрос на страницу делает пользователь, когда сайт запрашивает данные, мы ему предоставляем данные из этого списка</li>
-<li>Ключевые слова, которые скрипт будет искать на страницах вакансий</li>
-</ol>
+</div>
 </section>
 <section id="проверка-полученной-страницы-вакансия" class="level1">
 <h1>Проверка полученной страницы (вакансия)</h1>
-<p>При запросе страницы бывает приходит страница не полная, у которой нет части данных. Эта функция проверяет наличие данных, если они не полные то делает запрос повторно</p>
-<div id="e35b00ec" class="cell" data-execution_count="2">
-<details class="code-fold">
-<summary>Код</summary>
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> check_correctly(url):</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>     <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">9</span>):         <span class="co"># ^1</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>          response <span class="op">=</span> requests.get(url, headers<span class="op">=</span>headers) <span class="co"># 2</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>          soup <span class="op">=</span> BeautifulSoup(response.text, <span class="st">'html.parser'</span>) <span class="co"># 3</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>          header <span class="op">=</span> soup.find(<span class="st">'div'</span>, {<span class="st">'class'</span>: <span class="st">'vacancy-title'</span>}) <span class="co"># 4</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>          <span class="cf">if</span> header:                                            <span class="co"># 5</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>               visit_and_check(url, soup, response)             <span class="co"># 6</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>               <span class="cf">break</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
+<p>При запросе страницы бывают случаи когда приходит страница не полная, у которой нет части данных. Эта функция проверяет наличие данных, если они не полные то делает запрос повторно</p>
+<div id="83ea13a2" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="annotated-cell-2"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-2-1"><a href="#annotated-cell-2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> check_correctly(url):</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-2-2" class="code-annotation-target"><a href="#annotated-cell-2-2" aria-hidden="true" tabindex="-1"></a>     <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">9</span>):</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-2-3" class="code-annotation-target"><a href="#annotated-cell-2-3" aria-hidden="true" tabindex="-1"></a>          response <span class="op">=</span> requests.get(url, headers<span class="op">=</span>headers)</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="3" onclick="event.preventDefault();">3</a><span id="annotated-cell-2-4" class="code-annotation-target"><a href="#annotated-cell-2-4" aria-hidden="true" tabindex="-1"></a>          soup <span class="op">=</span> BeautifulSoup(response.text, <span class="st">'html.parser'</span>)</span>
+<span id="annotated-cell-2-5"><a href="#annotated-cell-2-5" aria-hidden="true" tabindex="-1"></a></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="4" onclick="event.preventDefault();">4</a><span id="annotated-cell-2-6" class="code-annotation-target"><a href="#annotated-cell-2-6" aria-hidden="true" tabindex="-1"></a>          header <span class="op">=</span> soup.find(<span class="st">'div'</span>, {<span class="st">'class'</span>: <span class="st">'vacancy-title'</span>})</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="5" onclick="event.preventDefault();">5</a><span id="annotated-cell-2-7" class="code-annotation-target"><a href="#annotated-cell-2-7" aria-hidden="true" tabindex="-1"></a>          <span class="cf">if</span> header:</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="6" onclick="event.preventDefault();">6</a><span id="annotated-cell-2-8" class="code-annotation-target"><a href="#annotated-cell-2-8" aria-hidden="true" tabindex="-1"></a>               visit_and_check(url, soup, response)</span>
+<span id="annotated-cell-2-9"><a href="#annotated-cell-2-9" aria-hidden="true" tabindex="-1"></a>               <span class="cf">break</span></span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-2" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-2" data-code-lines="2" data-code-annotation="1">если данные приходят не полные, то повторяем запрос</span>
+</dd>
+<dt data-target-cell="annotated-cell-2" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-2" data-code-lines="3" data-code-annotation="2">сам запрос на получение данных с сайта, <em>url</em> - ссылка данные которой запрашиваем, <em>headers</em> - это имитация пользователя которая создавалась ранее</span>
+</dd>
+<dt data-target-cell="annotated-cell-2" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-cell="annotated-cell-2" data-code-lines="4" data-code-annotation="3">парсим полученный объект (теперь в этой переменной лежит “грубо говоря” html страница), которую можно парсить. Преимущество в том, что при тестах не делается запрос на сайт</span>
+</dd>
+<dt data-target-cell="annotated-cell-2" data-target-annotation="4">4</dt>
+<dd>
+<span data-code-cell="annotated-cell-2" data-code-lines="6" data-code-annotation="4">ищем <strong><em>div</em></strong> <strong><em>class</em></strong> с названием <strong>vacancy-title</strong></span>
+</dd>
+<dt data-target-cell="annotated-cell-2" data-target-annotation="5">5</dt>
+<dd>
+<span data-code-cell="annotated-cell-2" data-code-lines="7" data-code-annotation="5">проверяем переменную <em>header</em>,(для чего ? читай описание заголовка), если мы получили полную страницу</span>
+</dd>
+<dt data-target-cell="annotated-cell-2" data-target-annotation="6">6</dt>
+<dd>
+<span data-code-cell="annotated-cell-2" data-code-lines="8" data-code-annotation="6">вызываем функцию и передаем <em>url</em> - ссылку, <em>soup</em> - локальную html, <em>response</em> - для поиска слов по всей странице</span>
+</dd>
+</dl>
 </div>
-<ol type="1">
-<li>Если данные приходят не полные, то повторяем запрос</li>
-<li>Сам запрос на получение данных с сайта, <em>url</em> - ссылка данные которой запрашиваем, <em>headers</em> - это имитация пользователя которая создавалась ранее</li>
-<li>Парсим полученный объект (теперь в этой переменной лежит “грубо говоря” html страница), которую можно парсить. Преимущество в том, что при тестах не делается запрос на сайт</li>
-<li>Ищем <strong><em>div</em></strong> <strong><em>class</em></strong> с названием <strong>vacancy-title</strong></li>
-<li>Проверяем переменную <em>header</em>,(для чего ? читай описание заголовка), если мы получили полную страницу</li>
-<li>вызываем функцию и передаем <em>url</em> - ссылку, <em>soup</em> - локальную html, <em>response</em> - для поиска слов по всей странице</li>
-</ol>
+</div>
 </section>
 <section id="сканирование-вакансии" class="level1">
 <h1>Сканирование вакансии</h1>
 <p>Эта функция извлекает нужные данные страницы</p>
-<div id="03bf0392" class="cell" data-execution_count="3">
-<details class="code-fold">
-<summary>Код</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> visit_and_check(url, soup, response):</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">global</span> df                     <span class="co"># 1</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  fkeys <span class="op">=</span> []                    <span class="co"># 2</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> keyword <span class="kw">in</span> keywords:      <span class="co"># 3</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>      <span class="cf">if</span> keyword <span class="kw">in</span> response.text: <span class="co"># 4</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>        fkeys.append(keyword)      <span class="co"># 5</span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Находим теги (навыки) в нижней части страницы</span></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  skill_elements <span class="op">=</span> soup.find_all(<span class="st">'li'</span>, {<span class="st">'data-qa'</span>: <span class="st">'skills-element'</span>}) <span class="co"># 6</span></span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  skills <span class="op">=</span> [li.find(<span class="st">'div'</span>, class_<span class="op">=</span>re.<span class="bu">compile</span>(<span class="vs">r'magritte-tag__label'</span>)).text <span class="cf">for</span> li <span class="kw">in</span> skill_elements] <span class="co"># 6.1</span></span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>  header <span class="op">=</span> soup.find(<span class="st">'div'</span>, {<span class="st">'class'</span>: <span class="st">'vacancy-title'</span>}) <span class="co"># 7</span></span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>  title <span class="op">=</span> header.find(<span class="st">'h1'</span>).text                        <span class="co"># 8</span></span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>  salary_str <span class="op">=</span> header.find(<span class="st">'span'</span>, {<span class="st">'data-qa'</span>: <span class="st">'vacancy-salary-compensation-type-net'</span>}) <span class="co"># 9</span></span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> salary_str:                <span class="co"># 9.1</span></span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Найти первое число в строке с помощью регулярного выражения</span></span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>      match <span class="op">=</span> re.search(<span class="vs">r'\d+'</span>, salary_str.text.replace(<span class="st">'</span><span class="ch">\xa0</span><span class="st">'</span>, <span class="st">''</span>)) <span class="co"># 9.2</span></span>
-<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>      <span class="cf">if</span> match:</span>
-<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>        salary <span class="op">=</span> <span class="bu">int</span>(match.group()) <span class="co"># 9.3</span></span>
-<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>      <span class="cf">else</span>:</span>
-<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>        salary <span class="op">=</span> <span class="va">None</span>           <span class="co"># 9.4</span></span>
-<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>  <span class="cf">else</span>:</span>
-<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>    salary <span class="op">=</span> <span class="va">None</span>               <span class="co"># 9.4</span></span>
-<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>  df <span class="op">=</span> df.vstack(pl.DataFrame({ <span class="co"># 10</span></span>
-<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Вакансия"</span> : [title],</span>
-<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Зарплата"</span> : [salary],</span>
-<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Keyword"</span>: [<span class="st">', '</span>.join(fkeys)],</span>
-<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Tags"</span>: [<span class="st">', '</span>.join(skills)],</span>
-<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a>    <span class="st">"URL"</span>: [url]}))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
+<div id="0fd6662f" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="annotated-cell-3"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-3-1"><a href="#annotated-cell-3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> visit_and_check(url, soup, response):</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-3-2" class="code-annotation-target"><a href="#annotated-cell-3-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">global</span> df</span>
+<span id="annotated-cell-3-3"><a href="#annotated-cell-3-3" aria-hidden="true" tabindex="-1"></a></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-3-4" class="code-annotation-target"><a href="#annotated-cell-3-4" aria-hidden="true" tabindex="-1"></a>  fkeys <span class="op">=</span> []</span>
+<span id="annotated-cell-3-5"><a href="#annotated-cell-3-5" aria-hidden="true" tabindex="-1"></a></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="3" onclick="event.preventDefault();">3</a><span id="annotated-cell-3-6" class="code-annotation-target"><a href="#annotated-cell-3-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> keyword <span class="kw">in</span> keywords:</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="4" onclick="event.preventDefault();">4</a><span id="annotated-cell-3-7" class="code-annotation-target"><a href="#annotated-cell-3-7" aria-hidden="true" tabindex="-1"></a>      <span class="cf">if</span> keyword <span class="kw">in</span> response.text:</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="5" onclick="event.preventDefault();">5</a><span id="annotated-cell-3-8" class="code-annotation-target"><a href="#annotated-cell-3-8" aria-hidden="true" tabindex="-1"></a>        fkeys.append(keyword)</span>
+<span id="annotated-cell-3-9"><a href="#annotated-cell-3-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="annotated-cell-3-10"><a href="#annotated-cell-3-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Находим теги (навыки) в нижней части страницы</span></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="6" onclick="event.preventDefault();">6</a><span id="annotated-cell-3-11" class="code-annotation-target"><a href="#annotated-cell-3-11" aria-hidden="true" tabindex="-1"></a>  skill_elements <span class="op">=</span> soup.find_all(<span class="st">'li'</span>, {<span class="st">'data-qa'</span>: <span class="st">'skills-element'</span>})</span>
+<span id="annotated-cell-3-12"><a href="#annotated-cell-3-12" aria-hidden="true" tabindex="-1"></a>  skills <span class="op">=</span> [li.find(<span class="st">'div'</span>, class_<span class="op">=</span>re.<span class="bu">compile</span>(<span class="vs">r'magritte-tag__label'</span>)).text <span class="cf">for</span> li <span class="kw">in</span> skill_elements]</span>
+<span id="annotated-cell-3-13"><a href="#annotated-cell-3-13" aria-hidden="true" tabindex="-1"></a></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="7" onclick="event.preventDefault();">7</a><span id="annotated-cell-3-14" class="code-annotation-target"><a href="#annotated-cell-3-14" aria-hidden="true" tabindex="-1"></a>  header <span class="op">=</span> soup.find(<span class="st">'div'</span>, {<span class="st">'class'</span>: <span class="st">'vacancy-title'</span>})</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="8" onclick="event.preventDefault();">8</a><span id="annotated-cell-3-15" class="code-annotation-target"><a href="#annotated-cell-3-15" aria-hidden="true" tabindex="-1"></a>  title <span class="op">=</span> header.find(<span class="st">'h1'</span>).text</span>
+<span id="annotated-cell-3-16"><a href="#annotated-cell-3-16" aria-hidden="true" tabindex="-1"></a></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="9" onclick="event.preventDefault();">9</a><span id="annotated-cell-3-17" class="code-annotation-target"><a href="#annotated-cell-3-17" aria-hidden="true" tabindex="-1"></a>  salary_str <span class="op">=</span> header.find(<span class="st">'span'</span>, {<span class="st">'data-qa'</span>: <span class="st">'vacancy-salary-compensation-type-net'</span>})</span>
+<span id="annotated-cell-3-18"><a href="#annotated-cell-3-18" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> salary_str:</span>
+<span id="annotated-cell-3-19"><a href="#annotated-cell-3-19" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Найти первое число в строке с помощью регулярного выражения</span></span>
+<span id="annotated-cell-3-20"><a href="#annotated-cell-3-20" aria-hidden="true" tabindex="-1"></a>      match <span class="op">=</span> re.search(<span class="vs">r'\d+'</span>, salary_str.text.replace(<span class="st">'</span><span class="ch">\xa0</span><span class="st">'</span>, <span class="st">''</span>))</span>
+<span id="annotated-cell-3-21"><a href="#annotated-cell-3-21" aria-hidden="true" tabindex="-1"></a>      <span class="cf">if</span> match:</span>
+<span id="annotated-cell-3-22"><a href="#annotated-cell-3-22" aria-hidden="true" tabindex="-1"></a>        salary <span class="op">=</span> <span class="bu">int</span>(match.group())</span>
+<span id="annotated-cell-3-23"><a href="#annotated-cell-3-23" aria-hidden="true" tabindex="-1"></a>      <span class="cf">else</span>:</span>
+<span id="annotated-cell-3-24"><a href="#annotated-cell-3-24" aria-hidden="true" tabindex="-1"></a>        salary <span class="op">=</span> <span class="va">None</span></span>
+<span id="annotated-cell-3-25"><a href="#annotated-cell-3-25" aria-hidden="true" tabindex="-1"></a>  <span class="cf">else</span>:</span>
+<span id="annotated-cell-3-26"><a href="#annotated-cell-3-26" aria-hidden="true" tabindex="-1"></a>    salary <span class="op">=</span> <span class="va">None</span></span>
+<span id="annotated-cell-3-27"><a href="#annotated-cell-3-27" aria-hidden="true" tabindex="-1"></a></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="10" onclick="event.preventDefault();">10</a><span id="annotated-cell-3-28" class="code-annotation-target"><a href="#annotated-cell-3-28" aria-hidden="true" tabindex="-1"></a>  df <span class="op">=</span> df.vstack(pl.DataFrame({</span>
+<span id="annotated-cell-3-29"><a href="#annotated-cell-3-29" aria-hidden="true" tabindex="-1"></a>    <span class="st">"URL"</span>: [url],</span>
+<span id="annotated-cell-3-30"><a href="#annotated-cell-3-30" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Вакансия"</span> : [title],</span>
+<span id="annotated-cell-3-31"><a href="#annotated-cell-3-31" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Зарплата"</span> : [salary],</span>
+<span id="annotated-cell-3-32"><a href="#annotated-cell-3-32" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Keyword"</span>: [<span class="st">', '</span>.join(fkeys)],</span>
+<span id="annotated-cell-3-33"><a href="#annotated-cell-3-33" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Tags"</span>: [<span class="st">', '</span>.join(skills)]}))</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-3" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-3" data-code-lines="2" data-code-annotation="1">эта строка нужна для из за пространства имен, дело в том что данная функция вызывается для каждой вакансии и результат полученных данных нужно записать в таблицу. (после выхода из функции все объекты созданные в ней удаляются), по этому таблица создается вне функции, глобально, и что бы получить доступ к глобальной таблице нужна эта строка</span>
+</dd>
+<dt data-target-cell="annotated-cell-3" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-3" data-code-lines="4" data-code-annotation="2">в этот список будут помещены слова найденные на странице (список слов указан в переменной <em>keywords</em>)</span>
+</dd>
+<dt data-target-cell="annotated-cell-3" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-cell="annotated-cell-3" data-code-lines="6" data-code-annotation="3">собственно сам поиск этих ключей указанных в <em>keywords</em>, берется каждый ключ по очереди</span>
+</dd>
+<dt data-target-cell="annotated-cell-3" data-target-annotation="4">4</dt>
+<dd>
+<span data-code-cell="annotated-cell-3" data-code-lines="7" data-code-annotation="4">и производиться поиск ключа (слова) по объекту <em>response.text</em> который вернул запрос к сайту</span>
+</dd>
+<dt data-target-cell="annotated-cell-3" data-target-annotation="5">5</dt>
+<dd>
+<span data-code-cell="annotated-cell-3" data-code-lines="8" data-code-annotation="5">если ключ найден на странице он добавляется в пустой список <em>fkeys</em> (который создали ранее)</span>
+</dd>
+<dt data-target-cell="annotated-cell-3" data-target-annotation="6">6</dt>
+<dd>
+<span data-code-cell="annotated-cell-3" data-code-lines="11,12" data-code-annotation="6">ищем нужные данные в локальном html который спарсили, в данном случае, это теги в нижней части страницы.<br>- на прошлом шаге мы получаем кусок html кода с нужными тегами, данная строка извлекает текст тега и помещает в список</span>
+</dd>
+<dt data-target-cell="annotated-cell-3" data-target-annotation="7">7</dt>
+<dd>
+<span data-code-cell="annotated-cell-3" data-code-lines="14" data-code-annotation="7">извлекаем header</span>
+</dd>
+<dt data-target-cell="annotated-cell-3" data-target-annotation="8">8</dt>
+<dd>
+<span data-code-cell="annotated-cell-3" data-code-lines="15" data-code-annotation="8">получаем название вакансии</span>
+</dd>
+<dt data-target-cell="annotated-cell-3" data-target-annotation="9">9</dt>
+<dd>
+<span data-code-cell="annotated-cell-3" data-code-lines="17,18,20,22,24,26" data-code-annotation="9">получаем ставку (указанную зарплату)` Примечание: есть вакансии на которых указанной зарплаты нет, а бывают случаи когда указан диапазон от…до, такие моменты обрабатываю ниже<br>- проверяем, указана зарплата<br>- регулярным выражением ищем только число (убираем символы)<br>- преобразовываем в число<br>- если зарплата не указано, помечаем переменную как <del>Nane</del></span>
+</dd>
+<dt data-target-cell="annotated-cell-3" data-target-annotation="10">10</dt>
+<dd>
+<span data-code-cell="annotated-cell-3" data-code-lines="28,29,30,31,32,33" data-code-annotation="10">полученные данные записываем в таблицу</span>
+</dd>
+</dl>
 </div>
-<ol type="1">
-<li>Эта строка нужна для из за пространства имен, дело в том что данная функция вызывается для каждой вакансии и результат полученных данных нужно записать в таблицу. (после выхода из функции все объекты созданные в ней удаляются), по этому таблица создается вне функции, глобально, и что бы получить доступ к глобальной таблице нужна эта строка</li>
-<li>В этот список будут помещены слова найденные на странице (список слов указан в переменной <em>keywords</em>)</li>
-<li>Собственно сам поиск этих ключей указанных в <em>keywords</em>, берется каждый ключ по очереди</li>
-<li>И производиться поиск ключа (слова) по объекту <em>response.text</em> который вернул запрос к сайту</li>
-<li>Если ключ найден на странице он добавляется в пустой список <em>fkeys</em> (который создали ранее)</li>
-<li>Ищем нужные данные в локальном html который спарсили, в данном случае, это теги в нижней части страницы
-<ol type="1">
-<li>На прошлом шаге мы получаем кусок html кода с нужными тегами, данная строка извлекает текст тега и помещает в список</li>
-</ol></li>
-<li>Извлекаем header</li>
-<li>Получаем название вакансии</li>
-<li>Получаем ставку (указанную зарплату)` Примечание: есть вакансии на которых указанной зарплаты нет, а бывают случаи когда указан диапазон от…до, такие моменты обрабатываю ниже
-<ol type="1">
-<li>проверяем, указана зарплата</li>
-<li>регулярным выражением ищем только число (убираем символы)</li>
-<li>преобразовываем в число</li>
-<li>если зарплата не указано, помечаем переменную как <del>Nane</del></li>
-</ol></li>
-<li>полученные данные записываем в таблицу</li>
-</ol>
+</div>
 </section>
 <section id="переход-по-страницам-и-поиск-ссылок" class="level1">
 <h1>Переход по страницам и поиск ссылок</h1>
 <p>Этот цикл сканирует главные страницы (на которых находятся вакансии), в зависимости от итерации переходит по страницам 2,3,4… на самом сайте</p>
-<div id="ee91aa5d" class="cell" data-execution_count="4">
-<details class="code-fold">
-<summary>Код</summary>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> p <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">9</span>):              <span class="co"># 1</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> p <span class="op">&gt;</span> <span class="dv">0</span>:</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>        url <span class="op">=</span> <span class="ss">f'</span><span class="sc">{</span>start_url<span class="sc">}</span><span class="ss">&amp;page=</span><span class="sc">{</span>p<span class="sc">}</span><span class="ss">'</span> <span class="co"># 2</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"--- Page </span><span class="sc">{</span>p<span class="sc">}</span><span class="ss"> --- --- ---"</span>)</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Поиск всех ссылок внутри тегов h2</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">9</span>):          <span class="co"># 3</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>        time.sleep(<span class="dv">3</span>)           <span class="co"># 4</span></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"--- --- --- Iteration </span><span class="sc">{</span>i<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>        response <span class="op">=</span> requests.get(url, headers<span class="op">=</span>headers) <span class="co"># 5</span></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>        soup <span class="op">=</span> BeautifulSoup(response.text, <span class="st">'html.parser'</span>) <span class="co"># 6</span></span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> soup.find_all(<span class="st">'h2'</span>):                            <span class="co"># 7</span></span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> h2 <span class="kw">in</span> soup.find_all(<span class="st">'h2'</span>):                 <span class="co"># 7.1</span></span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>                <span class="cf">for</span> a <span class="kw">in</span> h2.find_all(<span class="st">'a'</span>, href<span class="op">=</span><span class="va">True</span>):      <span class="co"># 7.2</span></span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>                    absolute_url <span class="op">=</span> requests.compat.urljoin(url, a[<span class="st">'href'</span>]) <span class="co"># 7.3</span></span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>                    check_correctly(absolute_url) <span class="co"># 8</span></span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>            <span class="cf">break</span>                                 <span class="co"># 9</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
+<div id="3eb78ad2" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="annotated-cell-4"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><a class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-4-1" class="code-annotation-target"><a href="#annotated-cell-4-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> p <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">9</span>):</span>
+<span id="annotated-cell-4-2"><a href="#annotated-cell-4-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> p <span class="op">&gt;</span> <span class="dv">0</span>:</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-4-3" class="code-annotation-target"><a href="#annotated-cell-4-3" aria-hidden="true" tabindex="-1"></a>        url <span class="op">=</span> <span class="ss">f'</span><span class="sc">{</span>start_url<span class="sc">}</span><span class="ss">&amp;page=</span><span class="sc">{</span>p<span class="sc">}</span><span class="ss">'</span></span>
+<span id="annotated-cell-4-4"><a href="#annotated-cell-4-4" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"--- Page </span><span class="sc">{</span>p<span class="sc">}</span><span class="ss"> --- --- ---"</span>)</span>
+<span id="annotated-cell-4-5"><a href="#annotated-cell-4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="annotated-cell-4-6"><a href="#annotated-cell-4-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Поиск всех ссылок внутри тегов h2</span></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="3" onclick="event.preventDefault();">3</a><span id="annotated-cell-4-7" class="code-annotation-target"><a href="#annotated-cell-4-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">9</span>):</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="4" onclick="event.preventDefault();">4</a><span id="annotated-cell-4-8" class="code-annotation-target"><a href="#annotated-cell-4-8" aria-hidden="true" tabindex="-1"></a>        time.sleep(<span class="dv">3</span>)</span>
+<span id="annotated-cell-4-9"><a href="#annotated-cell-4-9" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"--- --- --- Iteration </span><span class="sc">{</span>i<span class="sc">}</span><span class="ss">"</span>)</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="5" onclick="event.preventDefault();">5</a><span id="annotated-cell-4-10" class="code-annotation-target"><a href="#annotated-cell-4-10" aria-hidden="true" tabindex="-1"></a>        response <span class="op">=</span> requests.get(url, headers<span class="op">=</span>headers)</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="6" onclick="event.preventDefault();">6</a><span id="annotated-cell-4-11" class="code-annotation-target"><a href="#annotated-cell-4-11" aria-hidden="true" tabindex="-1"></a>        soup <span class="op">=</span> BeautifulSoup(response.text, <span class="st">'html.parser'</span>)</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="7" onclick="event.preventDefault();">7</a><span id="annotated-cell-4-12" class="code-annotation-target"><a href="#annotated-cell-4-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> soup.find_all(<span class="st">'h2'</span>):</span>
+<span id="annotated-cell-4-13"><a href="#annotated-cell-4-13" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> h2 <span class="kw">in</span> soup.find_all(<span class="st">'h2'</span>):</span>
+<span id="annotated-cell-4-14"><a href="#annotated-cell-4-14" aria-hidden="true" tabindex="-1"></a>                <span class="cf">for</span> a <span class="kw">in</span> h2.find_all(<span class="st">'a'</span>, href<span class="op">=</span><span class="va">True</span>):</span>
+<span id="annotated-cell-4-15"><a href="#annotated-cell-4-15" aria-hidden="true" tabindex="-1"></a>                    absolute_url <span class="op">=</span> requests.compat.urljoin(url, a[<span class="st">'href'</span>])</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="8" onclick="event.preventDefault();">8</a><span id="annotated-cell-4-16" class="code-annotation-target"><a href="#annotated-cell-4-16" aria-hidden="true" tabindex="-1"></a>                    check_correctly(absolute_url)</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="9" onclick="event.preventDefault();">9</a><span id="annotated-cell-4-17" class="code-annotation-target"><a href="#annotated-cell-4-17" aria-hidden="true" tabindex="-1"></a>            <span class="cf">break</span></span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-4" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-4" data-code-lines="1" data-code-annotation="1">указываем кол-во страниц (главных) по на которых будет смотреть вакансии</span>
+</dd>
+<dt data-target-cell="annotated-cell-4" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-4" data-code-lines="3" data-code-annotation="2">если это не первая итерация цикла, то к ссылке добавляем page и цифру страницы (цифру итерации цикла)</span>
+</dd>
+<dt data-target-cell="annotated-cell-4" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-cell="annotated-cell-4" data-code-lines="7" data-code-annotation="3">бывает hh.ru возвращает не полную страницу, в этом цикле проверяем корректность полученной страницы, если она не полная повторяем запрос вплоть до получения полной страницы или в плоть до числа в функции <strong>range()</strong></span>
+</dd>
+<dt data-target-cell="annotated-cell-4" data-target-annotation="4">4</dt>
+<dd>
+<span data-code-cell="annotated-cell-4" data-code-lines="8" data-code-annotation="4">перед каждым новым запросом немного ждем, что бы не DDOSить сайт, все таки цель получить данные, имитируем простой переход</span>
+</dd>
+<dt data-target-cell="annotated-cell-4" data-target-annotation="5">5</dt>
+<dd>
+<span data-code-cell="annotated-cell-4" data-code-lines="10" data-code-annotation="5">сам запрос на получение данных с сайта, <em>url</em> - ссылка данные которой запрашиваем, <em>headers</em> - это имитация пользователя которая создавалась ранее</span>
+</dd>
+<dt data-target-cell="annotated-cell-4" data-target-annotation="6">6</dt>
+<dd>
+<span data-code-cell="annotated-cell-4" data-code-lines="11" data-code-annotation="6">парсим полученный объект (теперь в этой переменной лежит “грубо говоря” html страница), которую можно парсить. Преимущество в том, что при тестах не делается запрос на сайт</span>
+</dd>
+<dt data-target-cell="annotated-cell-4" data-target-annotation="7">7</dt>
+<dd>
+<span data-code-cell="annotated-cell-4" data-code-lines="12,13,14,15" data-code-annotation="7">проверяем полученную страницу, если она не полная то делаем запрос еще раз (переходим на новую итерацию)<br> - если страница полная, извлекаем h2 (заголовок вакансии)<br>- в этом заголовке ищем ссылку на вакансию<br> - из этой ссылки делаем абсолютный путь (полную ссылку на вакансию)<br></span>
+</dd>
+<dt data-target-cell="annotated-cell-4" data-target-annotation="8">8</dt>
+<dd>
+<span data-code-cell="annotated-cell-4" data-code-lines="16" data-code-annotation="8">передаем ссылку на вакансию в переменную проверки</span>
+</dd>
+<dt data-target-cell="annotated-cell-4" data-target-annotation="9">9</dt>
+<dd>
+<span data-code-cell="annotated-cell-4" data-code-lines="17" data-code-annotation="9">на данном этапе то как мы попали в <strong><em>if soup.find all(‘h2’)</em></strong>, значит мы получили полную ссылку на страницу, делать новый запрос по той же ссылке не нужно</span>
+</dd>
+</dl>
 </div>
-<ol type="1">
-<li>Указываем кол-во страниц (главных) по на которых будет смотреть вакансии</li>
-<li>Если это не первая итерация цикла, то к ссылке добавляем page и цифру страницы (цифру итерации цикла)</li>
-<li>Бывает hh.ru возвращает не полную страницу, в этом цикле проверяем корректность полученной страницы, если она не полная повторяем запрос вплоть до получения полной страницы или в плоть до числа в функции <strong>range()</strong></li>
-<li>Перед каждым новым запросом немного ждем, что бы не DDOSить сайт, все таки цель получить данные, имитируем простой переход</li>
-<li>Сам запрос на получение данных с сайта, <em>url</em> - ссылка данные которой запрашиваем, <em>headers</em> - это имитация пользователя которая создавалась ранее</li>
-<li>Парсим полученный объект (теперь в этой переменной лежит “грубо говоря” html страница), которую можно парсить. Преимущество в том, что при тестах не делается запрос на сайт</li>
-<li>Проверяем полученную страницу, если она не полная то делаем запрос еще раз (переходим на новую итерацию)</li>
-<li>Если страница полная, извлекаем h2 (заголовок вакансии)</li>
-<li>В этом заголовке ищем ссылку на вакансию</li>
-<li>Из этой ссылки делаем абсолютный путь (полную ссылку на вакансию)</li>
-<li>Передаем ссылку на вакансию в переменную проверки</li>
-<li>На данном этапе то как мы попали в <strong><em>if soup.find all(‘h2’)</em></strong>, значит мы получили полную ссылку на страницу, делать новый запрос по той же ссылке не нужно</li>
-</ol>
+</div>
 </section>
 <section id="сохранить" class="level1">
 <h1>Сохранить</h1>
 <p>Сохраняем результат в <em>xlsx</em> файл</p>
-<div id="c0779e95" class="cell" data-execution_count="5">
-<details class="code-fold">
-<summary>Код</summary>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>wb <span class="op">=</span> xlsxwriter.Workbook(<span class="st">'Output.xlsx'</span>)</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 1 sheet DF</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>df.write_excel(</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    workbook<span class="op">=</span> wb,</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    worksheet<span class="op">=</span><span class="st">'DF'</span>,</span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    position<span class="op">=</span><span class="st">"A1"</span>,</span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    table_style<span class="op">=</span><span class="st">"Table Style Medium 3"</span>,</span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    dtype_formats<span class="op">=</span>{pl.Date: <span class="st">"mm/dd/yyyy"</span>},</span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    column_totals<span class="op">=</span>{<span class="st">"num"</span>: <span class="st">"average"</span>},</span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>    float_precision<span class="op">=</span><span class="dv">1</span>,</span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>    autofit<span class="op">=</span><span class="va">True</span>,</span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>wb.close()</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
+<div class="sourceCode" id="annotated-cell-5"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><a class="code-annotation-anchor" data-target-cell="annotated-cell-5" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-5-1" class="code-annotation-target"><a href="#annotated-cell-5-1" aria-hidden="true" tabindex="-1"></a>wb <span class="op">=</span> xlsxwriter.Workbook(<span class="st">'Output.xlsx'</span>)</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-5" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-5-2" class="code-annotation-target"><a href="#annotated-cell-5-2" aria-hidden="true" tabindex="-1"></a>ws <span class="op">=</span> wb.add_worksheet(<span class="st">'DF'</span>)</span>
+<span id="annotated-cell-5-3"><a href="#annotated-cell-5-3" aria-hidden="true" tabindex="-1"></a></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-5" data-target-annotation="3" onclick="event.preventDefault();">3</a><span id="annotated-cell-5-4" class="code-annotation-target"><a href="#annotated-cell-5-4" aria-hidden="true" tabindex="-1"></a>df.write_excel(</span>
+<span id="annotated-cell-5-5"><a href="#annotated-cell-5-5" aria-hidden="true" tabindex="-1"></a>    workbook<span class="op">=</span>wb,</span>
+<span id="annotated-cell-5-6"><a href="#annotated-cell-5-6" aria-hidden="true" tabindex="-1"></a>    worksheet<span class="op">=</span><span class="st">'DF'</span>,</span>
+<span id="annotated-cell-5-7"><a href="#annotated-cell-5-7" aria-hidden="true" tabindex="-1"></a>    position<span class="op">=</span><span class="st">"A1"</span>,</span>
+<span id="annotated-cell-5-8"><a href="#annotated-cell-5-8" aria-hidden="true" tabindex="-1"></a>    table_style<span class="op">=</span><span class="st">"Table Style Medium 3"</span>,</span>
+<span id="annotated-cell-5-9"><a href="#annotated-cell-5-9" aria-hidden="true" tabindex="-1"></a>    dtype_formats<span class="op">=</span>{pl.Date: <span class="st">"mm/dd/yyyy"</span>},</span>
+<span id="annotated-cell-5-10"><a href="#annotated-cell-5-10" aria-hidden="true" tabindex="-1"></a>    column_totals<span class="op">=</span>{<span class="st">"score"</span>: <span class="st">"average"</span>},</span>
+<span id="annotated-cell-5-11"><a href="#annotated-cell-5-11" aria-hidden="true" tabindex="-1"></a>    float_precision<span class="op">=</span><span class="dv">1</span>,</span>
+<span id="annotated-cell-5-12"><a href="#annotated-cell-5-12" aria-hidden="true" tabindex="-1"></a>    autofit<span class="op">=</span><span class="va">True</span>,</span>
+<span id="annotated-cell-5-13"><a href="#annotated-cell-5-13" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="annotated-cell-5-14"><a href="#annotated-cell-5-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="annotated-cell-5-15"><a href="#annotated-cell-5-15" aria-hidden="true" tabindex="-1"></a></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-5" data-target-annotation="4" onclick="event.preventDefault();">4</a><span id="annotated-cell-5-16" class="code-annotation-target"><a href="#annotated-cell-5-16" aria-hidden="true" tabindex="-1"></a>ws.set_column(<span class="st">'A:A'</span>, <span class="dv">10</span>)</span>
+<span id="annotated-cell-5-17"><a href="#annotated-cell-5-17" aria-hidden="true" tabindex="-1"></a>ws.set_column(<span class="st">'B:B'</span>, <span class="dv">40</span>)</span>
+<span id="annotated-cell-5-18"><a href="#annotated-cell-5-18" aria-hidden="true" tabindex="-1"></a>ws.set_column(<span class="st">'C:C'</span>, <span class="dv">10</span>)</span>
+<span id="annotated-cell-5-19"><a href="#annotated-cell-5-19" aria-hidden="true" tabindex="-1"></a>ws.set_column(<span class="st">'D:D'</span>, <span class="dv">20</span>)</span>
+<span id="annotated-cell-5-20"><a href="#annotated-cell-5-20" aria-hidden="true" tabindex="-1"></a>ws.set_column(<span class="st">'E:E'</span>, <span class="dv">90</span>)</span>
+<span id="annotated-cell-5-21"><a href="#annotated-cell-5-21" aria-hidden="true" tabindex="-1"></a></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-5" data-target-annotation="5" onclick="event.preventDefault();">5</a><span id="annotated-cell-5-22" class="code-annotation-target"><a href="#annotated-cell-5-22" aria-hidden="true" tabindex="-1"></a>wb.close()</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<dl class="code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-5" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-5" data-code-lines="1" data-code-annotation="1">создаем объект книги</span>
+</dd>
+<dt data-target-cell="annotated-cell-5" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-5" data-code-lines="2" data-code-annotation="2">создаем страницу</span>
+</dd>
+<dt data-target-cell="annotated-cell-5" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-cell="annotated-cell-5" data-code-lines="4,5,6,7,8,9,10,11,12,13" data-code-annotation="3">вставляем таблицу на xlsx лист, и указываем формат столбцов</span>
+</dd>
+<dt data-target-cell="annotated-cell-5" data-target-annotation="4">4</dt>
+<dd>
+<span data-code-cell="annotated-cell-5" data-code-lines="16,17,18,19,20" data-code-annotation="4">установка ширины столбцов</span>
+</dd>
+<dt data-target-cell="annotated-cell-5" data-target-annotation="5">5</dt>
+<dd>
+<span data-code-cell="annotated-cell-5" data-code-lines="22" data-code-annotation="5">закрытие xlsx файла</span>
+</dd>
+</dl>
 </section>
 <section id="результат" class="level1">
 <h1>Результат</h1>
@@ -505,7 +595,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   });
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("https:\/\/eno\.github\.io\/");
+      var filterRegex = new RegExp('/' + window.location.host + '/');
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
@@ -861,7 +951,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   </li>  
     <li class="nav-item compact">
     <a class="nav-link" href="mailto:Владимир_Владимирович+enopheron@yandex.ru">
-      <i class="bi bi-envelope" role="img">
+      <i class="bi bi-envelope-fill" role="img">
 </i> 
     </a>
   </li>  
