@@ -96,5 +96,19 @@
     "title": "OCR Reader",
     "section": "Copy result into clipboard",
     "text": "Copy result into clipboard\nThe func for copy OCR result in clipboard\ndef copy_text_to_clipboard(text):\n    subprocess.run(['xclip', '-selection', 'clipboard'], input=text.encode(), check=True)"
+  },
+  {
+    "objectID": "content/portfolio/posts/OCR-tool.html#get-img-from-clipboard",
+    "href": "content/portfolio/posts/OCR-tool.html#get-img-from-clipboard",
+    "title": "OCR Reader",
+    "section": "Get img from clipboard",
+    "text": "Get img from clipboard\nFunction for get screenshot from clipboard\ndef get_image_from_clipboard():\n1    result = subprocess.run(['xclip', '-selection', 'clipboard', '-t', 'image/png', '-o'], stdout=subprocess.PIPE)\n\n2    if result.returncode != 0:\n        raise Exception(\"Can't get screenshot\")\n\n    return io.BytesIO(result.stdout)\n\n1\n\nGet screenshot from clipboard\n\n2\n\nException"
+  },
+  {
+    "objectID": "content/portfolio/posts/OCR-tool.html#copy-result-into-clipboard",
+    "href": "content/portfolio/posts/OCR-tool.html#copy-result-into-clipboard",
+    "title": "OCR Reader",
+    "section": "Copy result into clipboard",
+    "text": "Copy result into clipboard\nThe func for copy OCR result in clipboard\ndef copy_text_to_clipboard(text):\n    subprocess.run(['xclip', '-selection', 'clipboard'], input=text.encode(), check=True)"
   }
 ]

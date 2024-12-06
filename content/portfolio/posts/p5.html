@@ -207,7 +207,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="импорт-и-настройки" class="level1">
 <h1>Импорт и настройки</h1>
 <p>Основными библиотеками для парсинга выступают:<br> 1. <em>requests</em> - делает запрос на сайт и получает данные<br> 2. <em>bs4</em> (<strong>BeautifulSoup</strong>) - парсит результат запроса <em>requests</em></p>
-<div id="412604e8" class="cell" data-execution_count="1">
+<div id="d71d2e93" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="annotated-cell-1"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-1-1"><a href="#annotated-cell-1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> requests</span>
 <span id="annotated-cell-1-2"><a href="#annotated-cell-1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> bs4 <span class="im">import</span> BeautifulSoup</span>
 <span id="annotated-cell-1-3"><a href="#annotated-cell-1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> polars <span class="im">as</span> pl</span>
@@ -270,7 +270,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="проверка-полученной-страницы-вакансия" class="level1">
 <h1>Проверка полученной страницы (вакансия)</h1>
 <p>При запросе страницы бывают случаи когда приходит страница не полная, у которой нет части данных. Эта функция проверяет наличие данных, если они не полные то делает запрос повторно</p>
-<div id="147ae947" class="cell" data-execution_count="2">
+<div id="a0f61d69" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="annotated-cell-2"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-2-1"><a href="#annotated-cell-2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> check_correctly(url):</span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-2-2" class="code-annotation-target"><a href="#annotated-cell-2-2" aria-hidden="true" tabindex="-1"></a>     <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">9</span>):</span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-2-3" class="code-annotation-target"><a href="#annotated-cell-2-3" aria-hidden="true" tabindex="-1"></a>          response <span class="op">=</span> requests.get(url, headers<span class="op">=</span>headers)</span>
@@ -313,7 +313,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="сканирование-вакансии" class="level1">
 <h1>Сканирование вакансии</h1>
 <p>Эта функция извлекает нужные данные страницы</p>
-<div id="4baa4793" class="cell" data-execution_count="3">
+<div id="32917625" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="annotated-cell-3"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-3-1"><a href="#annotated-cell-3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> visit_and_check(url, soup, response):</span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-3-2" class="code-annotation-target"><a href="#annotated-cell-3-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">global</span> df</span>
 <span id="annotated-cell-3-3"><a href="#annotated-cell-3-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -396,7 +396,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="переход-по-страницам-и-поиск-ссылок" class="level1">
 <h1>Переход по страницам и поиск ссылок</h1>
 <p>Этот цикл сканирует главные страницы (на которых находятся вакансии), в зависимости от итерации переходит по страницам 2,3,4… на самом сайте</p>
-<div id="0c3c5342" class="cell" data-execution_count="4">
+<div id="bc31e183" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="annotated-cell-4"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><a class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-4-1" class="code-annotation-target"><a href="#annotated-cell-4-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> p <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">9</span>):</span>
 <span id="annotated-cell-4-2"><a href="#annotated-cell-4-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> p <span class="op">&gt;</span> <span class="dv">0</span>:</span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-4-3" class="code-annotation-target"><a href="#annotated-cell-4-3" aria-hidden="true" tabindex="-1"></a>        url <span class="op">=</span> <span class="ss">f'</span><span class="sc">{</span>start_url<span class="sc">}</span><span class="ss">&amp;page=</span><span class="sc">{</span>p<span class="sc">}</span><span class="ss">'</span></span>
