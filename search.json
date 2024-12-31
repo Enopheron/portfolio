@@ -194,5 +194,61 @@
     "title": "Beautiful export to Excel (xlsx)",
     "section": "",
     "text": "Note\n\n\n\nThis article briefly describes the functions of the openxlsx package. Below is an example of the interaction of functions and the final result of exporting a table from R → xlsx\n\n\n\nLibraryes and styles\n\nlibrary(openxlsx)\n\n## --- Colors\ngray   &lt;- createStyle(fgFill = '#d9d9d9')\ngreen  &lt;- createStyle(fgFill = '#c6e0b4')\nred    &lt;- createStyle(fgFill = '#f9a1a1')\nblue   &lt;- createStyle(fgFill = '#bdd7ee')\nyellow &lt;- createStyle(fgFill = '#ffe699')\nros    &lt;- createStyle(fgFill = '#fce4d6')\nborder &lt;- createStyle(fgFill = '#333333')\n\n## --- Styles\nst_bord &lt;- createStyle(numFmt = \"#,##0\",\n                       border = 'TopBottomLeftRight',borderColour = '#cccccc')\nst_head &lt;- createStyle(textDecoration = \"bold\", halign = \"center\",\n                       border = 'TopBottomLeftRight',borderColour = border)\nst_bot  &lt;- createStyle(textDecoration = 'bold',border = \"top\",\n                       borderColour = border,borderStyle = \"medium\")\nst_name &lt;- createStyle(halign = \"center\", textDecoration = 'bold',\n                       fontSize = 16, border = 'TopBottomLeftRight',\n                       borderColour = border, borderStyle = 'medium')\nst_bold &lt;- createStyle(textDecoration = 'bold',border = \"left\",\n                       borderColour = border,borderStyle = \"medium\")\n\n\n\nWorkbook and Options\nWe create a workbook (an object in RAM) and a sheet in this workbook named Sales, to which we apply several options: - orientation :: portrait - specifies the paper orientation (an option for printing on paper) - pageSetup :: parameters for page margin (helps fit more information on the page when printing on paper)\n\n## Create a book\nwb &lt;- createWorkbook()\n\n## Adding a Sheet to the xlsx Workbook\naddWorksheet(wb, sheetName = \"Sales\", orientation = 'portrait', gridLines = FALSE)\n\n## Setting Margins\npageSetup(wb, \"Sales\", left = 0.25, top = 0.25, right = 0.25,bottom = 0.25)\n\n\n\nWriting and Customization\n\nmergeCells - merges cells (the range of merged cells is determined automatically) cols = 1:length(fin_sales)\naddStyle - applies the “st_name” style to the specified range\nsetColWidths - sets the width of the column\n\n\n## Writing Data to the xlsx Sheet\nwriteData(wb, 'Sales', \"Sales\")\n\n## Merging Cells\nmergeCells(wb, sheet = \"Sales\", cols = 1:length(fin_sales), rows = 1)\n\n## Apply the st_name Style to the First Row from the First Column to the Length of the fin_sales Table\naddStyle(wb, 'Sales', st_name, 1, 1:length(fin_sales), stack = TRUE)\n\nwriteData(wb, 'Sales', fin_sales, startRow = 3)\naddStyle(wb, 'Sales', st_head, 3, 1:length(fin_sales),\n         gridExpand = TRUE, stack = TRUE)\n\n## Set Column Widths\nsetColWidths(wb, \"Sales\", cols = 1, widths = 25)\n\naddStyle(wb, 'Sales', st_bord, 4:(nrow(fin_sales)+3),\n         1:length(fin_sales), stack = TRUE, gridExpand = TRUE)\n\n## Apply the st_bot Style to Cells in the Column with Data\naddStyle(wb, 'Sales', st_bot, (which(!is.na(temp_sales$PROC))+3),\n         1:length(temp_sales), stack = TRUE, gridExpand = TRUE)\n\naddStyle(wb, 'Sales', st_bot, nrow(fin_sales)+3, 1:length(fin_sales), stack = TRUE)\naddStyle(wb, 'Sales', createStyle(halign = \"center\"),\n         3:(nrow(fin_sales)+3), length(fin_sales), stack = TRUE, gridExpand = TRUE)\nsetColWidths(wb, \"Sales\", cols = length(fin_sales), widths = 18)\naddStyle(wb, 'Sales', gray, 3, 1, stack = TRUE)\naddStyle(wb, 'Sales', ros, 3, c(2,3), stack = TRUE, gridExpand = TRUE)\naddStyle(wb, 'Sales', green, 3, 4, stack = TRUE)\naddStyle(wb, 'Sales', blue, 3, 5, stack = TRUE)\naddStyle(wb, 'Sales', yellow, 3, 6, stack = TRUE)\n\n\n\nResult\n\n\n\nConclusion\nThis method of saving to xlsx is, on one hand, “verbose,” but on the other hand, it is very flexible in customization, allowing you to write/apply styles down to the individual cell.\nIf a similar report is generated regularly, where only the data is updated, this approach makes sense. In the long term, it will pay off in subsequent iterations of report generation.\n\n\n\n\n Back to top"
+  },
+  {
+    "objectID": "about-no.html",
+    "href": "about-no.html",
+    "title": "Shevchenko Vladimir Vladimirovich",
+    "section": "",
+    "text": "Oversett 💬\n🇬🇧 ¦ 🇳🇴 ¦ 🇷🇺\n\n\n\n\n\n\n\n\nDate of Birth\n08/29/1997 (27 years old)\n\n\nGender\nMale\n\n\nMarital Status\nSingle\n\n\nEducation\nBachelor Degree\n\n\nLocation\nBjørnafjordenm, Norway\n\n\nJob Search Status\nOpen to offers"
+  },
+  {
+    "objectID": "about-no.html#section",
+    "href": "about-no.html#section",
+    "title": "Shevchenko Vladimir Vladimirovich",
+    "section": "2016 – 2020",
+    "text": "2016 – 2020\n\n\n\n\n\n\n\nEducational Institution\nDmytro Motornyi Tavria StateAgrotechnological University\n\n\nProgram Subject Area\nComputer sciences and information technologies\n\n\nQualification\nBachelor in Computer Sciences and Information Technologies\n\n\nForm of Training\nFull-Time"
+  },
+  {
+    "objectID": "about-no.html#data-processing-and-reporting-tools",
+    "href": "about-no.html#data-processing-and-reporting-tools",
+    "title": "Shevchenko Vladimir Vladimirovich",
+    "section": "Data Processing and Reporting Tools",
+    "text": "Data Processing and Reporting Tools\n\n\n\nTools\nAreas of Application\n\n\n\n\nExcel\nFormulas, Pivot Tables\n\n\nPowerPoint\nIn-house Presentation Creation\n\n\nPython\npolars, pandas, seaborn, plotly, etc.\n\n\nR\ndplyr, ggplot, futureverse, glue, etc.\n\n\nSQL\nOracle, SQLite\n\n\nQuarto / RMarkdown\nReporting"
+  },
+  {
+    "objectID": "about-no.html#programming",
+    "href": "about-no.html#programming",
+    "title": "Shevchenko Vladimir Vladimirovich",
+    "section": "Programming",
+    "text": "Programming\n\n\n\nGo\ncolly, go-telegram\n\n\nDocker\nuse of templates containers"
+  },
+  {
+    "objectID": "about-no.html#os-and-ide",
+    "href": "about-no.html#os-and-ide",
+    "title": "Shevchenko Vladimir Vladimirovich",
+    "section": "OS and IDE",
+    "text": "OS and IDE\nPreferred Tools\n\n\n\nLinux\nEmacs\nDBeaver"
+  },
+  {
+    "objectID": "about-no.html#june-2023---december-2023",
+    "href": "about-no.html#june-2023---december-2023",
+    "title": "Shevchenko Vladimir Vladimirovich",
+    "section": "June 2023 - December 2023",
+    "text": "June 2023 - December 2023\n\n\n\nJOB TITLE\nEconomist\n\n\n\n\nORGANIZATION\nMelitopol Dairy Plant LLC\n\n\nEXPERIENCE WORK\n~7 months\n\n\n\nJOB DESCRIPTION AND RESPONSIBILITIES:\n\nPreparing and supporting reports for three enterprises: Melitopol Dairy Plant, Cheeses of Tavria, Dolphin  (data collection, processing, analysis, and visualization)\n\nOversight of product and material stock warehouses\n\nSales analysis by stores\n\nProduct cost calculation"
+  },
+  {
+    "objectID": "about-no.html#november-2020---october-2022",
+    "href": "about-no.html#november-2020---october-2022",
+    "title": "Shevchenko Vladimir Vladimirovich",
+    "section": "November 2020 - October 2022",
+    "text": "November 2020 - October 2022\n\n\n\n\n\n\n\nJOB TITLE\nChief Specialist of theRisk Management Department\n\n\n\n\nORGANIZATION\nForward Bank LLC\n\n\nEXPERIENCE WORK\n~2 years\n\n\n\nJOB DESCRIPTION AND RESPONSIBILITIES:\n\nGeneration of reports, pass rates, and risk indicators\n\nCustomer checks against blacklists, personal data, BKI, PTI\n\nWriting and optimizing audit scripts; developing new risk indicators\n\nManaging Oracle database tables (creation, deletion, modification of a table’s structure)\n\nData cleaning\nInformation processing (segmentation, aggregation, filtering, visualization)"
+  },
+  {
+    "objectID": "about-no.html#section-1",
+    "href": "about-no.html#section-1",
+    "title": "Shevchenko Vladimir Vladimirovich",
+    "section": "2016 - 2018",
+    "text": "2016 - 2018\n\n\n\nJOB TITLE\nTech Specialist\n\n\n\n\nORGANIZATION\nBand\n\n\nEXPERIENCE WORK\n~2 years\n\n\n\nJOB DESCRIPTION AND RESPONSIBILITIES:\n\nRemote technical support for employees\n\nInstallation and configuration of programs for Windows/Linux\n\nVPS (VDS) rental and support\n\nWorkflow automation"
   }
 ]
