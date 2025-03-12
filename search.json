@@ -200,21 +200,21 @@
     "href": "about-no.html",
     "title": "Shevchenko Vladimir Vladimirovich",
     "section": "",
-    "text": "Oversett 🈚\n🇬🇧 ¦ 🇳🇴 ¦ 🇷🇺\n\n\n\n\n\n\n\n\nDate of Birth\n08/29/1997 (27 years old)\n\n\nGender\nMale\n\n\nMarital Status\nSingle\n\n\nEducation\nBachelor Degree\n\n\nLocation\nBjørnafjorden, Norway\n\n\nJob Search Status\nOpen to offers"
+    "text": "Oversette 🈚\n🇬🇧 ¦ 🇳🇴 ¦ 🇷🇺\n\n\n\n\n\n\n\n\nFødselsdato\n29.08.1997 (27 år)\n\n\nKjønn\nMann\n\n\nSivilstatus\nSingel\n\n\nUtdanning\nBachelorgrad\n\n\nPlassering\nBjørnafjorden, Norge\n\n\nStatus for jobbsøk\nÅpen for tilbud"
   },
   {
     "objectID": "about-no.html#section",
     "href": "about-no.html#section",
     "title": "Shevchenko Vladimir Vladimirovich",
     "section": "2016 – 2020",
-    "text": "2016 – 2020\n\n\n\n\n\n\n\nEducational Institution\nDmytro Motornyi Tavria StateAgrotechnological University\n\n\nProgram Subject Area\nComputer sciences and information technologies\n\n\nQualification\nBachelor in Computer Sciences and Information Technologies\n\n\nForm of Training\nFull-Time"
+    "text": "2016 – 2020\n\n\n\n\n\n\n\nUtdannings Institusjon\nDmytro Motornyi Tavria StateAgrotechnological University\n\n\nProgram Emne Område\nDatavitenskap og informasjonsteknologi\n\n\nKvalifikasjon\nBachelor i informatikk og informasjonsteknologi\n\n\nForm av Trening\nHeltid"
   },
   {
     "objectID": "about-no.html#data-processing-and-reporting-tools",
     "href": "about-no.html#data-processing-and-reporting-tools",
     "title": "Shevchenko Vladimir Vladimirovich",
     "section": "Data Processing and Reporting Tools",
-    "text": "Data Processing and Reporting Tools\n\n\n\nTools\nAreas of Application\n\n\n\n\nExcel\nFormulas, Pivot Tables\n\n\nPowerPoint\nIn-house Presentation Creation\n\n\nPython\npolars, pandas, seaborn, plotly, etc.\n\n\nR\ndplyr, ggplot, futureverse, glue, etc.\n\n\nSQL\nOracle, SQLite\n\n\nQuarto / RMarkdown\nReporting"
+    "text": "Data Processing and Reporting Tools\n\n\n\nTools\nAreas of Application\n\n\n\n\nExcel\nFormulas, Pivot Tables\n\n\nPowerPoint\nIn-house Presentation Creation\n\n\nPython\nPolars, Pandas, Seaborn, Plotly, etc.\n\n\nR\nDplyr, Ggplot, Futureverse, Glue, etc.\n\n\nSQL\nOracle, SQLite\n\n\nQuarto / RMarkdown\nReporting"
   },
   {
     "objectID": "about-no.html#programming",
@@ -249,6 +249,41 @@
     "href": "about-no.html#section-1",
     "title": "Shevchenko Vladimir Vladimirovich",
     "section": "2016 - 2018",
-    "text": "2016 - 2018\n\n\n\nJOB TITLE\nTech Specialist\n\n\n\n\nORGANIZATION\nBand\n\n\nEXPERIENCE WORK\n~2 years\n\n\n\nJOB DESCRIPTION AND RESPONSIBILITIES:\n\nRemote technical support for employees\n\nInstallation and configuration of programs for Windows/Linux\n\nVPS (VDS) rental and support\n\nWorkflow automation"
+    "text": "2016 - 2018\n\n\n\n\n\n\n\nJOBB TITEL\nTeknisk spesialist\n\n\n\n\nORGANISASJON\nBand\n\n\nERFARING ARBEID\n~2 år\n\n\n\nJOBB BESKRIVELSE OG ANSVAR:\n\nEkstern teknisk støtte for ansatte\nInstallasjon og konfigurasjon av programmer for Windows/Linux\nVPS (VDS) utleie og støtte\nAutomatisering av arbeidsflyt"
+  },
+  {
+    "objectID": "about-no.html#databehandlings--og-rapporteringsverktøy",
+    "href": "about-no.html#databehandlings--og-rapporteringsverktøy",
+    "title": "Shevchenko Vladimir Vladimirovich",
+    "section": "Databehandlings- og rapporteringsverktøy",
+    "text": "Databehandlings- og rapporteringsverktøy\n\n\n\n\n\n\n\nVerktøy\nBruksområder\n\n\n\n\nExcel\nFormler, pivottabeller\n\n\nPowerPoint\nOppretting av intern presentasjon\n\n\nPython\nPolarer, Pandaer, Seaborn, Plotly, etc.\n\n\nR\nDplyr, Ggplot, Futureverse, Glue, etc.\n\n\nSQL\nOracle, SQLite\n\n\nQuarto / RMarkdown\nRapportering"
+  },
+  {
+    "objectID": "about-no.html#programmering",
+    "href": "about-no.html#programmering",
+    "title": "Shevchenko Vladimir Vladimirovich",
+    "section": "Programmering",
+    "text": "Programmering\n\n\n\nGå\ncolly, go-telegram\n\n\nDocker\nbruk av maler containere"
+  },
+  {
+    "objectID": "about-no.html#os-og-ide",
+    "href": "about-no.html#os-og-ide",
+    "title": "Shevchenko Vladimir Vladimirovich",
+    "section": "OS og IDE",
+    "text": "OS og IDE\nForetrukket verktøy\n\n\n\nLinux\nEmacs\nDBeaver"
+  },
+  {
+    "objectID": "about-no.html#juni-2023-desember-2023",
+    "href": "about-no.html#juni-2023-desember-2023",
+    "title": "Shevchenko Vladimir Vladimirovich",
+    "section": "juni 2023 – desember 2023",
+    "text": "juni 2023 – desember 2023\n\n\n\nJOBB TITEL\nØkonom\n\n\n\n\nORGANISASJON\nMelitopol Dairy Plant LLC\n\n\nERFARING ARBEID\n~7 måneder\n\n\n\nJOBB BESKRIVELSE OG ANSVAR:\n\nUtarbeide og støtte rapporter for tre virksomheter: Melitopol meierianlegg, oster fra Tavria, delfiner (datainnsamling, prosessering, analyse og visualisering)\nOvervåking av vare- og materiallager\nSalgsanalyse etter butikker\nProduktkostnadsberegning"
+  },
+  {
+    "objectID": "about-no.html#november-2020-oktober-2022",
+    "href": "about-no.html#november-2020-oktober-2022",
+    "title": "Shevchenko Vladimir Vladimirovich",
+    "section": "november 2020 – oktober 2022",
+    "text": "november 2020 – oktober 2022\n\n\n\n\n\n\n\nJOBB TITEL\nSjefspesialist forRisk Management Department\n\n\n\n\nORGANISASJON\nForward Bank LLC\n\n\nERFARING ARBEID\n~2 år\n\n\n\nJOBB BESKRIVELSE OG ANSVAR:\n\nGenerering av rapporter, beståttrater og risikoindikatorer\nKunde sjekker mot svartelister, persondata, BKI, PTI\nSkrive og optimalisere revisjonsskript; utvikle nye risikoindikatorer\nAdministrere Oracle-databasetabeller (oppretting, sletting, endring av en tabells struktur)\nRensing av data\nInformasjonsbehandling (segmentering, aggregering, filtrering, visualisering)"
   }
 ]
