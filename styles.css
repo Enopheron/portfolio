@@ -1,3 +1,5 @@
+/* настройки для отображения на маленьком экране */
+
 @media (max-width: 600px) {
   body {
     font-size: 14px;
@@ -18,14 +20,9 @@ em {
     color: #606060;
 }
 
-code {
-    color: #606060;
-    font-weight: normal;
-    background-color: #eeeeee !important;
-    border-radius: 0.3em;
-    padding-left: 0.3em;
-    padding-right: 0.3em;
-    
+code:not(.sourceCode) {
+  color: #606060;
+  background-color: #eeeeee !important;
 }
 
 dt {
