@@ -1,3 +1,15 @@
+@media (max-width: 600px) {
+  body {
+    font-size: 14px;
+  }
+  .sidebar {
+    display: none;
+  }
+  div.quarto-about-solana .about-entity {
+    text-align: left !important;
+  }
+}
+
 em, code, strong, del {
     font-family: "JetBrainsMono Nerd Font", sans-serif;
 }
