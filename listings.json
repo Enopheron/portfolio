@@ -1,17 +1,5 @@
 [
   {
-    "listing": "/content/portfolio/index.html",
-    "items": [
-      "/content/portfolio/posts/web-scraping.html",
-      "/content/portfolio/posts/sales_report.html",
-      "/content/portfolio/posts/revenue-segment.html",
-      "/content/portfolio/posts/OCR-tool.html",
-      "/content/portfolio/posts/cheese-sales.html",
-      "/content/portfolio/posts/sales-binol-olive.html",
-      "/content/portfolio/posts/export-to-xlsx.html"
-    ]
-  },
-  {
     "listing": "/index.html",
     "items": [
       "/content/portfolio/posts/sales-binol-olive.html",
@@ -21,6 +9,18 @@
       "/content/portfolio/posts/cheese-sales.html",
       "/content/portfolio/posts/revenue-segment.html",
       "/content/portfolio/posts/sales_report.html"
+    ]
+  },
+  {
+    "listing": "/content/portfolio/index.html",
+    "items": [
+      "/content/portfolio/posts/web-scraping.html",
+      "/content/portfolio/posts/sales_report.html",
+      "/content/portfolio/posts/revenue-segment.html",
+      "/content/portfolio/posts/OCR-tool.html",
+      "/content/portfolio/posts/cheese-sales.html",
+      "/content/portfolio/posts/sales-binol-olive.html",
+      "/content/portfolio/posts/export-to-xlsx.html"
     ]
   }
 ]
