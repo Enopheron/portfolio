@@ -1,0 +1,190 @@
+/* --- Глобальные настройки --- */
+:root {
+  --bg-color: #121212;
+  --text-color: #e0e0e0;
+  --accent-color: #00e676; /* Яркий неон-зеленый */
+  --muted-color: #a0a0a0;
+  --border-color: #333;
+  --font-header: 'Space Grotesk', sans-serif;
+  --font-body: 'Inter', sans-serif;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-family: var(--font-body);
+  font-weight: 300;
+  margin: 0;
+  padding: 0;
+  line-height: 1.8;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-header);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+a {
+  color: var(--accent-color);
+  text-decoration: none;
+  transition: opacity 0.3s;
+}
+
+a:hover {
+  opacity: 0.7;
+}
+
+/* --- Контейнер --- */
+.main-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 60px 20px;
+}
+
+hr {
+  border: 0;
+  border-top: 1px solid var(--border-color);
+  margin: 60px 0;
+}
+
+/* --- Хедер --- */
+.header-section {
+  text-align: center;
+  margin-bottom: 80px;
+}
+
+.profile-img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid var(--accent-color);
+  margin-bottom: 20px;
+}
+
+.accent {
+  color: var(--accent-color);
+}
+
+.translations {
+  margin: 15px 0;
+  font-size: 0.9em;
+}
+
+.translations a {
+  margin: 0 5px;
+  color: var(--muted-color);
+}
+
+.contacts i {
+  font-size: 1.5em;
+  margin: 0 10px;
+  color: var(--text-color);
+}
+
+.about-snippet {
+  font-size: 0.9em;
+  color: var(--muted-color);
+  margin-top: 20px;
+}
+
+/* --- Общие секции --- */
+h2 {
+  font-size: 2em;
+  display: flex;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+.num {
+  color: var(--accent-color);
+  font-size: 0.6em;
+  margin-right: 15px;
+  border-bottom: 2px solid var(--accent-color);
+}
+
+.text-block {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+/* --- Навыки --- */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 40px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.skill-category h3 {
+  font-size: 1.1em;
+  color: var(--accent-color);
+  margin-bottom: 20px;
+}
+
+.skill-category ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.skill-category li {
+  margin-bottom: 8px;
+  color: var(--muted-color);
+}
+
+/* --- Временная шкала (Опыт/Удавание) --- */
+.timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.timeline-item {
+  display: flex;
+  gap: 30px;
+}
+
+.timeline-meta {
+  flex: 0 0 250px; /* Фиксированная ширина для мета-данных */
+  text-align: right;
+}
+
+.timeline-meta h4 {
+  font-size: 1.1em;
+  margin: 0 0 10px 0;
+}
+
+.company {
+  display: block;
+  font-weight: 400;
+  margin-bottom: 5px;
+}
+
+.date, .location {
+  display: block;
+  font-size: 0.85em;
+  color: var(--muted-color);
+}
+
+.timeline-content {
+  flex: 1;
+  color: var(--muted-color);
+  font-weight: 300;
+}
+
+/* --- Адаптивность для мобильных --- */
+@media (max-width: 768px) {
+  .timeline-item {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .timeline-meta {
+    flex: none;
+    text-align: left;
+  }
+}
