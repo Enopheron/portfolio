@@ -286,7 +286,7 @@ a:hover      { filter: brightness(.8); }
 .detail-box ul li::before           { content: '\F285'; color: var(--accent); }
 .detail-box ul li.no::before        { content: '\F659'; color: var(--red);    }
 .detail-box ul li.time::before      { content: '\F292'; color: var(--gold);   }
-.detail-box ul li.guarantee::before { content: '\F33F'; color: var(--green);  }
+.detail-box ul li.guarantee::before { content: '\F52F'; color: var(--green);  }
 .detail-box ul li.home::before      { content: '\F423'; color: var(--accent);  }
 .detail-box ul li.guarantee i       { display: none; }
 
