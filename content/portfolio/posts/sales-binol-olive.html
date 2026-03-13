@@ -8,7 +8,7 @@
 
 <meta name="dcterms.date" content="2024-12-14">
 
-<title>Binol vs Olive – Vladimir Shevchenko</title>
+<title>Binol vs Olive Sales Analysis – Vladimir Shevchenko</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -77,7 +77,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-1b3db88def35042d172274863c1cdcf0.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../site_libs/bootstrap/bootstrap-39a4a45c59b80bdf197a6334dd00454b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-f38abdc5f243f273513e5c75ae16b4fc.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -164,9 +164,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#library" id="toc-library" class="nav-link active" data-scroll-target="#library">Library</a></li>
-  <li><a href="#get-data-asdasdasd" id="toc-get-data-asdasdasd" class="nav-link" data-scroll-target="#get-data-asdasdasd">Get data asdasdasd</a></li>
-  <li><a href="#agregate-table" id="toc-agregate-table" class="nav-link" data-scroll-target="#agregate-table">Agregate table</a></li>
+  <li><a href="#setup-and-libraries" id="toc-setup-and-libraries" class="nav-link active" data-scroll-target="#setup-and-libraries">Setup and Libraries</a></li>
+  <li><a href="#data-extraction" id="toc-data-extraction" class="nav-link" data-scroll-target="#data-extraction">Data Extraction</a></li>
+  <li><a href="#data-aggregation-and-visualization" id="toc-data-aggregation-and-visualization" class="nav-link" data-scroll-target="#data-aggregation-and-visualization">Data Aggregation and Visualization</a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
   </ul>
 </nav>
     </div>
@@ -175,11 +176,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Binol vs Olive</h1>
-<p class="subtitle lead">Analize of sales</p>
+<h1 class="title">Binol vs Olive Sales Analysis</h1>
+<p class="subtitle lead">Comparative Analysis using Python, Polars, and Seaborn</p>
   <div class="quarto-categories">
     <div class="quarto-category">Python</div>
     <div class="quarto-category">SQLite</div>
+    <div class="quarto-category">DuckDB</div>
+    <div class="quarto-category">Polars</div>
+    <div class="quarto-category">Seaborn</div>
   </div>
   </div>
 
@@ -203,10 +207,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p><strong>Binol</strong> and <strong>Olive</strong> is concurire market for buys a flowers</p>
-<section id="library" class="level1">
-<h1>Library</h1>
-<div id="3cbde9c7" class="cell" data-execution_count="1">
+<p><strong>Binol</strong> and <strong>Olive</strong> are competing businesses in the flower market. This analysis compares their historical sales across several shared shop locations to identify trends and market dominance in different areas.</p>
+<section id="setup-and-libraries" class="level2">
+<h2 class="anchored" data-anchor-id="setup-and-libraries">Setup and Libraries</h2>
+<p>We use a modern, highly performant Python data stack for this analysis: <code>DuckDB</code> for querying the local SQLite database rapidly, <code>Polars</code> for fast data manipulation, and <code>Seaborn</code> combined with <code>Matplotlib</code> for creating rich visualizations.</p>
+<div id="4e131d16" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sqlalchemy <span class="im">import</span> create_engine</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> duckdb <span class="im">as</span> db</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> polars <span class="im">as</span> pl</span>
@@ -218,82 +223,108 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> locale <span class="im">import</span> setlocale, LC_TIME</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
-<section id="get-data-asdasdasd" class="level1">
-<h1>Get data asdasdasd</h1>
-<div id="2ee98b08" class="cell" data-execution_count="2">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>con <span class="op">=</span> db.<span class="ex">connect</span>(<span class="st">"~/Documents/kdb/notes/local.db"</span>)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> con.execute(<span class="st">"""</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="st">  select * from portfolio.salles_binol_olivia</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="st">  where Shops in ('Washington 24', 'Pine 3', 'Cedar 19a', 'Park Avenue 12', 'King Street 25', 'Victoria 38/4')</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span>).pl().with_columns(</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    pl.col(<span class="st">'DT'</span>).<span class="bu">str</span>.to_date(<span class="bu">format</span><span class="op">=</span><span class="st">'%Y-%m-</span><span class="sc">%d</span><span class="st">'</span>)</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="data-extraction" class="level2">
+<h2 class="anchored" data-anchor-id="data-extraction">Data Extraction</h2>
+<p>We connect directly to a local database using <code>DuckDB</code>’s powerful integration. We filter for specific competitive shop locations and extract the dataset into a <code>Polars</code> DataFrame. Finally, we convert the date strings into proper Date objects for time-series plotting.</p>
+<div id="df201a03" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Connect to the local database</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>con <span class="op">=</span> db.<span class="ex">connect</span>(<span class="st">"~/Documents/kdb/notes/local.db"</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Query the sales data and convert directly to a Polars DataFrame</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> con.execute(<span class="st">"""</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="st">  SELECT * FROM portfolio.salles_binol_olivia</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="st">  WHERE Shops IN ('Washington 24', 'Pine 3', 'Cedar 19a', 'Park Avenue 12', 'King Street 25', 'Victoria 38/4')</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span>).pl().with_columns(</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Convert string dates to datetime objects</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    pl.col(<span class="st">'DT'</span>).<span class="bu">str</span>.to_date(<span class="bu">format</span><span class="op">=</span><span class="st">'%Y-%m-</span><span class="sc">%d</span><span class="st">'</span>)</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
-<section id="agregate-table" class="level1">
-<h1>Agregate table</h1>
-<div id="0a098b7b" class="cell" data-execution_count="3">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>sns.set_theme()</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>df_melted <span class="op">=</span> df.melt(id_vars<span class="op">=</span>[<span class="st">"DT"</span>, <span class="st">"Shops"</span>], value_vars<span class="op">=</span>[<span class="st">"Binol"</span>, <span class="st">"Olive"</span>],</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>                    variable_name<span class="op">=</span><span class="st">"Product"</span>, value_name<span class="op">=</span><span class="st">"Value"</span>)</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>g <span class="op">=</span> sns.FacetGrid(df_melted,</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>                  col<span class="op">=</span><span class="st">'Shops'</span>,</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>                  hue<span class="op">=</span><span class="st">'Product'</span>,        <span class="co"># coloring with a new color</span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>                  col_wrap<span class="op">=</span><span class="dv">3</span>,           <span class="co"># number of plots displayed in one row</span></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>                  sharey<span class="op">=</span><span class="va">False</span>,         <span class="co"># y-axis shared across all plots</span></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>                  sharex<span class="op">=</span><span class="va">False</span>,         <span class="co"># x-axis shared across all plots</span></span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>                  height<span class="op">=</span><span class="dv">4</span>)             <span class="co"># height</span></span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>g <span class="op">=</span> g.<span class="bu">map</span>(sns.lineplot, <span class="st">'DT'</span>, <span class="st">'Value'</span>, marker<span class="op">=</span><span class="st">'o'</span>, markersize<span class="op">=</span><span class="dv">4</span>)</span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Apply formatting function to the Y-axis of each subplot</span></span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> ax <span class="kw">in</span> g.axes.flat:</span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Increase the maximum Y-axis value by 10%</span></span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>    ylim <span class="op">=</span> ax.get_ylim()</span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>    ax.set_ylim((ylim[<span class="dv">0</span>], ylim[<span class="dv">1</span>] <span class="op">*</span> <span class="fl">1.1</span>))</span>
-<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Draw trend lines for each line in ax.lines</span></span>
-<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> line <span class="kw">in</span> ax.lines:</span>
-<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>        sns.regplot(</span>
-<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>            x<span class="op">=</span>line.get_xdata(), y<span class="op">=</span>line.get_ydata(), ax<span class="op">=</span>ax,</span>
-<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>            scatter<span class="op">=</span><span class="va">False</span>,         <span class="co"># No markers (only trend line)</span></span>
-<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>            color<span class="op">=</span><span class="st">'gray'</span>,          <span class="co"># Set line color to gray</span></span>
-<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>            ci<span class="op">=</span><span class="va">None</span>,               <span class="co"># No confidence interval shading</span></span>
-<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>            line_kws<span class="op">=</span>{<span class="st">'linestyle'</span>: <span class="st">'--'</span>}  <span class="co"># Dashed line</span></span>
-<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>        )</span>
-<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Format X-axis labels</span></span>
-<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>    ax.xaxis.set_major_formatter(mdates.DateFormatter(<span class="st">'%b'</span>))</span>
-<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a><span class="co"># Text annotation function</span></span>
-<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> f(x, y, <span class="op">**</span>kwargs):</span>
-<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a>    ax <span class="op">=</span> plt.gca()  <span class="co"># Get current axis</span></span>
-<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(x)):</span>
-<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a>        ax.annotate(<span class="ss">f"</span><span class="sc">{</span>y<span class="sc">.</span>values[i]<span class="sc">:.1f}</span><span class="ss">"</span>, xy<span class="op">=</span>(x.values[i], y.values[i]), fontsize<span class="op">=</span><span class="dv">8</span>,</span>
-<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a>                    xytext<span class="op">=</span>(<span class="dv">0</span>, <span class="dv">10</span>), textcoords<span class="op">=</span><span class="st">"offset points"</span>,</span>
-<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a>                    color<span class="op">=</span><span class="st">"black"</span>,  <span class="co"># Set color same as line color</span></span>
-<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a>                    bbox<span class="op">=</span><span class="bu">dict</span>(boxstyle<span class="op">=</span><span class="st">"round"</span>, ec<span class="op">=</span><span class="st">"none"</span>, fc<span class="op">=</span><span class="st">"gray"</span>, alpha<span class="op">=</span><span class="fl">0.3</span>, pad<span class="op">=</span><span class="fl">0.3</span>),</span>
-<span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a>                    va<span class="op">=</span><span class="st">"center"</span>, ha<span class="op">=</span><span class="st">"center"</span>)</span>
+<section id="data-aggregation-and-visualization" class="level2">
+<h2 class="anchored" data-anchor-id="data-aggregation-and-visualization">Data Aggregation and Visualization</h2>
+<p>To visualize the sales side-by-side effectively, we need to transform our data from wide format (Binol and Olive as separate columns) to a long format (or melted) structure.</p>
+<p>Using <code>Seaborn</code>’s <code>FacetGrid</code>, we can cleanly create small multiples—one plot for each shop—allowing for a direct visual comparison of the performance of the two companies at each location. We also add trend lines and value annotations to make the charts easy to read.</p>
+<div id="f9c2196a" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set the default Seaborn aesthetic theme</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>sns.set_theme()</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Melt the DataFrame so 'Product' becomes a categorical column linking 'Binol' and 'Olive'</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>df_melted <span class="op">=</span> df.melt(</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    id_vars<span class="op">=</span>[<span class="st">"DT"</span>, <span class="st">"Shops"</span>], </span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    value_vars<span class="op">=</span>[<span class="st">"Binol"</span>, <span class="st">"Olive"</span>],</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    variable_name<span class="op">=</span><span class="st">"Product"</span>, </span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    value_name<span class="op">=</span><span class="st">"Value"</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize a grid of plots, faceted by 'Shops'</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>g <span class="op">=</span> sns.FacetGrid(</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    df_melted,</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>    col<span class="op">=</span><span class="st">'Shops'</span>,</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>    hue<span class="op">=</span><span class="st">'Product'</span>,        <span class="co"># Color grouping</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>    col_wrap<span class="op">=</span><span class="dv">3</span>,           <span class="co"># Display 3 plots per row</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>    sharey<span class="op">=</span><span class="va">False</span>,         <span class="co"># Allow y-axis to scale independently for each shop</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>    sharex<span class="op">=</span><span class="va">False</span>,         <span class="co"># Allow x-axis to scale independently</span></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>    height<span class="op">=</span><span class="dv">4</span>              <span class="co"># Height of each individual facet</span></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Map a lineplot to each facet</span></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>g <span class="op">=</span> g.<span class="bu">map</span>(sns.lineplot, <span class="st">'DT'</span>, <span class="st">'Value'</span>, marker<span class="op">=</span><span class="st">'o'</span>, markersize<span class="op">=</span><span class="dv">4</span>)</span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Apply custom formatting and annotations to each subplot</span></span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> ax <span class="kw">in</span> g.axes.flat:</span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Increase the maximum Y-axis value by 10% to prevent labels from getting cut off at the top</span></span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>    ylim <span class="op">=</span> ax.get_ylim()</span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>    ax.set_ylim((ylim[<span class="dv">0</span>], ylim[<span class="dv">1</span>] <span class="op">*</span> <span class="fl">1.1</span>))</span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Draw dashed trend lines for each plotted line</span></span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> line <span class="kw">in</span> ax.lines:</span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a>        sns.regplot(</span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a>            x<span class="op">=</span>line.get_xdata(), y<span class="op">=</span>line.get_ydata(), ax<span class="op">=</span>ax,</span>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a>            scatter<span class="op">=</span><span class="va">False</span>,         <span class="co"># Hide scatter points, show only the trend line</span></span>
+<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a>            color<span class="op">=</span><span class="st">'gray'</span>,          </span>
+<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a>            ci<span class="op">=</span><span class="va">None</span>,               <span class="co"># Disable confidence interval shading</span></span>
+<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a>            line_kws<span class="op">=</span>{<span class="st">'linestyle'</span>: <span class="st">'--'</span>} </span>
+<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Format X-axis tick labels to show abbreviated month names</span></span>
+<span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a>    ax.xaxis.set_major_formatter(mdates.DateFormatter(<span class="st">'%b'</span>))</span>
 <span id="cb3-43"><a href="#cb3-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-44"><a href="#cb3-44" aria-hidden="true" tabindex="-1"></a>g.<span class="bu">map</span>(f, <span class="st">'DT'</span>, <span class="st">'Value'</span>)</span>
-<span id="cb3-45"><a href="#cb3-45" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-46"><a href="#cb3-46" aria-hidden="true" tabindex="-1"></a>g.fig.subplots_adjust(top<span class="op">=</span><span class="fl">.9</span>)         <span class="co"># space for the suptitle from the plot</span></span>
-<span id="cb3-47"><a href="#cb3-47" aria-hidden="true" tabindex="-1"></a>g.fig.suptitle(<span class="st">'Salles'</span>)              <span class="co"># title of the plot</span></span>
-<span id="cb3-48"><a href="#cb3-48" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-49"><a href="#cb3-49" aria-hidden="true" tabindex="-1"></a>g.add_legend(title<span class="op">=</span><span class="st">"Product"</span>)</span>
-<span id="cb3-50"><a href="#cb3-50" aria-hidden="true" tabindex="-1"></a>sns.move_legend(</span>
-<span id="cb3-51"><a href="#cb3-51" aria-hidden="true" tabindex="-1"></a>    g, <span class="st">"center"</span>, bbox_to_anchor<span class="op">=</span>(<span class="fl">.5</span>, <span class="dv">1</span>), ncol<span class="op">=</span><span class="dv">5</span>, title<span class="op">=</span><span class="va">None</span>, frameon<span class="op">=</span><span class="va">False</span>,</span>
-<span id="cb3-52"><a href="#cb3-52" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb3-53"><a href="#cb3-53" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-54"><a href="#cb3-54" aria-hidden="true" tabindex="-1"></a><span class="co"># specify X/Y axis labels</span></span>
-<span id="cb3-55"><a href="#cb3-55" aria-hidden="true" tabindex="-1"></a>g.set_axis_labels(<span class="st">"Date"</span>, <span class="st">"Amount"</span>)</span>
-<span id="cb3-56"><a href="#cb3-56" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-57"><a href="#cb3-57" aria-hidden="true" tabindex="-1"></a><span class="co"># set the title of each subplot based on the data table</span></span>
-<span id="cb3-58"><a href="#cb3-58" aria-hidden="true" tabindex="-1"></a>g.set_titles(<span class="st">"</span><span class="sc">{col_name}</span><span class="st">"</span>)</span>
-<span id="cb3-59"><a href="#cb3-59" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-60"><a href="#cb3-60" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb3-44"><a href="#cb3-44" aria-hidden="true" tabindex="-1"></a><span class="co"># Define a function to annotate the data points with their exact values</span></span>
+<span id="cb3-45"><a href="#cb3-45" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> annotate_points(x, y, <span class="op">**</span>kwargs):</span>
+<span id="cb3-46"><a href="#cb3-46" aria-hidden="true" tabindex="-1"></a>    ax <span class="op">=</span> plt.gca()  </span>
+<span id="cb3-47"><a href="#cb3-47" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(x)):</span>
+<span id="cb3-48"><a href="#cb3-48" aria-hidden="true" tabindex="-1"></a>        ax.annotate(</span>
+<span id="cb3-49"><a href="#cb3-49" aria-hidden="true" tabindex="-1"></a>            <span class="ss">f"</span><span class="sc">{</span>y<span class="sc">.</span>values[i]<span class="sc">:.1f}</span><span class="ss">"</span>, </span>
+<span id="cb3-50"><a href="#cb3-50" aria-hidden="true" tabindex="-1"></a>            xy<span class="op">=</span>(x.values[i], y.values[i]), </span>
+<span id="cb3-51"><a href="#cb3-51" aria-hidden="true" tabindex="-1"></a>            fontsize<span class="op">=</span><span class="dv">8</span>,</span>
+<span id="cb3-52"><a href="#cb3-52" aria-hidden="true" tabindex="-1"></a>            xytext<span class="op">=</span>(<span class="dv">0</span>, <span class="dv">10</span>), textcoords<span class="op">=</span><span class="st">"offset points"</span>,</span>
+<span id="cb3-53"><a href="#cb3-53" aria-hidden="true" tabindex="-1"></a>            color<span class="op">=</span><span class="st">"black"</span>,  </span>
+<span id="cb3-54"><a href="#cb3-54" aria-hidden="true" tabindex="-1"></a>            bbox<span class="op">=</span><span class="bu">dict</span>(boxstyle<span class="op">=</span><span class="st">"round"</span>, ec<span class="op">=</span><span class="st">"none"</span>, fc<span class="op">=</span><span class="st">"gray"</span>, alpha<span class="op">=</span><span class="fl">0.3</span>, pad<span class="op">=</span><span class="fl">0.3</span>),</span>
+<span id="cb3-55"><a href="#cb3-55" aria-hidden="true" tabindex="-1"></a>            va<span class="op">=</span><span class="st">"center"</span>, ha<span class="op">=</span><span class="st">"center"</span></span>
+<span id="cb3-56"><a href="#cb3-56" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb3-57"><a href="#cb3-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-58"><a href="#cb3-58" aria-hidden="true" tabindex="-1"></a><span class="co"># Map the annotation function to the grid</span></span>
+<span id="cb3-59"><a href="#cb3-59" aria-hidden="true" tabindex="-1"></a>g.<span class="bu">map</span>(annotate_points, <span class="st">'DT'</span>, <span class="st">'Value'</span>)</span>
+<span id="cb3-60"><a href="#cb3-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-61"><a href="#cb3-61" aria-hidden="true" tabindex="-1"></a><span class="co"># Adjust layout to make room for the main title and legend</span></span>
+<span id="cb3-62"><a href="#cb3-62" aria-hidden="true" tabindex="-1"></a>g.fig.subplots_adjust(top<span class="op">=</span><span class="fl">.9</span>)         </span>
+<span id="cb3-63"><a href="#cb3-63" aria-hidden="true" tabindex="-1"></a>g.fig.suptitle(<span class="st">'Monthly Sales Comparison by Location'</span>)              </span>
+<span id="cb3-64"><a href="#cb3-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-65"><a href="#cb3-65" aria-hidden="true" tabindex="-1"></a><span class="co"># Configure the unified legend</span></span>
+<span id="cb3-66"><a href="#cb3-66" aria-hidden="true" tabindex="-1"></a>g.add_legend(title<span class="op">=</span><span class="st">"Company"</span>)</span>
+<span id="cb3-67"><a href="#cb3-67" aria-hidden="true" tabindex="-1"></a>sns.move_legend(</span>
+<span id="cb3-68"><a href="#cb3-68" aria-hidden="true" tabindex="-1"></a>    g, <span class="st">"center"</span>, </span>
+<span id="cb3-69"><a href="#cb3-69" aria-hidden="true" tabindex="-1"></a>    bbox_to_anchor<span class="op">=</span>(<span class="fl">.5</span>, <span class="dv">1</span>), </span>
+<span id="cb3-70"><a href="#cb3-70" aria-hidden="true" tabindex="-1"></a>    ncol<span class="op">=</span><span class="dv">5</span>, title<span class="op">=</span><span class="va">None</span>, frameon<span class="op">=</span><span class="va">False</span>,</span>
+<span id="cb3-71"><a href="#cb3-71" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-72"><a href="#cb3-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-73"><a href="#cb3-73" aria-hidden="true" tabindex="-1"></a><span class="co"># Set axis labels across all facets</span></span>
+<span id="cb3-74"><a href="#cb3-74" aria-hidden="true" tabindex="-1"></a>g.set_axis_labels(<span class="st">"Date"</span>, <span class="st">"Sales Amount"</span>)</span>
+<span id="cb3-75"><a href="#cb3-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-76"><a href="#cb3-76" aria-hidden="true" tabindex="-1"></a><span class="co"># Set the title of each subplot based on the shop name</span></span>
+<span id="cb3-77"><a href="#cb3-77" aria-hidden="true" tabindex="-1"></a>g.set_titles(<span class="st">"</span><span class="sc">{col_name}</span><span class="st">"</span>)</span>
+<span id="cb3-78"><a href="#cb3-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-79"><a href="#cb3-79" aria-hidden="true" tabindex="-1"></a><span class="co"># Render the plot</span></span>
+<span id="cb3-80"><a href="#cb3-80" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -302,6 +333,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
+</section>
+<section id="conclusion" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
+<p>By observing the trend lines, we can immediately identify which storefront location is dominated by Binol and which by Olive over time. Utilizing <code>Polars</code> and <code>DuckDB</code> ensures that even as the dataset scales, this aggregation and querying structure will remain extremely fast and memory-efficient.</p>
 
 
 </section>

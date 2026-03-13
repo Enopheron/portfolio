@@ -4,20 +4,25 @@
   body {
     font-size: 14px;
   }
+
   .sidebar {
     display: none;
   }
+
   div.quarto-about-solana .about-entity {
     text-align: left !important;
   }
 }
 
-em, code, strong, del {
-    font-family: "JetBrainsMono Nerd Font", sans-serif;
+em,
+code,
+strong,
+del {
+  font-family: "JetBrainsMono Nerd Font", sans-serif;
 }
 
 em {
-    color: #606060;
+  color: #606060;
 }
 
 code:not(.sourceCode) {
@@ -25,17 +30,126 @@ code:not(.sourceCode) {
   background-color: #eeeeee !important;
 }
 
+/* Dark mode support for inline code */
+.quarto-dark code:not(.sourceCode) {
+  color: #c9c9c9;
+  background-color: #2b2b2b !important;
+}
+
 dt {
-    font-weight: normal;
+  font-weight: normal;
 }
 
 .sidebar nav[role=doc-toc] ul>li>a.active {
-    filter: hue-rotate(310deg);
-    font-weight: bold;
+  filter: hue-rotate(310deg);
+  font-weight: bold;
 }
 
-.navbar-nav .nav-link.active, .navbar-nav .nav-link.show, .quarto-listing-category .category.active {
-    font-weight: bold !important;
-    color: #cc7b29;
+.navbar-nav .nav-link.active,
+.navbar-nav .nav-link.show,
+.quarto-listing-category .category.active {
+  font-weight: bold !important;
+  color: #cc7b29 !important;
 }
 
+/* --- Modern UI/UX Enhancements --- */
+
+/* Smooth transitions for all links and buttons */
+a,
+.btn,
+.nav-link {
+  transition: all 0.3s ease-in-out;
+}
+
+/* Enhancing listings (cards) */
+.quarto-listing-item {
+  border: none !important;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden;
+  background-color: var(--bs-body-bg);
+}
+
+.quarto-listing-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.quarto-dark .quarto-listing-item {
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.quarto-dark .quarto-listing-item:hover {
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+}
+
+/* Custom styling for about page sections */
+.custom-card {
+  background: var(--bs-card-bg);
+  border-radius: 12px;
+  padding: 25px;
+  margin-bottom: 25px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+  transition: all 0.3s ease;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.quarto-dark .custom-card {
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.custom-card:hover {
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.08);
+}
+
+.quarto-dark .custom-card:hover {
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.3);
+}
+
+/* Hero section styling */
+.hero-section {
+  padding: 4rem 2rem;
+  border-radius: 16px;
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.03) 0%, rgba(0, 0, 0, 0.01) 100%);
+  margin-bottom: 3rem;
+  text-align: center;
+}
+
+.quarto-dark .hero-section {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.01) 100%);
+}
+
+/* Animated Gradient Text */
+.gradient-text {
+  background: linear-gradient(90deg, #cc7b29, #d9534f);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+
+/* Badges for skills */
+.skill-badge {
+  display: inline-block;
+  padding: 0.35rem 0.65rem;
+  font-size: 0.85em;
+  font-weight: 600;
+  line-height: 1;
+  color: var(--bs-body-color);
+  background-color: var(--bs-secondary-bg);
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: 50rem;
+  margin: 0.2rem;
+  border: 1px solid var(--bs-border-color);
+  transition: all 0.2s ease;
+}
+
+.skill-badge:hover {
+  background-color: #cc7b29;
+  color: white;
+  border-color: #cc7b29;
+}

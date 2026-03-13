@@ -8,7 +8,7 @@
 
 <meta name="dcterms.date" content="2024-07-10">
 
-<title>Beautiful export to Excel (xlsx) – Vladimir Shevchenko</title>
+<title>Beautiful Export to Excel (xlsx) – Vladimir Shevchenko</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -77,7 +77,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-1b3db88def35042d172274863c1cdcf0.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../site_libs/bootstrap/bootstrap-39a4a45c59b80bdf197a6334dd00454b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-f38abdc5f243f273513e5c75ae16b4fc.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -164,9 +164,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#libraryes-and-styles" id="toc-libraryes-and-styles" class="nav-link active" data-scroll-target="#libraryes-and-styles">Libraryes and styles</a></li>
-  <li><a href="#workbook-and-options" id="toc-workbook-and-options" class="nav-link" data-scroll-target="#workbook-and-options">Workbook and Options</a></li>
-  <li><a href="#writing-and-customization" id="toc-writing-and-customization" class="nav-link" data-scroll-target="#writing-and-customization">Writing and Customization</a></li>
+  <li><a href="#libraries-and-styles-definition" id="toc-libraries-and-styles-definition" class="nav-link active" data-scroll-target="#libraries-and-styles-definition">Libraries and Styles Definition</a></li>
+  <li><a href="#creating-the-workbook-and-setting-options" id="toc-creating-the-workbook-and-setting-options" class="nav-link" data-scroll-target="#creating-the-workbook-and-setting-options">Creating the Workbook and Setting Options</a></li>
+  <li><a href="#writing-data-and-applying-customization" id="toc-writing-data-and-applying-customization" class="nav-link" data-scroll-target="#writing-data-and-applying-customization">Writing Data and Applying Customization</a></li>
   <li><a href="#result" id="toc-result" class="nav-link" data-scroll-target="#result">Result</a></li>
   <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
   </ul>
@@ -177,12 +177,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Beautiful export to Excel (xlsx)</h1>
-<p class="subtitle lead">openxlsx</p>
+<h1 class="title">Beautiful Export to Excel (xlsx)</h1>
+<p class="subtitle lead">Customizing Exports with openxlsx in R</p>
   <div class="quarto-categories">
     <div class="quarto-category">R</div>
     <div class="quarto-category">xlsx</div>
     <div class="quarto-category">Excel</div>
+    <div class="quarto-category">Data Export</div>
   </div>
   </div>
 
@@ -218,18 +219,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Note
+<span class="screen-reader-only">Note</span>Overview
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>This article briefly describes the functions of the <strong>openxlsx</strong> package.<br> Below is an example of the interaction of functions and the final result of exporting a table from <em>R</em> → <em>xlsx</em></p>
+<p>This article briefly describes the powerful formatting capabilities of the <strong>openxlsx</strong> package in R.<br> Below is a practical example demonstrating how to meticulously build, style, and export a data table from R to a highly customized Excel <code>.xlsx</code> file.</p>
 </div>
 </div>
-<section id="libraryes-and-styles" class="level1">
-<h1>Libraryes and styles</h1>
+<section id="libraries-and-styles-definition" class="level2">
+<h2 class="anchored" data-anchor-id="libraries-and-styles-definition">Libraries and Styles Definition</h2>
+<p>Unlike <code>writexl</code>, <strong>openxlsx</strong> allows you to construct styles inside R and apply them cell-by-cell. First, we load the library and pre-define our color palette and structural styles (like bold headers and borders).</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(openxlsx)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="do">## --- Colors</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="do">## --- Color Palette</span></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>gray   <span class="ot">&lt;-</span> <span class="fu">createStyle</span>(<span class="at">fgFill =</span> <span class="st">'#d9d9d9'</span>)</span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>green  <span class="ot">&lt;-</span> <span class="fu">createStyle</span>(<span class="at">fgFill =</span> <span class="st">'#c6e0b4'</span>)</span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>red    <span class="ot">&lt;-</span> <span class="fu">createStyle</span>(<span class="at">fgFill =</span> <span class="st">'#f9a1a1'</span>)</span>
@@ -238,88 +240,87 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>ros    <span class="ot">&lt;-</span> <span class="fu">createStyle</span>(<span class="at">fgFill =</span> <span class="st">'#fce4d6'</span>)</span>
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>border <span class="ot">&lt;-</span> <span class="fu">createStyle</span>(<span class="at">fgFill =</span> <span class="st">'#333333'</span>)</span>
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="do">## --- Styles</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="do">## --- Structural Styles</span></span>
 <span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>st_bord <span class="ot">&lt;-</span> <span class="fu">createStyle</span>(<span class="at">numFmt =</span> <span class="st">"#,##0"</span>,</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>                       <span class="at">border =</span> <span class="st">'TopBottomLeftRight'</span>,<span class="at">borderColour =</span> <span class="st">'#cccccc'</span>)</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>                       <span class="at">border =</span> <span class="st">'TopBottomLeftRight'</span>, <span class="at">borderColour =</span> <span class="st">'#cccccc'</span>)</span>
 <span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>st_head <span class="ot">&lt;-</span> <span class="fu">createStyle</span>(<span class="at">textDecoration =</span> <span class="st">"bold"</span>, <span class="at">halign =</span> <span class="st">"center"</span>,</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>                       <span class="at">border =</span> <span class="st">'TopBottomLeftRight'</span>,<span class="at">borderColour =</span> border)</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>st_bot  <span class="ot">&lt;-</span> <span class="fu">createStyle</span>(<span class="at">textDecoration =</span> <span class="st">'bold'</span>,<span class="at">border =</span> <span class="st">"top"</span>,</span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>                       <span class="at">borderColour =</span> border,<span class="at">borderStyle =</span> <span class="st">"medium"</span>)</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>                       <span class="at">border =</span> <span class="st">'TopBottomLeftRight'</span>, <span class="at">borderColour =</span> border)</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>st_bot  <span class="ot">&lt;-</span> <span class="fu">createStyle</span>(<span class="at">textDecoration =</span> <span class="st">'bold'</span>, <span class="at">border =</span> <span class="st">"top"</span>,</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>                       <span class="at">borderColour =</span> border, <span class="at">borderStyle =</span> <span class="st">"medium"</span>)</span>
 <span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>st_name <span class="ot">&lt;-</span> <span class="fu">createStyle</span>(<span class="at">halign =</span> <span class="st">"center"</span>, <span class="at">textDecoration =</span> <span class="st">'bold'</span>,</span>
 <span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>                       <span class="at">fontSize =</span> <span class="dv">16</span>, <span class="at">border =</span> <span class="st">'TopBottomLeftRight'</span>,</span>
 <span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>                       <span class="at">borderColour =</span> border, <span class="at">borderStyle =</span> <span class="st">'medium'</span>)</span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>st_bold <span class="ot">&lt;-</span> <span class="fu">createStyle</span>(<span class="at">textDecoration =</span> <span class="st">'bold'</span>,<span class="at">border =</span> <span class="st">"left"</span>,</span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>                       <span class="at">borderColour =</span> border,<span class="at">borderStyle =</span> <span class="st">"medium"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>st_bold <span class="ot">&lt;-</span> <span class="fu">createStyle</span>(<span class="at">textDecoration =</span> <span class="st">'bold'</span>, <span class="at">border =</span> <span class="st">"left"</span>,</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>                       <span class="at">borderColour =</span> border, <span class="at">borderStyle =</span> <span class="st">"medium"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="workbook-and-options" class="level1">
-<h1>Workbook and Options</h1>
-<p>We create a workbook (an object in RAM) and a sheet in this workbook named <em>Sales</em>, to which we apply several options:<br> - <em>orientation = ‘portrait’</em> - specifies the paper orientation (an option for printing on paper)<br> - <em>pageSetup</em> – for page margin (helps fit more information on the page when printing on paper)</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Create a book</span></span>
+<section id="creating-the-workbook-and-setting-options" class="level2">
+<h2 class="anchored" data-anchor-id="creating-the-workbook-and-setting-options">Creating the Workbook and Setting Options</h2>
+<p>Everything starts by initializing a <code>Workbook</code> object in RAM. This object acts as an in-memory representation of our final Excel file, where we will add sheets, inject data, and manipulate settings such as paper orientation and print margins.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="do">## 1. Initialize an empty workbook</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>wb <span class="ot">&lt;-</span> <span class="fu">createWorkbook</span>()</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Adding a Sheet to the xlsx Workbook</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="do">## 2. Add a new worksheet named "Sales". Disabling gridLines makes it look like a clean canvas.</span></span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">addWorksheet</span>(wb, <span class="at">sheetName =</span> <span class="st">"Sales"</span>, <span class="at">orientation =</span> <span class="st">'portrait'</span>, <span class="at">gridLines =</span> <span class="cn">FALSE</span>)</span>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="do">## Setting Margins</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="fu">pageSetup</span>(wb, <span class="st">"Sales"</span>, <span class="at">left =</span> <span class="fl">0.25</span>, <span class="at">top =</span> <span class="fl">0.25</span>, <span class="at">right =</span> <span class="fl">0.25</span>,<span class="at">bottom =</span> <span class="fl">0.25</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="do">## 3. Configure print layout margins (especially useful for automated physical reports)</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="fu">pageSetup</span>(wb, <span class="st">"Sales"</span>, <span class="at">left =</span> <span class="fl">0.25</span>, <span class="at">top =</span> <span class="fl">0.25</span>, <span class="at">right =</span> <span class="fl">0.25</span>, <span class="at">bottom =</span> <span class="fl">0.25</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="writing-and-customization" class="level1">
-<h1>Writing and Customization</h1>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-3"><pre class="sourceCode r code-annotation-code code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-3-1"><a href="#annotated-cell-3-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Writing Data to the xlsx Sheet</span></span>
-<span id="annotated-cell-3-2"><a href="#annotated-cell-3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">writeData</span>(wb, <span class="st">'Sales'</span>, <span class="st">"Sales"</span>)</span>
-<span id="annotated-cell-3-3"><a href="#annotated-cell-3-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="annotated-cell-3-4"><a href="#annotated-cell-3-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Merging Cells</span></span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-3-5" class="code-annotation-target"><a href="#annotated-cell-3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">mergeCells</span>(wb, <span class="at">sheet =</span> <span class="st">"Sales"</span>, <span class="at">cols =</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(fin_sales), <span class="at">rows =</span> <span class="dv">1</span>)</span>
-<span id="annotated-cell-3-6"><a href="#annotated-cell-3-6" aria-hidden="true" tabindex="-1"></a></span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-3-7" class="code-annotation-target"><a href="#annotated-cell-3-7" aria-hidden="true" tabindex="-1"></a><span class="fu">addStyle</span>(wb, <span class="st">'Sales'</span>, st_name, <span class="dv">1</span>, <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(fin_sales), <span class="at">stack =</span> <span class="cn">TRUE</span>)</span>
-<span id="annotated-cell-3-8"><a href="#annotated-cell-3-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="annotated-cell-3-9"><a href="#annotated-cell-3-9" aria-hidden="true" tabindex="-1"></a><span class="fu">writeData</span>(wb, <span class="st">'Sales'</span>, fin_sales, <span class="at">startRow =</span> <span class="dv">3</span>)</span>
-<span id="annotated-cell-3-10"><a href="#annotated-cell-3-10" aria-hidden="true" tabindex="-1"></a><span class="fu">addStyle</span>(wb, <span class="st">'Sales'</span>, st_head, <span class="dv">3</span>, <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(fin_sales),</span>
-<span id="annotated-cell-3-11"><a href="#annotated-cell-3-11" aria-hidden="true" tabindex="-1"></a>         <span class="at">gridExpand =</span> <span class="cn">TRUE</span>, <span class="at">stack =</span> <span class="cn">TRUE</span>)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<dl class="code-annotation-container-grid">
-<dt data-target-cell="annotated-cell-3" data-target-annotation="1">1</dt>
-<dd>
-<span data-code-cell="annotated-cell-3" data-code-lines="5" data-code-annotation="1">merges cells (the range of merged cells is determined automatically) <br> <code>cols = 1:length(fin_sales)</code><br></span>
-</dd>
-<dt data-target-cell="annotated-cell-3" data-target-annotation="2">2</dt>
-<dd>
-<span data-code-cell="annotated-cell-3" data-code-lines="7" data-code-annotation="2">applies the “st_name” style to the specified range<br></span>
-</dd>
-</dl>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-4"><pre class="sourceCode r code-annotation-code code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-4-1"><a href="#annotated-cell-4-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Set Column Widths</span></span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-4-2" class="code-annotation-target"><a href="#annotated-cell-4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">setColWidths</span>(wb, <span class="st">"Sales"</span>, <span class="at">cols =</span> <span class="dv">1</span>, <span class="at">widths =</span> <span class="dv">25</span>)</span>
-<span id="annotated-cell-4-3"><a href="#annotated-cell-4-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="annotated-cell-4-4"><a href="#annotated-cell-4-4" aria-hidden="true" tabindex="-1"></a><span class="fu">addStyle</span>(wb, <span class="st">'Sales'</span>, st_bord, <span class="dv">4</span><span class="sc">:</span>(<span class="fu">nrow</span>(fin_sales)<span class="sc">+</span><span class="dv">3</span>),</span>
-<span id="annotated-cell-4-5"><a href="#annotated-cell-4-5" aria-hidden="true" tabindex="-1"></a>         <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(fin_sales), <span class="at">stack =</span> <span class="cn">TRUE</span>, <span class="at">gridExpand =</span> <span class="cn">TRUE</span>)</span>
-<span id="annotated-cell-4-6"><a href="#annotated-cell-4-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="annotated-cell-4-7"><a href="#annotated-cell-4-7" aria-hidden="true" tabindex="-1"></a><span class="do">## Apply the st_bot Style to Cells in the Column with Data</span></span>
-<span id="annotated-cell-4-8"><a href="#annotated-cell-4-8" aria-hidden="true" tabindex="-1"></a><span class="fu">addStyle</span>(wb, <span class="st">'Sales'</span>, st_bot, (<span class="fu">which</span>(<span class="sc">!</span><span class="fu">is.na</span>(temp_sales<span class="sc">$</span>PROC))<span class="sc">+</span><span class="dv">3</span>),</span>
-<span id="annotated-cell-4-9"><a href="#annotated-cell-4-9" aria-hidden="true" tabindex="-1"></a>         <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(temp_sales), <span class="at">stack =</span> <span class="cn">TRUE</span>, <span class="at">gridExpand =</span> <span class="cn">TRUE</span>)</span>
-<span id="annotated-cell-4-10"><a href="#annotated-cell-4-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="annotated-cell-4-11"><a href="#annotated-cell-4-11" aria-hidden="true" tabindex="-1"></a><span class="fu">addStyle</span>(wb, <span class="st">'Sales'</span>, st_bot, <span class="fu">nrow</span>(fin_sales)<span class="sc">+</span><span class="dv">3</span>, <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(fin_sales), <span class="at">stack =</span> <span class="cn">TRUE</span>)</span>
-<span id="annotated-cell-4-12"><a href="#annotated-cell-4-12" aria-hidden="true" tabindex="-1"></a><span class="fu">addStyle</span>(wb, <span class="st">'Sales'</span>, <span class="fu">createStyle</span>(<span class="at">halign =</span> <span class="st">"center"</span>),</span>
-<span id="annotated-cell-4-13"><a href="#annotated-cell-4-13" aria-hidden="true" tabindex="-1"></a>         <span class="dv">3</span><span class="sc">:</span>(<span class="fu">nrow</span>(fin_sales)<span class="sc">+</span><span class="dv">3</span>), <span class="fu">length</span>(fin_sales), <span class="at">stack =</span> <span class="cn">TRUE</span>, <span class="at">gridExpand =</span> <span class="cn">TRUE</span>)</span>
-<span id="annotated-cell-4-14"><a href="#annotated-cell-4-14" aria-hidden="true" tabindex="-1"></a><span class="fu">setColWidths</span>(wb, <span class="st">"Sales"</span>, <span class="at">cols =</span> <span class="fu">length</span>(fin_sales), <span class="at">widths =</span> <span class="dv">18</span>)</span>
-<span id="annotated-cell-4-15"><a href="#annotated-cell-4-15" aria-hidden="true" tabindex="-1"></a><span class="fu">addStyle</span>(wb, <span class="st">'Sales'</span>, gray, <span class="dv">3</span>, <span class="dv">1</span>, <span class="at">stack =</span> <span class="cn">TRUE</span>)</span>
-<span id="annotated-cell-4-16"><a href="#annotated-cell-4-16" aria-hidden="true" tabindex="-1"></a><span class="fu">addStyle</span>(wb, <span class="st">'Sales'</span>, ros, <span class="dv">3</span>, <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">3</span>), <span class="at">stack =</span> <span class="cn">TRUE</span>, <span class="at">gridExpand =</span> <span class="cn">TRUE</span>)</span>
-<span id="annotated-cell-4-17"><a href="#annotated-cell-4-17" aria-hidden="true" tabindex="-1"></a><span class="fu">addStyle</span>(wb, <span class="st">'Sales'</span>, green, <span class="dv">3</span>, <span class="dv">4</span>, <span class="at">stack =</span> <span class="cn">TRUE</span>)</span>
-<span id="annotated-cell-4-18"><a href="#annotated-cell-4-18" aria-hidden="true" tabindex="-1"></a><span class="fu">addStyle</span>(wb, <span class="st">'Sales'</span>, blue, <span class="dv">3</span>, <span class="dv">5</span>, <span class="at">stack =</span> <span class="cn">TRUE</span>)</span>
-<span id="annotated-cell-4-19"><a href="#annotated-cell-4-19" aria-hidden="true" tabindex="-1"></a><span class="fu">addStyle</span>(wb, <span class="st">'Sales'</span>, yellow, <span class="dv">3</span>, <span class="dv">6</span>, <span class="at">stack =</span> <span class="cn">TRUE</span>)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<dl class="code-annotation-container-grid">
-<dt data-target-cell="annotated-cell-4" data-target-annotation="1">1</dt>
-<dd>
-<span data-code-cell="annotated-cell-4" data-code-lines="2" data-code-annotation="1"><em>setColWidths</em> - sets the width of the column</span>
-</dd>
-</dl>
+<section id="writing-data-and-applying-customization" class="level2">
+<h2 class="anchored" data-anchor-id="writing-data-and-applying-customization">Writing Data and Applying Customization</h2>
+<p>Now, we will structure the report sheet. A standard approach involves adding titles, merging cells across the width of the table, injecting the actual dataframe, and finally splashing our pre-defined styles onto the desired coordinate grids.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Write the Title to the first row of the sheet</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">writeData</span>(wb, <span class="st">'Sales'</span>, <span class="st">"Sales"</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Merge the title cells across the entire length of our incoming data table</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">mergeCells</span>(wb, <span class="at">sheet =</span> <span class="st">"Sales"</span>, <span class="at">cols =</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(fin_sales), <span class="at">rows =</span> <span class="dv">1</span>) </span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="do">## Apply the large bold style (st_name) to the newly merged title row</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="fu">addStyle</span>(wb, <span class="st">'Sales'</span>, st_name, <span class="dv">1</span>, <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(fin_sales), <span class="at">stack =</span> <span class="cn">TRUE</span>) </span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="do">## Inject the data frame starting at Row 3 (leaving Row 2 empty for spacing)</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="fu">writeData</span>(wb, <span class="st">'Sales'</span>, fin_sales, <span class="at">startRow =</span> <span class="dv">3</span>)</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="do">## Apply our bold header style starting exactly on Row 3</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="fu">addStyle</span>(wb, <span class="st">'Sales'</span>, st_head, <span class="dv">3</span>, <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(fin_sales),</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>         <span class="at">gridExpand =</span> <span class="cn">TRUE</span>, <span class="at">stack =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Wait, we aren’t done. We still need to configure the column widths and paint specific highlighting on certain metric columns.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Widen the first column to comfortably fit descriptive labels</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">setColWidths</span>(wb, <span class="st">"Sales"</span>, <span class="at">cols =</span> <span class="dv">1</span>, <span class="at">widths =</span> <span class="dv">25</span>) </span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Embellish the body of the table with standard inner borders</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="fu">addStyle</span>(wb, <span class="st">'Sales'</span>, st_bord, <span class="dv">4</span><span class="sc">:</span>(<span class="fu">nrow</span>(fin_sales)<span class="sc">+</span><span class="dv">3</span>),</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>         <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(fin_sales), <span class="at">stack =</span> <span class="cn">TRUE</span>, <span class="at">gridExpand =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="do">## Add a sturdy bottom border to the totals sub-row</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="fu">addStyle</span>(wb, <span class="st">'Sales'</span>, st_bot, (<span class="fu">which</span>(<span class="sc">!</span><span class="fu">is.na</span>(temp_sales<span class="sc">$</span>PROC))<span class="sc">+</span><span class="dv">3</span>),</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>         <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(temp_sales), <span class="at">stack =</span> <span class="cn">TRUE</span>, <span class="at">gridExpand =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="do">## Add a final heavy bottom line at the absolute end of the table</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="fu">addStyle</span>(wb, <span class="st">'Sales'</span>, st_bot, <span class="fu">nrow</span>(fin_sales)<span class="sc">+</span><span class="dv">3</span>, <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(fin_sales), <span class="at">stack =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="do">## Center align the last numerical column</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="fu">addStyle</span>(wb, <span class="st">'Sales'</span>, <span class="fu">createStyle</span>(<span class="at">halign =</span> <span class="st">"center"</span>),</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>         <span class="dv">3</span><span class="sc">:</span>(<span class="fu">nrow</span>(fin_sales)<span class="sc">+</span><span class="dv">3</span>), <span class="fu">length</span>(fin_sales), <span class="at">stack =</span> <span class="cn">TRUE</span>, <span class="at">gridExpand =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a><span class="do">## Ensure the last numerical column is wide enough</span></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a><span class="fu">setColWidths</span>(wb, <span class="st">"Sales"</span>, <span class="at">cols =</span> <span class="fu">length</span>(fin_sales), <span class="at">widths =</span> <span class="dv">18</span>)</span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a><span class="do">## Colorizing Specific Header Cells for aesthetic pop</span></span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a><span class="fu">addStyle</span>(wb, <span class="st">'Sales'</span>, gray, <span class="dv">3</span>, <span class="dv">1</span>, <span class="at">stack =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a><span class="fu">addStyle</span>(wb, <span class="st">'Sales'</span>, ros, <span class="dv">3</span>, <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">3</span>), <span class="at">stack =</span> <span class="cn">TRUE</span>, <span class="at">gridExpand =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a><span class="fu">addStyle</span>(wb, <span class="st">'Sales'</span>, green, <span class="dv">3</span>, <span class="dv">4</span>, <span class="at">stack =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a><span class="fu">addStyle</span>(wb, <span class="st">'Sales'</span>, blue, <span class="dv">3</span>, <span class="dv">5</span>, <span class="at">stack =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a><span class="fu">addStyle</span>(wb, <span class="st">'Sales'</span>, yellow, <span class="dv">3</span>, <span class="dv">6</span>, <span class="at">stack =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="result" class="level1">
-<h1>Result</h1>
+<section id="result" class="level2">
+<h2 class="anchored" data-anchor-id="result">Result</h2>
+<p>If all logic fires correctly, our R-side table is translated instantly into a stylized, production-ready Excel document.</p>
 <p><img src="../images/export-to-xlsx/custome_export_date.png" class="img-fluid"></p>
 </section>
-<section id="conclusion" class="level1">
-<h1>Conclusion</h1>
-<p>This method of saving to <em>xlsx</em> is, on one hand, “verbose,” but on the other hand, it is very flexible in customization, allowing you to write/apply styles down to the individual cell.</p>
-<p>If a similar report is generated regularly, where only the data is updated, this approach makes sense. In the long term, it will pay off in subsequent iterations of report generation.</p>
+<section id="conclusion" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
+<p>This explicit indexing method of saving to <code>.xlsx</code> is “verbose”, but it provides absolute programmatic flexibility. It lets you format a report down to the granular level of individual cells dynamically.</p>
+<p>If you are generating a specific corporate report regularly (where only the inbound numbers change), frontloading this effort ensures every sequential report output requires zero manual Excel touch-ups — saving tremendous amounts of time in iteration.</p>
 
 
 </section>
