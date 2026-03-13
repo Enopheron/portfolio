@@ -211,7 +211,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="setup-and-libraries" class="level2">
 <h2 class="anchored" data-anchor-id="setup-and-libraries">Setup and Libraries</h2>
 <p>We use a modern, highly performant Python data stack for this analysis: <code>DuckDB</code> for querying the local SQLite database rapidly, <code>Polars</code> for fast data manipulation, and <code>Seaborn</code> combined with <code>Matplotlib</code> for creating rich visualizations.</p>
-<div id="4e131d16" class="cell" data-execution_count="1">
+<div id="0c010639" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sqlalchemy <span class="im">import</span> create_engine</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> duckdb <span class="im">as</span> db</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> polars <span class="im">as</span> pl</span>
@@ -226,7 +226,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="data-extraction" class="level2">
 <h2 class="anchored" data-anchor-id="data-extraction">Data Extraction</h2>
 <p>We connect directly to a local database using <code>DuckDB</code>’s powerful integration. We filter for specific competitive shop locations and extract the dataset into a <code>Polars</code> DataFrame. Finally, we convert the date strings into proper Date objects for time-series plotting.</p>
-<div id="df201a03" class="cell" data-execution_count="2">
+<div id="5e105a77" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Connect to the local database</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>con <span class="op">=</span> db.<span class="ex">connect</span>(<span class="st">"~/Documents/kdb/notes/local.db"</span>)</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -244,7 +244,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="data-aggregation-and-visualization">Data Aggregation and Visualization</h2>
 <p>To visualize the sales side-by-side effectively, we need to transform our data from wide format (Binol and Olive as separate columns) to a long format (or melted) structure.</p>
 <p>Using <code>Seaborn</code>’s <code>FacetGrid</code>, we can cleanly create small multiples—one plot for each shop—allowing for a direct visual comparison of the performance of the two companies at each location. We also add trend lines and value annotations to make the charts easy to read.</p>
-<div id="f9c2196a" class="cell" data-execution_count="3">
+<div id="0aa52137" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set the default Seaborn aesthetic theme</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>sns.set_theme()</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
