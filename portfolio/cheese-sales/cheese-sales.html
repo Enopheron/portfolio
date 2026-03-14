@@ -6,9 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2024-07-01">
+<meta name="dcterms.date" content="2024-07-06">
 
-<title>Sales Report – Vladimir Shevchenko</title>
+<title>Cheese Sales Analysis – Vladimir Shevchenko</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -21,28 +21,63 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../../../">
-<link href="../../../assets/images/icons/favicon.ico" rel="icon">
-<script src="../../../site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
-<script src="../../../site_libs/quarto-html/popper.min.js"></script>
-<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-1b3db88def35042d172274863c1cdcf0.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../site_libs/bootstrap/bootstrap-f38abdc5f243f273513e5c75ae16b4fc.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../assets/images/icons/favicon.ico" rel="icon">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-ac1a48248070c8bfbae4244efd7728e4.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-9fbb3af37ca9569285579dd0d384ea3c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -71,9 +106,10 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
+<meta charset="utf-8">
 
 
-<link rel="stylesheet" href="../../../styles.css">
+<link rel="stylesheet" href="../../styles.css">
 </head>
 
 <body class="nav-fixed quarto-light">
@@ -83,7 +119,7 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="../../../index.html">
+    <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">Vladimir Shevchenko</span>
     </a>
   </div>
@@ -94,22 +130,22 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../../index.html"> <i class="bi bi-house-door" role="img">
+    <a class="nav-link" href="../../index.html"> <i class="bi bi-house-door" role="img">
 </i> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../../content/portfolio/index.html"> <i class="bi bi-image" role="img">
+    <a class="nav-link" href="../../portfolio/index.html"> <i class="bi bi-image" role="img">
 </i> 
 <span class="menu-text">Portfolio</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../../job/it-services-pricing.html"> <i class="bi bi-briefcase" role="img">
+    <a class="nav-link" href="../../job/it-services-pricing.html"> <i class="bi bi-briefcase" role="img">
 </i> 
 <span class="menu-text">IT-Help</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../../about.html"> <i class="bi bi-file-person" role="img">
+    <a class="nav-link" href="../../about.html"> <i class="bi bi-file-person" role="img">
 </i> 
 <span class="menu-text">About me</span></a>
   </li>  
@@ -129,9 +165,9 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#binol-stores-with-an-area-of-up-to-15m²" id="toc-binol-stores-with-an-area-of-up-to-15m²" class="nav-link active" data-scroll-target="#binol-stores-with-an-area-of-up-to-15m²">Binol stores with an area of up to 15m²</a></li>
-  <li><a href="#binol-stores-with-an-area-of-15m²-or-more" id="toc-binol-stores-with-an-area-of-15m²-or-more" class="nav-link" data-scroll-target="#binol-stores-with-an-area-of-15m²-or-more">Binol stores with an area of 15m² or more</a></li>
-  <li><a href="#total-by-months" id="toc-total-by-months" class="nav-link" data-scroll-target="#total-by-months">Total by months</a></li>
+  <li><a href="#data-preparation" id="toc-data-preparation" class="nav-link active" data-scroll-target="#data-preparation">Data Preparation</a></li>
+  <li><a href="#creating-the-3d-pie-chart" id="toc-creating-the-3d-pie-chart" class="nav-link" data-scroll-target="#creating-the-3d-pie-chart">Creating the 3D Pie Chart</a></li>
+  <li><a href="#result" id="toc-result" class="nav-link" data-scroll-target="#result">Result</a></li>
   </ul>
 </nav>
     </div>
@@ -140,12 +176,11 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Sales Report</h1>
-<p class="subtitle lead">ggplot2, scales</p>
+<h1 class="title">Cheese Sales Analysis</h1>
+<p class="subtitle lead">3D Pie Charts with plotrix</p>
   <div class="quarto-categories">
     <div class="quarto-category">R</div>
     <div class="quarto-category">Graphs</div>
-    <div class="quarto-category">Data Visualization</div>
   </div>
   </div>
 
@@ -157,7 +192,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">July 1, 2024</p>
+      <p class="date">July 6, 2024</p>
     </div>
   </div>
   
@@ -169,71 +204,43 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="binol-stores-with-an-area-of-up-to-15m²" class="level1">
-<h1>Binol stores with an area of up to 15m²</h1>
-<p>The presented chart shows the month-by-month sales dynamics. The data indicates that sales volumes in such outlets experience significant fluctuations throughout the year.</p>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Note
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Data for the store <strong><em>57/9 Kirova Street</em></strong> is unavailable due to its closure.</p>
-</div>
-</div>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="sales_report_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="864"></p>
-</figure>
-</div>
-</div>
-</div>
-<div style="page-break-after: always;"></div>
+<p>This post demonstrates how to create an attractive <strong>3D pie chart</strong> in R using the <code>plotrix</code> package. While pie charts are often debated in data visualization circles, they can be highly effective for displaying market share or proportional breakdowns when stylized well.</p>
+<section id="data-preparation" class="level2">
+<h2 class="anchored" data-anchor-id="data-preparation">Data Preparation</h2>
+<p>First, we will load the necessary libraries and create a sample dataset of cheese sales. We use <code>dplyr</code> to elegantly calculate the percentage share (market share) of each cheese type relative to total sales.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(plotrix)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Constructing a sample dataset of cheese sales</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">NM =</span> <span class="fu">c</span>(<span class="st">"Cheddar"</span>, <span class="st">"Mozzarella"</span>, <span class="st">"Brie"</span>, <span class="st">"Parmesan"</span>, <span class="st">"Gouda"</span>),</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">SUM =</span> <span class="fu">c</span>(<span class="dv">279158</span>, <span class="dv">231399</span>, <span class="dv">606614</span>, <span class="dv">586469</span>, <span class="dv">267434</span>)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Calculating the percentage share for each category</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">PROC =</span> <span class="fu">round</span>((SUM <span class="sc">/</span> <span class="fu">sum</span>(SUM)) <span class="sc">*</span> <span class="dv">100</span>, <span class="dv">1</span>) <span class="sc">%&gt;%</span> <span class="fu">paste0</span>(<span class="st">'%'</span>)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="binol-stores-with-an-area-of-15m²-or-more" class="level1">
-<h1>Binol stores with an area of 15m² or more</h1>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="sales_report_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="864"></p>
-</figure>
-</div>
-</div>
-</div>
-<div style="page-break-after: always;"></div>
+<section id="creating-the-3d-pie-chart" class="level2">
+<h2 class="anchored" data-anchor-id="creating-the-3d-pie-chart">Creating the 3D Pie Chart</h2>
+<p>The <code>plotrix</code> library provides the <code>pie3D</code> function, which allows for extensive customization. In this example, we manipulate the margins, apply a built-in heat color palette, and format the labels to include both the proportional share and the absolute sales numbers (in thousands).</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Generating a stylized 3D pie chart</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">pie3D</span>(</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  df<span class="sc">$</span>SUM, </span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">mar =</span> <span class="fu">rep</span>(<span class="dv">1</span>, <span class="dv">4</span>), <span class="co"># Adjusted margins to fit labels</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">col =</span> <span class="fu">hcl.colors</span>(<span class="fu">length</span>(df<span class="sc">$</span>NM), <span class="st">"Heat 2"</span>), <span class="co"># Applying a warm color palette</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">labels =</span> <span class="fu">paste0</span>(df<span class="sc">$</span>NM, <span class="st">'</span><span class="sc">\n</span><span class="st">'</span>, <span class="fu">round</span>(df<span class="sc">$</span>SUM <span class="sc">/</span> <span class="dv">1000</span>), <span class="st">'k ('</span>, df<span class="sc">$</span>PROC, <span class="st">')'</span>),</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">"Cheese Sales Distribution"</span>,</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">height =</span> <span class="fl">0.1</span>,    <span class="co"># Thickness of the 3D pie</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">radius =</span> <span class="fl">0.8</span>,    <span class="co"># Overall radius</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">labelcex =</span> <span class="dv">1</span>,    <span class="co"># Label size scaling factor</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">explode =</span> <span class="fl">0.1</span>    <span class="co"># Spacing between the pie slices</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="total-by-months" class="level1">
-<h1>Total by months</h1>
-<p>The total revenue from the sale of <em>Binol</em> and <strong>Olive</strong> flowers.</p>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Note
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>The revenue from <strong>Olive</strong> was deducted from the total sales of the stores. That is, the <em>Binol</em> figures also include third-party products (warehouse goods).</p>
-</div>
-</div>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="sales_report_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="864"></p>
-</figure>
-</div>
-</div>
-</div>
+<section id="result" class="level2">
+<h2 class="anchored" data-anchor-id="result">Result</h2>
+<p>The resulting visualization cleanly separates the categories and provides an immediate understanding of the sales distribution among the different cheese varieties.</p>
+<p><img src="./assets/chees.png" class="img-fluid"></p>
 
 
 </section>
@@ -676,5 +683,5 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<script src="../../../site_libs/quarto-html/zenscroll-min.js"></script>
+<script src="../../site_libs/quarto-html/zenscroll-min.js"></script>
 </body></html>

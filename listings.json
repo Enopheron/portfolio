@@ -2,25 +2,23 @@
   {
     "listing": "/index.html",
     "items": [
-      "/content/portfolio/posts/sales-binol-olive.html",
-      "/content/portfolio/posts/OCR-tool.html",
-      "/content/portfolio/posts/web-scraping.html",
-      "/content/portfolio/posts/export-to-xlsx.html",
-      "/content/portfolio/posts/cheese-sales.html",
-      "/content/portfolio/posts/revenue-segment.html",
-      "/content/portfolio/posts/sales_report.html"
+      "/portfolio/todo-tree-viewer/todo-tree-viewer.html",
+      "/portfolio/sales-binol-olive/sales-binol-olive.html",
+      "/portfolio/ocr-tool/ocr-tool.html",
+      "/portfolio/web-scraping-hh/web-scraping-hh.html",
+      "/portfolio/export-to-xlsx/export-to-xlsx.html",
+      "/portfolio/cheese-sales/cheese-sales.html"
     ]
   },
   {
-    "listing": "/content/portfolio/index.html",
+    "listing": "/portfolio/index.html",
     "items": [
-      "/content/portfolio/posts/web-scraping.html",
-      "/content/portfolio/posts/revenue-segment.html",
-      "/content/portfolio/posts/OCR-tool.html",
-      "/content/portfolio/posts/cheese-sales.html",
-      "/content/portfolio/posts/sales-binol-olive.html",
-      "/content/portfolio/posts/sales_report.html",
-      "/content/portfolio/posts/export-to-xlsx.html"
+      "/portfolio/todo-tree-viewer/todo-tree-viewer.html",
+      "/portfolio/sales-binol-olive/sales-binol-olive.html",
+      "/portfolio/ocr-tool/ocr-tool.html",
+      "/portfolio/web-scraping-hh/web-scraping-hh.html",
+      "/portfolio/export-to-xlsx/export-to-xlsx.html",
+      "/portfolio/cheese-sales/cheese-sales.html"
     ]
   }
 ]

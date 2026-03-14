@@ -1,0 +1,1408 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.26">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2026-03-14">
+
+<title>Interactive Todo.txt Tree Viewer – Vladimir Shevchenko</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../assets/images/icons/favicon.ico" rel="icon">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-ac1a48248070c8bfbae4244efd7728e4.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-9fbb3af37ca9569285579dd0d384ea3c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+<meta charset="utf-8">
+
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Vladimir Shevchenko</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html"> <i class="bi bi-house-door" role="img">
+</i> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../portfolio/index.html"> <i class="bi bi-image" role="img">
+</i> 
+<span class="menu-text">Portfolio</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../job/it-services-pricing.html"> <i class="bi bi-briefcase" role="img">
+</i> 
+<span class="menu-text">IT-Help</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html"> <i class="bi bi-file-person" role="img">
+</i> 
+<span class="menu-text">About me</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#why-this-matters" id="toc-why-this-matters" class="nav-link active" data-scroll-target="#why-this-matters">Why This Matters</a></li>
+  <li><a href="#data-architecture" id="toc-data-architecture" class="nav-link" data-scroll-target="#data-architecture">Data Architecture</a>
+  <ul>
+  <li><a href="#task-the-task-model" id="toc-task-the-task-model" class="nav-link" data-scroll-target="#task-the-task-model">Task — The Task Model</a></li>
+  <li><a href="#rnote-note-hierarchy" id="toc-rnote-note-hierarchy" class="nav-link" data-scroll-target="#rnote-note-hierarchy">RNote — Note Hierarchy</a></li>
+  <li><a href="#dependency-graph" id="toc-dependency-graph" class="nav-link" data-scroll-target="#dependency-graph">Dependency Graph</a></li>
+  </ul></li>
+  <li><a href="#visualization-two-modes" id="toc-visualization-two-modes" class="nav-link" data-scroll-target="#visualization-two-modes">Visualization: Two Modes</a>
+  <ul>
+  <li><a href="#tree-mode" id="toc-tree-mode" class="nav-link" data-scroll-target="#tree-mode">Tree Mode</a></li>
+  <li><a href="#day-mode" id="toc-day-mode" class="nav-link" data-scroll-target="#day-mode">Day Mode</a></li>
+  </ul></li>
+  <li><a href="#color-palette-and-rich" id="toc-color-palette-and-rich" class="nav-link" data-scroll-target="#color-palette-and-rich">Color Palette and Rich</a>
+  <ul>
+  <li><a href="#color-scheme" id="toc-color-scheme" class="nav-link" data-scroll-target="#color-scheme">Color Scheme</a></li>
+  <li><a href="#rendering-with-tag-highlighting" id="toc-rendering-with-tag-highlighting" class="nav-link" data-scroll-target="#rendering-with-tag-highlighting">Rendering with Tag Highlighting</a></li>
+  <li><a href="#markdown-in-notes" id="toc-markdown-in-notes" class="nav-link" data-scroll-target="#markdown-in-notes">Markdown in Notes</a></li>
+  </ul></li>
+  <li><a href="#navigation-and-control" id="toc-navigation-and-control" class="nav-link" data-scroll-target="#navigation-and-control">Navigation and Control</a>
+  <ul>
+  <li><a href="#keyboard-shortcuts" id="toc-keyboard-shortcuts" class="nav-link" data-scroll-target="#keyboard-shortcuts">Keyboard Shortcuts</a></li>
+  <li><a href="#key-reading" id="toc-key-reading" class="nav-link" data-scroll-target="#key-reading">Key Reading</a></li>
+  </ul></li>
+  <li><a href="#filtering-and-search" id="toc-filtering-and-search" class="nav-link" data-scroll-target="#filtering-and-search">Filtering and Search</a>
+  <ul>
+  <li><a href="#text-search" id="toc-text-search" class="nav-link" data-scroll-target="#text-search">Text Search</a></li>
+  <li><a href="#building-branch-from-line" id="toc-building-branch-from-line" class="nav-link" data-scroll-target="#building-branch-from-line">Building Branch from Line</a></li>
+  </ul></li>
+  <li><a href="#interesting-technical-details" id="toc-interesting-technical-details" class="nav-link" data-scroll-target="#interesting-technical-details">Interesting Technical Details</a>
+  <ul>
+  <li><a href="#tree-flattening-for-display" id="toc-tree-flattening-for-display" class="nav-link" data-scroll-target="#tree-flattening-for-display">Tree Flattening for Display</a></li>
+  <li><a href="#handling-ansi-codes" id="toc-handling-ansi-codes" class="nav-link" data-scroll-target="#handling-ansi-codes">Handling ANSI Codes</a></li>
+  </ul></li>
+  <li><a href="#conclusions" id="toc-conclusions" class="nav-link" data-scroll-target="#conclusions">Conclusions</a></li>
+  <li><a href="#full-source-code" id="toc-full-source-code" class="nav-link" data-scroll-target="#full-source-code">Full Source Code</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content column-page-left" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Interactive Todo.txt Tree Viewer</h1>
+<p class="subtitle lead">Terminal Task Organizer with Tree Visualization</p>
+  <div class="quarto-categories">
+    <div class="quarto-category">Python</div>
+    <div class="quarto-category">TUI</div>
+  </div>
+  </div>
+
+
+
+<div class="quarto-title-meta column-page-left">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">March 14, 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p><img src="./assets/preview.png" class="img-fluid"></p>
+<section id="why-this-matters" class="level2">
+<h2 class="anchored" data-anchor-id="why-this-matters">Why This Matters</h2>
+<p>When your task list grows into a multi-level hierarchy with dependencies, notes, and links, a plain text file becomes unwieldy. Sure, you could open it in an editor, search for <code>link:</code>, jump between files—but that’s exhausting. What you really want is to <strong>see the whole structure at once</strong>: who depends on whom, which tasks are connected, where the priorities lie.</p>
+<p><code>show-links.py</code> is an interactive TUI visualizer for todo.txt that displays tasks as a dependency tree, filters by status, context, and tags, and integrates with markdown notes. Think of it as a file manager for tasks—quick navigation through the hierarchy, seeing the big picture, and editing what you need with a single keystroke.</p>
+</section>
+<section id="data-architecture" class="level2">
+<h2 class="anchored" data-anchor-id="data-architecture">Data Architecture</h2>
+<p>The foundation rests on two key structures: <strong>Task</strong> and <strong>RNote</strong>.</p>
+<section id="task-the-task-model" class="level3">
+<h3 class="anchored" data-anchor-id="task-the-task-model">Task — The Task Model</h3>
+<p>Each line in <code>todo.txt</code> gets parsed into a Task object:</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>show-links.py</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-1" data-filename="show-links.py"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-1-1"><a href="#annotated-cell-1-1" aria-hidden="true" tabindex="-1"></a><span class="at">@dataclass</span></span>
+<span id="annotated-cell-1-2"><a href="#annotated-cell-1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Task:</span>
+<span id="annotated-cell-1-3"><a href="#annotated-cell-1-3" aria-hidden="true" tabindex="-1"></a>    line_num: <span class="bu">int</span><span class="op">;</span> raw: <span class="bu">str</span><span class="op">;</span> title: <span class="bu">str</span></span>
+<span id="annotated-cell-1-4"><a href="#annotated-cell-1-4" aria-hidden="true" tabindex="-1"></a>    done:     <span class="bu">bool</span>          <span class="op">=</span> <span class="va">False</span></span>
+<span id="annotated-cell-1-5"><a href="#annotated-cell-1-5" aria-hidden="true" tabindex="-1"></a>    priority: Optional[<span class="bu">str</span>] <span class="op">=</span> <span class="va">None</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="1">1</button><span id="annotated-cell-1-6" class="code-annotation-target"><a href="#annotated-cell-1-6" aria-hidden="true" tabindex="-1"></a>    tid:      Optional[<span class="bu">str</span>] <span class="op">=</span> <span class="va">None</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="2">2</button><span id="annotated-cell-1-7" class="code-annotation-target"><a href="#annotated-cell-1-7" aria-hidden="true" tabindex="-1"></a>    status:   Optional[<span class="bu">str</span>] <span class="op">=</span> <span class="va">None</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="3">3</button><span id="annotated-cell-1-8" class="code-annotation-target"><a href="#annotated-cell-1-8" aria-hidden="true" tabindex="-1"></a>    link:     Optional[<span class="bu">str</span>] <span class="op">=</span> <span class="va">None</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="4">4</button><span id="annotated-cell-1-9" class="code-annotation-target"><a href="#annotated-cell-1-9" aria-hidden="true" tabindex="-1"></a>    ttype:    Optional[<span class="bu">str</span>] <span class="op">=</span> <span class="va">None</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="5">5</button><span id="annotated-cell-1-10" class="code-annotation-target"><a href="#annotated-cell-1-10" aria-hidden="true" tabindex="-1"></a>    tags:     List[<span class="bu">str</span>]     <span class="op">=</span> field(default_factory<span class="op">=</span><span class="bu">list</span>)</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="6">6</button><span id="annotated-cell-1-11" class="code-annotation-target"><a href="#annotated-cell-1-11" aria-hidden="true" tabindex="-1"></a>    tags_lc:  Set[<span class="bu">str</span>]      <span class="op">=</span> field(default_factory<span class="op">=</span><span class="bu">set</span>)</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="7">7</button><span id="annotated-cell-1-12" class="code-annotation-target"><a href="#annotated-cell-1-12" aria-hidden="true" tabindex="-1"></a>    ctx:      Optional[<span class="bu">str</span>] <span class="op">=</span> <span class="va">None</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="8">8</button><span id="annotated-cell-1-13" class="code-annotation-target"><a href="#annotated-cell-1-13" aria-hidden="true" tabindex="-1"></a>    due:      Optional[<span class="bu">str</span>] <span class="op">=</span> <span class="va">None</span></span>
+<span id="annotated-cell-1-14"><a href="#annotated-cell-1-14" aria-hidden="true" tabindex="-1"></a>    filepath: Optional[Path] <span class="op">=</span> <span class="va">None</span></span>
+<span id="annotated-cell-1-15"><a href="#annotated-cell-1-15" aria-hidden="true" tabindex="-1"></a>    notes:    List[RNote]   <span class="op">=</span> field(default_factory<span class="op">=</span><span class="bu">list</span>)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-1" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-1" data-code-lines="6" data-code-annotation="1">Unique task identifier (e.g., <code>id:some_task</code>)</span>
+</dd>
+<dt data-target-cell="annotated-cell-1" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-1" data-code-lines="7" data-code-annotation="2">Current status: <code>run</code>, <code>hold</code>, <code>idea</code>, <code>todo</code></span>
+</dd>
+<dt data-target-cell="annotated-cell-1" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-cell="annotated-cell-1" data-code-lines="8" data-code-annotation="3">Link to parent task for dependency chain</span>
+</dd>
+<dt data-target-cell="annotated-cell-1" data-target-annotation="4">4</dt>
+<dd>
+<span data-code-cell="annotated-cell-1" data-code-lines="9" data-code-annotation="4">Task type: <code>dev</code>, <code>bug</code>, <code>feature</code>, etc.</span>
+</dd>
+<dt data-target-cell="annotated-cell-1" data-target-annotation="5">5</dt>
+<dd>
+<span data-code-cell="annotated-cell-1" data-code-lines="10" data-code-annotation="5">Tags for categorization like <code>+project</code>, <code>+urgent</code></span>
+</dd>
+<dt data-target-cell="annotated-cell-1" data-target-annotation="6">6</dt>
+<dd>
+<span data-code-cell="annotated-cell-1" data-code-lines="11" data-code-annotation="6">Lowercase cache for case-insensitive search</span>
+</dd>
+<dt data-target-cell="annotated-cell-1" data-target-annotation="7">7</dt>
+<dd>
+<span data-code-cell="annotated-cell-1" data-code-lines="12" data-code-annotation="7">Context marker like <code>@home</code>, <code>@work</code></span>
+</dd>
+<dt data-target-cell="annotated-cell-1" data-target-annotation="8">8</dt>
+<dd>
+<span data-code-cell="annotated-cell-1" data-code-lines="13" data-code-annotation="8">Due date in ISO format <code>2024-03-15</code></span>
+</dd>
+</dl>
+<p><strong>Interesting detail</strong>: tags are stored in two formats—both the original list and a lowercase cache. This enables case-insensitive search without repeated conversions.</p>
+<p>Parsing happens via regex patterns that extract metadata directly from the task text:</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>show-links.py</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-2" data-filename="show-links.py"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><button class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="1">1</button><span id="annotated-cell-2-1" class="code-annotation-target"><a href="#annotated-cell-2-1" aria-hidden="true" tabindex="-1"></a>_RE_PRIORITY <span class="op">=</span> re.<span class="bu">compile</span>(<span class="vs">r"</span><span class="ch">\(</span><span class="kw">(</span><span class="pp">[A-Z]</span><span class="kw">)</span><span class="ch">\)</span><span class="vs">"</span>)</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="2">2</button><span id="annotated-cell-2-2" class="code-annotation-target"><a href="#annotated-cell-2-2" aria-hidden="true" tabindex="-1"></a>_RE_TASK_ID  <span class="op">=</span> re.<span class="bu">compile</span>(<span class="vs">r"id:</span><span class="kw">(</span><span class="dv">\S</span><span class="op">+</span><span class="kw">)</span><span class="vs">"</span>)</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="3">3</button><span id="annotated-cell-2-3" class="code-annotation-target"><a href="#annotated-cell-2-3" aria-hidden="true" tabindex="-1"></a>_RE_LINK     <span class="op">=</span> re.<span class="bu">compile</span>(<span class="vs">r"link:</span><span class="kw">(</span><span class="dv">\S</span><span class="op">+</span><span class="kw">)</span><span class="vs">"</span>)</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="4">4</button><span id="annotated-cell-2-4" class="code-annotation-target"><a href="#annotated-cell-2-4" aria-hidden="true" tabindex="-1"></a>_RE_STATUS   <span class="op">=</span> re.<span class="bu">compile</span>(<span class="vs">r"st:</span><span class="kw">(</span><span class="dv">\S</span><span class="op">+</span><span class="kw">)</span><span class="vs">"</span>)</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="5">5</button><span id="annotated-cell-2-5" class="code-annotation-target"><a href="#annotated-cell-2-5" aria-hidden="true" tabindex="-1"></a>_RE_DUE      <span class="op">=</span> re.<span class="bu">compile</span>(<span class="vs">r"due:</span><span class="kw">(</span><span class="pp">[</span><span class="dv">\d</span><span class="pp">-]</span><span class="op">+</span><span class="kw">)</span><span class="vs">"</span>)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-2" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-2" data-code-lines="1" data-code-annotation="1">Captures priority in format <code>(A)</code>, <code>(B)</code>, <code>(C)</code></span>
+</dd>
+<dt data-target-cell="annotated-cell-2" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-2" data-code-lines="2" data-code-annotation="2">Extracts unique task ID</span>
+</dd>
+<dt data-target-cell="annotated-cell-2" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-cell="annotated-cell-2" data-code-lines="3" data-code-annotation="3">Finds link to parent task</span>
+</dd>
+<dt data-target-cell="annotated-cell-2" data-target-annotation="4">4</dt>
+<dd>
+<span data-code-cell="annotated-cell-2" data-code-lines="4" data-code-annotation="4">Determines current status (run/hold/idea)</span>
+</dd>
+<dt data-target-cell="annotated-cell-2" data-target-annotation="5">5</dt>
+<dd>
+<span data-code-cell="annotated-cell-2" data-code-lines="5" data-code-annotation="5">Parses ISO date format for deadlines</span>
+</dd>
+</dl>
+</section>
+<section id="rnote-note-hierarchy" class="level3">
+<h3 class="anchored" data-anchor-id="rnote-note-hierarchy">RNote — Note Hierarchy</h3>
+<p>Markdown notes are parsed into a tree structure based on heading levels:</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>show-links.py</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-3" data-filename="show-links.py"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-3-1"><a href="#annotated-cell-3-1" aria-hidden="true" tabindex="-1"></a><span class="at">@dataclass</span></span>
+<span id="annotated-cell-3-2"><a href="#annotated-cell-3-2" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> RNote:</span>
+<span id="annotated-cell-3-3"><a href="#annotated-cell-3-3" aria-hidden="true" tabindex="-1"></a>    title: <span class="bu">str</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="1">1</button><span id="annotated-cell-3-4" class="code-annotation-target"><a href="#annotated-cell-3-4" aria-hidden="true" tabindex="-1"></a>    ntype: Optional[<span class="bu">str</span>]  <span class="op">=</span> <span class="va">None</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="2">2</button><span id="annotated-cell-3-5" class="code-annotation-target"><a href="#annotated-cell-3-5" aria-hidden="true" tabindex="-1"></a>    date:  Optional[<span class="bu">str</span>]  <span class="op">=</span> <span class="va">None</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="3">3</button><span id="annotated-cell-3-6" class="code-annotation-target"><a href="#annotated-cell-3-6" aria-hidden="true" tabindex="-1"></a>    nid:   Optional[<span class="bu">str</span>]  <span class="op">=</span> <span class="va">None</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="4">4</button><span id="annotated-cell-3-7" class="code-annotation-target"><a href="#annotated-cell-3-7" aria-hidden="true" tabindex="-1"></a>    link:  Optional[<span class="bu">str</span>]  <span class="op">=</span> <span class="va">None</span></span>
+<span id="annotated-cell-3-8"><a href="#annotated-cell-3-8" aria-hidden="true" tabindex="-1"></a>    level: <span class="bu">int</span>            <span class="op">=</span> <span class="dv">2</span></span>
+<span id="annotated-cell-3-9"><a href="#annotated-cell-3-9" aria-hidden="true" tabindex="-1"></a>    line_num: <span class="bu">int</span>         <span class="op">=</span> <span class="dv">0</span></span>
+<span id="annotated-cell-3-10"><a href="#annotated-cell-3-10" aria-hidden="true" tabindex="-1"></a>    filepath: Optional[Path] <span class="op">=</span> <span class="va">None</span></span>
+<span id="annotated-cell-3-11"><a href="#annotated-cell-3-11" aria-hidden="true" tabindex="-1"></a>    content:  Optional[<span class="bu">str</span>]  <span class="op">=</span> <span class="va">None</span></span>
+<span id="annotated-cell-3-12"><a href="#annotated-cell-3-12" aria-hidden="true" tabindex="-1"></a>    content_lines: List[Tuple[<span class="bu">int</span>, <span class="bu">str</span>]] <span class="op">=</span> field(default_factory<span class="op">=</span><span class="bu">list</span>)</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="5">5</button><span id="annotated-cell-3-13" class="code-annotation-target"><a href="#annotated-cell-3-13" aria-hidden="true" tabindex="-1"></a>    children: List[<span class="st">"RNote"</span>] <span class="op">=</span> field(default_factory<span class="op">=</span><span class="bu">list</span>)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-3" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-3" data-code-lines="4" data-code-annotation="1">Note type: <code>OBS</code> (observation), <code>HYP</code> (hypothesis), <code>DO</code> (action)</span>
+</dd>
+<dt data-target-cell="annotated-cell-3" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-3" data-code-lines="5" data-code-annotation="2">Date the note was created</span>
+</dd>
+<dt data-target-cell="annotated-cell-3" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-cell="annotated-cell-3" data-code-lines="6" data-code-annotation="3">Optional note identifier for cross-referencing</span>
+</dd>
+<dt data-target-cell="annotated-cell-3" data-target-annotation="4">4</dt>
+<dd>
+<span data-code-cell="annotated-cell-3" data-code-lines="7" data-code-annotation="4">Link to parent note for hierarchy</span>
+</dd>
+<dt data-target-cell="annotated-cell-3" data-target-annotation="5">5</dt>
+<dd>
+<span data-code-cell="annotated-cell-3" data-code-lines="13" data-code-annotation="5">Child notes form the tree structure</span>
+</dd>
+</dl>
+<p>The parser builds notes using a <strong>stack approach</strong>—a classic technique for building a tree from a flat list:</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>show-links.py</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-4" data-filename="show-links.py"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-4-1"><a href="#annotated-cell-4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> parse_notes(content: <span class="bu">str</span>, filepath: Optional[Path] <span class="op">=</span> <span class="va">None</span>) <span class="op">-&gt;</span> List[RNote]:</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="1">1</button><span id="annotated-cell-4-2" class="code-annotation-target"><a href="#annotated-cell-4-2" aria-hidden="true" tabindex="-1"></a>    notes: List[RNote] <span class="op">=</span> []<span class="op">;</span> stack: List[RNote] <span class="op">=</span> []</span>
+<span id="annotated-cell-4-3"><a href="#annotated-cell-4-3" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="annotated-cell-4-4"><a href="#annotated-cell-4-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> lineno, line <span class="kw">in</span> <span class="bu">enumerate</span>(content.split(<span class="st">"</span><span class="ch">\n</span><span class="st">"</span>), <span class="dv">1</span>):</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="2">2</button><span id="annotated-cell-4-5" class="code-annotation-target"><a href="#annotated-cell-4-5" aria-hidden="true" tabindex="-1"></a>        hm <span class="op">=</span> _RE_HEADER.match(line)</span>
+<span id="annotated-cell-4-6"><a href="#annotated-cell-4-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> hm:</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="3">3</button><span id="annotated-cell-4-7" class="code-annotation-target"><a href="#annotated-cell-4-7" aria-hidden="true" tabindex="-1"></a>            lv, raw <span class="op">=</span> <span class="bu">len</span>(hm.group(<span class="dv">1</span>)), hm.group(<span class="dv">2</span>).strip()</span>
+<span id="annotated-cell-4-8"><a href="#annotated-cell-4-8" aria-hidden="true" tabindex="-1"></a>            </span>
+<span id="annotated-cell-4-9"><a href="#annotated-cell-4-9" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Collapse stack to appropriate level</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="4">4</button><span id="annotated-cell-4-10" class="code-annotation-target"><a href="#annotated-cell-4-10" aria-hidden="true" tabindex="-1"></a>            <span class="cf">while</span> stack <span class="kw">and</span> stack[<span class="op">-</span><span class="dv">1</span>].level <span class="op">&gt;=</span> lv:</span>
+<span id="annotated-cell-4-11"><a href="#annotated-cell-4-11" aria-hidden="true" tabindex="-1"></a>                stack.pop()</span>
+<span id="annotated-cell-4-12"><a href="#annotated-cell-4-12" aria-hidden="true" tabindex="-1"></a>            </span>
+<span id="annotated-cell-4-13"><a href="#annotated-cell-4-13" aria-hidden="true" tabindex="-1"></a>            note <span class="op">=</span> RNote(</span>
+<span id="annotated-cell-4-14"><a href="#annotated-cell-4-14" aria-hidden="true" tabindex="-1"></a>                title<span class="op">=</span>t.strip(), level<span class="op">=</span>lv,</span>
+<span id="annotated-cell-4-15"><a href="#annotated-cell-4-15" aria-hidden="true" tabindex="-1"></a>                ntype<span class="op">=</span>_ex(_RE_TYPE, raw),</span>
+<span id="annotated-cell-4-16"><a href="#annotated-cell-4-16" aria-hidden="true" tabindex="-1"></a>                date<span class="op">=</span>_ex(_RE_NDATE, raw),</span>
+<span id="annotated-cell-4-17"><a href="#annotated-cell-4-17" aria-hidden="true" tabindex="-1"></a>            )</span>
+<span id="annotated-cell-4-18"><a href="#annotated-cell-4-18" aria-hidden="true" tabindex="-1"></a>            </span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="5">5</button><span id="annotated-cell-4-19" class="code-annotation-target"><a href="#annotated-cell-4-19" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> stack:</span>
+<span id="annotated-cell-4-20"><a href="#annotated-cell-4-20" aria-hidden="true" tabindex="-1"></a>                stack[<span class="op">-</span><span class="dv">1</span>].children.append(note)</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="6">6</button><span id="annotated-cell-4-21" class="code-annotation-target"><a href="#annotated-cell-4-21" aria-hidden="true" tabindex="-1"></a>            <span class="cf">else</span>:</span>
+<span id="annotated-cell-4-22"><a href="#annotated-cell-4-22" aria-hidden="true" tabindex="-1"></a>                notes.append(note)</span>
+<span id="annotated-cell-4-23"><a href="#annotated-cell-4-23" aria-hidden="true" tabindex="-1"></a>            </span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="7">7</button><span id="annotated-cell-4-24" class="code-annotation-target"><a href="#annotated-cell-4-24" aria-hidden="true" tabindex="-1"></a>            stack.append(note)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-4" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-4" data-code-lines="2" data-code-annotation="1">Initialize empty notes list and stack for hierarchy</span>
+</dd>
+<dt data-target-cell="annotated-cell-4" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-4" data-code-lines="5" data-code-annotation="2">Find markdown headings (##, ###, etc.)</span>
+</dd>
+<dt data-target-cell="annotated-cell-4" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-cell="annotated-cell-4" data-code-lines="7" data-code-annotation="3">Count <code>#</code> symbols to determine nesting level</span>
+</dd>
+<dt data-target-cell="annotated-cell-4" data-target-annotation="4">4</dt>
+<dd>
+<span data-code-cell="annotated-cell-4" data-code-lines="10" data-code-annotation="4">Pop stack until we reach appropriate parent level</span>
+</dd>
+<dt data-target-cell="annotated-cell-4" data-target-annotation="5">5</dt>
+<dd>
+<span data-code-cell="annotated-cell-4" data-code-lines="19" data-code-annotation="5">If stack exists, add as child to current parent</span>
+</dd>
+<dt data-target-cell="annotated-cell-4" data-target-annotation="6">6</dt>
+<dd>
+<span data-code-cell="annotated-cell-4" data-code-lines="21" data-code-annotation="6">Otherwise, this is a root-level note</span>
+</dd>
+<dt data-target-cell="annotated-cell-4" data-target-annotation="7">7</dt>
+<dd>
+<span data-code-cell="annotated-cell-4" data-code-lines="24" data-code-annotation="7">Push current note onto stack for next iteration</span>
+</dd>
+</dl>
+<p>The stack maintains the “path” from root to current element, automatically handling arbitrary nesting depths.</p>
+</section>
+<section id="dependency-graph" class="level3">
+<h3 class="anchored" data-anchor-id="dependency-graph">Dependency Graph</h3>
+<p>After parsing all tasks and notes, a dependency graph is built via <code>link:</code> fields:</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>show-links.py</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-5" data-filename="show-links.py"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-5-1"><a href="#annotated-cell-5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> build_graph(tasks: List[Task]) <span class="op">-&gt;</span> <span class="bu">tuple</span>:</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-5" data-target-annotation="1">1</button><span id="annotated-cell-5-2" class="code-annotation-target"><a href="#annotated-cell-5-2" aria-hidden="true" tabindex="-1"></a>    id2t <span class="op">=</span> {t.tid: t <span class="cf">for</span> t <span class="kw">in</span> tasks <span class="cf">if</span> t.tid}</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-5" data-target-annotation="2">2</button><span id="annotated-cell-5-3" class="code-annotation-target"><a href="#annotated-cell-5-3" aria-hidden="true" tabindex="-1"></a>    c2p <span class="op">=</span> {}  <span class="co"># child_id -&gt; parent_id</span></span>
+<span id="annotated-cell-5-4"><a href="#annotated-cell-5-4" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="annotated-cell-5-5"><a href="#annotated-cell-5-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> t <span class="kw">in</span> tasks:</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-5" data-target-annotation="3">3</button><span id="annotated-cell-5-6" class="code-annotation-target"><a href="#annotated-cell-5-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> t.link <span class="kw">and</span> t.link <span class="kw">in</span> id2t:</span>
+<span id="annotated-cell-5-7"><a href="#annotated-cell-5-7" aria-hidden="true" tabindex="-1"></a>            c2p[t.tid] <span class="op">=</span> t.link</span>
+<span id="annotated-cell-5-8"><a href="#annotated-cell-5-8" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="annotated-cell-5-9"><a href="#annotated-cell-5-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> id2t, c2p</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-5" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-5" data-code-lines="2" data-code-annotation="1">Build lookup table: task ID → Task object</span>
+</dd>
+<dt data-target-cell="annotated-cell-5" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-5" data-code-lines="3" data-code-annotation="2">Build parent mapping: child ID → parent ID</span>
+</dd>
+<dt data-target-cell="annotated-cell-5" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-cell="annotated-cell-5" data-code-lines="6" data-code-annotation="3">Only add link if parent task actually exists</span>
+</dd>
+</dl>
+<p>Now you can build the task tree: if a task has <code>link:parent_task</code>, it becomes a child of <code>parent_task</code>.</p>
+</section>
+</section>
+<section id="visualization-two-modes" class="level2">
+<h2 class="anchored" data-anchor-id="visualization-two-modes">Visualization: Two Modes</h2>
+<p>The script supports two display modes—<strong>Tree</strong> (hierarchical) and <strong>Day</strong> (by date).</p>
+<section id="tree-mode" class="level3">
+<h3 class="anchored" data-anchor-id="tree-mode">Tree Mode</h3>
+<p><img src="./assets/tree.png" class="img-fluid"></p>
+<p>Tree view is built recursively:</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>show-links.py</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-6" data-filename="show-links.py"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-6-1"><a href="#annotated-cell-6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> build_tree(tasks: List[Task], id2t, c2p, ...) <span class="op">-&gt;</span> List[Node]:</span>
+<span id="annotated-cell-6-2"><a href="#annotated-cell-6-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Find root tasks (those without parents)</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-6" data-target-annotation="1">1</button><span id="annotated-cell-6-3" class="code-annotation-target"><a href="#annotated-cell-6-3" aria-hidden="true" tabindex="-1"></a>    roots <span class="op">=</span> [t <span class="cf">for</span> t <span class="kw">in</span> tasks <span class="cf">if</span> <span class="kw">not</span> t.tid <span class="kw">or</span> t.tid <span class="kw">not</span> <span class="kw">in</span> c2p]</span>
+<span id="annotated-cell-6-4"><a href="#annotated-cell-6-4" aria-hidden="true" tabindex="-1"></a>    </span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-6" data-target-annotation="2">2</button><span id="annotated-cell-6-5" class="code-annotation-target"><a href="#annotated-cell-6-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> make_tree(task: Task) <span class="op">-&gt;</span> Node:</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-6" data-target-annotation="3">3</button><span id="annotated-cell-6-6" class="code-annotation-target"><a href="#annotated-cell-6-6" aria-hidden="true" tabindex="-1"></a>        children <span class="op">=</span> [id2t[cid] <span class="cf">for</span> cid, pid <span class="kw">in</span> c2p.items() <span class="cf">if</span> pid <span class="op">==</span> task.tid]</span>
+<span id="annotated-cell-6-7"><a href="#annotated-cell-6-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> Node(</span>
+<span id="annotated-cell-6-8"><a href="#annotated-cell-6-8" aria-hidden="true" tabindex="-1"></a>            data<span class="op">=</span>task,</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-6" data-target-annotation="4">4</button><span id="annotated-cell-6-9" class="code-annotation-target"><a href="#annotated-cell-6-9" aria-hidden="true" tabindex="-1"></a>            children<span class="op">=</span>[make_tree(c) <span class="cf">for</span> c <span class="kw">in</span> children],</span>
+<span id="annotated-cell-6-10"><a href="#annotated-cell-6-10" aria-hidden="true" tabindex="-1"></a>            notes<span class="op">=</span>[make_tree_note(n) <span class="cf">for</span> n <span class="kw">in</span> task.notes]</span>
+<span id="annotated-cell-6-11"><a href="#annotated-cell-6-11" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="annotated-cell-6-12"><a href="#annotated-cell-6-12" aria-hidden="true" tabindex="-1"></a>    </span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-6" data-target-annotation="5">5</button><span id="annotated-cell-6-13" class="code-annotation-target"><a href="#annotated-cell-6-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> [make_tree(r) <span class="cf">for</span> r <span class="kw">in</span> roots]</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-6" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-6" data-code-lines="3" data-code-annotation="1">Root tasks have no parent (not in child→parent mapping)</span>
+</dd>
+<dt data-target-cell="annotated-cell-6" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-6" data-code-lines="5" data-code-annotation="2">Recursive function to build tree from task</span>
+</dd>
+<dt data-target-cell="annotated-cell-6" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-cell="annotated-cell-6" data-code-lines="6" data-code-annotation="3">Find all tasks that link to current task</span>
+</dd>
+<dt data-target-cell="annotated-cell-6" data-target-annotation="4">4</dt>
+<dd>
+<span data-code-cell="annotated-cell-6" data-code-lines="9" data-code-annotation="4">Recursively build child nodes</span>
+</dd>
+<dt data-target-cell="annotated-cell-6" data-target-annotation="5">5</dt>
+<dd>
+<span data-code-cell="annotated-cell-6" data-code-lines="13" data-code-annotation="5">Build forest (multiple root trees)</span>
+</dd>
+</dl>
+<p>The tree is displayed with indentation and symbols:</p>
+<pre><code>├─ (A) Write article  st:run  @home  due:15.03
+│  ├─ Gather references  st:todo
+│  └─ Prepare code  st:hold
+└─ Submit PR  st:idea</code></pre>
+</section>
+<section id="day-mode" class="level3">
+<h3 class="anchored" data-anchor-id="day-mode">Day Mode</h3>
+<p><img src="./assets/day.png" class="img-fluid"></p>
+<p>In Day mode, tasks are grouped by date and status:</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>show-links.py</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-8" data-filename="show-links.py"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-8-1"><a href="#annotated-cell-8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> build_day_view(tasks: List[Task]) <span class="op">-&gt;</span> List[DayGroup]:</span>
+<span id="annotated-cell-8-2"><a href="#annotated-cell-8-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Group by date: overdue / today / future</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-8" data-target-annotation="1">1</button><span id="annotated-cell-8-3" class="code-annotation-target"><a href="#annotated-cell-8-3" aria-hidden="true" tabindex="-1"></a>    overdue <span class="op">=</span> [t <span class="cf">for</span> t <span class="kw">in</span> tasks <span class="cf">if</span> is_overdue(t.due)]</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-8" data-target-annotation="2">2</button><span id="annotated-cell-8-4" class="code-annotation-target"><a href="#annotated-cell-8-4" aria-hidden="true" tabindex="-1"></a>    today   <span class="op">=</span> [t <span class="cf">for</span> t <span class="kw">in</span> tasks <span class="cf">if</span> is_today(t.due)]</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-8" data-target-annotation="3">3</button><span id="annotated-cell-8-5" class="code-annotation-target"><a href="#annotated-cell-8-5" aria-hidden="true" tabindex="-1"></a>    future  <span class="op">=</span> [t <span class="cf">for</span> t <span class="kw">in</span> tasks <span class="cf">if</span> is_future(t.due)]</span>
+<span id="annotated-cell-8-6"><a href="#annotated-cell-8-6" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="annotated-cell-8-7"><a href="#annotated-cell-8-7" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Within groups, sort by priority and status</span></span>
+<span id="annotated-cell-8-8"><a href="#annotated-cell-8-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> [</span>
+<span id="annotated-cell-8-9"><a href="#annotated-cell-8-9" aria-hidden="true" tabindex="-1"></a>        DayGroup(<span class="st">"Overdue"</span>, overdue),</span>
+<span id="annotated-cell-8-10"><a href="#annotated-cell-8-10" aria-hidden="true" tabindex="-1"></a>        DayGroup(<span class="st">"Today"</span>, today),</span>
+<span id="annotated-cell-8-11"><a href="#annotated-cell-8-11" aria-hidden="true" tabindex="-1"></a>        DayGroup(<span class="st">"Upcoming"</span>, future)</span>
+<span id="annotated-cell-8-12"><a href="#annotated-cell-8-12" aria-hidden="true" tabindex="-1"></a>    ]</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-8" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-8" data-code-lines="3" data-code-annotation="1">Tasks past their due date</span>
+</dd>
+<dt data-target-cell="annotated-cell-8" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-8" data-code-lines="4" data-code-annotation="2">Tasks due today</span>
+</dd>
+<dt data-target-cell="annotated-cell-8" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-cell="annotated-cell-8" data-code-lines="5" data-code-annotation="3">Tasks due in the future</span>
+</dd>
+</dl>
+<p>This is useful for planning—you can see what’s burning, what needs attention today, and what’s coming up.</p>
+</section>
+</section>
+<section id="color-palette-and-rich" class="level2">
+<h2 class="anchored" data-anchor-id="color-palette-and-rich">Color Palette and Rich</h2>
+<p>All output is implemented via the <strong>Rich</strong> library, which enables beautiful terminal UI.</p>
+<section id="color-scheme" class="level3">
+<h3 class="anchored" data-anchor-id="color-scheme">Color Scheme</h3>
+<p>Colors are centrally defined:</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>show-links.py</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-9" data-filename="show-links.py"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-9-1"><a href="#annotated-cell-9-1" aria-hidden="true" tabindex="-1"></a>C <span class="op">=</span> <span class="bu">dict</span>(</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-9" data-target-annotation="1">1</button><span id="annotated-cell-9-2" class="code-annotation-target"><a href="#annotated-cell-9-2" aria-hidden="true" tabindex="-1"></a>    red<span class="op">=</span><span class="st">"#d78787"</span>, blue<span class="op">=</span><span class="st">"#87afd7"</span>, yellow<span class="op">=</span><span class="st">"#d7af87"</span>, green<span class="op">=</span><span class="st">"#87af87"</span>,</span>
+<span id="annotated-cell-9-3"><a href="#annotated-cell-9-3" aria-hidden="true" tabindex="-1"></a>    mag<span class="op">=</span><span class="st">"#af87af"</span>, cyan<span class="op">=</span><span class="st">"#7aafaf"</span>, gray<span class="op">=</span><span class="st">"#8a8a8a"</span>, dim<span class="op">=</span><span class="st">"#585858"</span>,</span>
+<span id="annotated-cell-9-4"><a href="#annotated-cell-9-4" aria-hidden="true" tabindex="-1"></a>    orange<span class="op">=</span><span class="st">"#af875f"</span>, white<span class="op">=</span><span class="st">"#c6c6c6"</span>, sep<span class="op">=</span><span class="st">"#818181"</span>,</span>
+<span id="annotated-cell-9-5"><a href="#annotated-cell-9-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="annotated-cell-9-6"><a href="#annotated-cell-9-6" aria-hidden="true" tabindex="-1"></a></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-9" data-target-annotation="2">2</button><span id="annotated-cell-9-7" class="code-annotation-target"><a href="#annotated-cell-9-7" aria-hidden="true" tabindex="-1"></a>PRIO  <span class="op">=</span> {<span class="st">"A"</span>: C[<span class="st">"red"</span>],    <span class="st">"B"</span>: C[<span class="st">"blue"</span>],   <span class="st">"C"</span>: C[<span class="st">"sep"</span>]}</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-9" data-target-annotation="3">3</button><span id="annotated-cell-9-8" class="code-annotation-target"><a href="#annotated-cell-9-8" aria-hidden="true" tabindex="-1"></a>STAT  <span class="op">=</span> {<span class="st">"idea"</span>: C[<span class="st">"yellow"</span>], <span class="st">"todo"</span>: C[<span class="st">"dim"</span>], <span class="st">"run"</span>: C[<span class="st">"blue"</span>],</span>
+<span id="annotated-cell-9-9"><a href="#annotated-cell-9-9" aria-hidden="true" tabindex="-1"></a>         <span class="st">"hold"</span>: C[<span class="st">"orange"</span>],  <span class="st">"lock"</span>: C[<span class="st">"red"</span>]}</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-9" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-9" data-code-lines="2" data-code-annotation="1">Base color palette inspired by terminal themes</span>
+</dd>
+<dt data-target-cell="annotated-cell-9" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-9" data-code-lines="7" data-code-annotation="2">Priority levels: A (high/red), B (medium/blue), C (low/gray)</span>
+</dd>
+<dt data-target-cell="annotated-cell-9" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-cell="annotated-cell-9" data-code-lines="8" data-code-annotation="3">Status colors: idea (yellow), active (blue), blocked (red)</span>
+</dd>
+</dl>
+<p>Each priority, status, and note type gets its own color for instant visual distinction.</p>
+</section>
+<section id="rendering-with-tag-highlighting" class="level3">
+<h3 class="anchored" data-anchor-id="rendering-with-tag-highlighting">Rendering with Tag Highlighting</h3>
+<p>Tags in task titles are highlighted separately:</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>show-links.py</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-10" data-filename="show-links.py"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-10-1"><a href="#annotated-cell-10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> _title_text(title: <span class="bu">str</span>, text_col: <span class="bu">str</span>, tag_col: <span class="bu">str</span>) <span class="op">-&gt;</span> Text:</span>
+<span id="annotated-cell-10-2"><a href="#annotated-cell-10-2" aria-hidden="true" tabindex="-1"></a>    tx <span class="op">=</span> Text(no_wrap<span class="op">=</span><span class="va">False</span>)</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-10" data-target-annotation="1">1</button><span id="annotated-cell-10-3" class="code-annotation-target"><a href="#annotated-cell-10-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> part <span class="kw">in</span> _RE_TAG_PAT.split(title):</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-10" data-target-annotation="2">2</button><span id="annotated-cell-10-4" class="code-annotation-target"><a href="#annotated-cell-10-4" aria-hidden="true" tabindex="-1"></a>        tx.append(part, style<span class="op">=</span>tag_col <span class="cf">if</span> _RE_TAG_PAT.match(part) <span class="cf">else</span> text_col)</span>
+<span id="annotated-cell-10-5"><a href="#annotated-cell-10-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> tx</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-10" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-10" data-code-lines="3" data-code-annotation="1">Split title on tag boundaries (e.g., <code>+urgent</code>)</span>
+</dd>
+<dt data-target-cell="annotated-cell-10" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-10" data-code-lines="4" data-code-annotation="2">Apply tag color to tags, text color to everything else</span>
+</dd>
+</dl>
+<p>If the title contains <code>+urgent</code>, it will be highlighted in the tag color while the rest uses the task’s main color.</p>
+</section>
+<section id="markdown-in-notes" class="level3">
+<h3 class="anchored" data-anchor-id="markdown-in-notes">Markdown in Notes</h3>
+<p>Notes support basic markdown formatting—<strong>bold</strong>, <em>italic</em>, and <code>code</code>:</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>show-links.py</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-11" data-filename="show-links.py"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-11-1"><a href="#annotated-cell-11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> _md_text(raw: <span class="bu">str</span>, base: <span class="bu">str</span>) <span class="op">-&gt;</span> Text:</span>
+<span id="annotated-cell-11-2"><a href="#annotated-cell-11-2" aria-hidden="true" tabindex="-1"></a>    tx <span class="op">=</span> Text(no_wrap<span class="op">=</span><span class="va">False</span>)<span class="op">;</span> pos <span class="op">=</span> <span class="dv">0</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-11" data-target-annotation="1">1</button><span id="annotated-cell-11-3" class="code-annotation-target"><a href="#annotated-cell-11-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> m <span class="kw">in</span> _RE_MD.finditer(raw):</span>
+<span id="annotated-cell-11-4"><a href="#annotated-cell-11-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> m.start() <span class="op">&gt;</span> pos:</span>
+<span id="annotated-cell-11-5"><a href="#annotated-cell-11-5" aria-hidden="true" tabindex="-1"></a>            tx.append(raw[pos:m.start()], style<span class="op">=</span>base)</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-11" data-target-annotation="2">2</button><span id="annotated-cell-11-6" class="code-annotation-target"><a href="#annotated-cell-11-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> m.group(<span class="dv">1</span>) <span class="kw">is</span> <span class="kw">not</span> <span class="va">None</span>:</span>
+<span id="annotated-cell-11-7"><a href="#annotated-cell-11-7" aria-hidden="true" tabindex="-1"></a>            tx.append(m.group(<span class="dv">1</span>), style<span class="op">=</span><span class="ss">f"</span><span class="sc">{</span>base<span class="sc">}</span><span class="ss"> bold"</span>)</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-11" data-target-annotation="3">3</button><span id="annotated-cell-11-8" class="code-annotation-target"><a href="#annotated-cell-11-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">elif</span> m.group(<span class="dv">2</span>) <span class="kw">is</span> <span class="kw">not</span> <span class="va">None</span>:</span>
+<span id="annotated-cell-11-9"><a href="#annotated-cell-11-9" aria-hidden="true" tabindex="-1"></a>            tx.append(m.group(<span class="dv">2</span>), style<span class="op">=</span><span class="ss">f"</span><span class="sc">{</span>C[<span class="st">'dim'</span>]<span class="sc">}</span><span class="ss"> italic"</span>)</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-11" data-target-annotation="4">4</button><span id="annotated-cell-11-10" class="code-annotation-target"><a href="#annotated-cell-11-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
+<span id="annotated-cell-11-11"><a href="#annotated-cell-11-11" aria-hidden="true" tabindex="-1"></a>            tx.append(m.group(<span class="dv">3</span>), style<span class="op">=</span><span class="ss">f"</span><span class="sc">{</span>C[<span class="st">'dim'</span>]<span class="sc">}</span><span class="ss"> on #303030"</span>)</span>
+<span id="annotated-cell-11-12"><a href="#annotated-cell-11-12" aria-hidden="true" tabindex="-1"></a>        pos <span class="op">=</span> m.end()</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-11" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-11" data-code-lines="3" data-code-annotation="1">Find markdown patterns: <code>**text**</code>, <code>*text*</code>, <code>`text`</code></span>
+</dd>
+<dt data-target-cell="annotated-cell-11" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-11" data-code-lines="6" data-code-annotation="2">Double asterisks = bold</span>
+</dd>
+<dt data-target-cell="annotated-cell-11" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-cell="annotated-cell-11" data-code-lines="8" data-code-annotation="3">Single asterisks = italic</span>
+</dd>
+<dt data-target-cell="annotated-cell-11" data-target-annotation="4">4</dt>
+<dd>
+<span data-code-cell="annotated-cell-11" data-code-lines="10" data-code-annotation="4">Backticks = code with dark background</span>
+</dd>
+</dl>
+<p>This allows readable notes right in the terminal.</p>
+</section>
+</section>
+<section id="navigation-and-control" class="level2">
+<h2 class="anchored" data-anchor-id="navigation-and-control">Navigation and Control</h2>
+<p>The entire interface is keyboard-driven, making it fast for power users.</p>
+<section id="keyboard-shortcuts" class="level3">
+<h3 class="anchored" data-anchor-id="keyboard-shortcuts">Keyboard Shortcuts</h3>
+<pre><code>↑ ↓        navigation
+→ / space  expand / collapse node
+←          collapse / go to parent
+v          switch view (Tree ↔ Day)
+f          search (text) / goto branch (digits)
+l n d c    toggles (linked/nonotes/done/content)
+s @ +      filters (status/context/tags)
+enter      open in $EDITOR
+ctrl+enter open task note
+r          build branch from line
+esc        reset filters
+q          quit</code></pre>
+</section>
+<section id="key-reading" class="level3">
+<h3 class="anchored" data-anchor-id="key-reading">Key Reading</h3>
+<p>Key reading is implemented via low-level <code>termios</code>:</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>show-links.py</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-13" data-filename="show-links.py"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-13-1"><a href="#annotated-cell-13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> read_key() <span class="op">-&gt;</span> <span class="bu">str</span>:</span>
+<span id="annotated-cell-13-2"><a href="#annotated-cell-13-2" aria-hidden="true" tabindex="-1"></a>    fd <span class="op">=</span> sys.stdin.fileno()</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-13" data-target-annotation="1">1</button><span id="annotated-cell-13-3" class="code-annotation-target"><a href="#annotated-cell-13-3" aria-hidden="true" tabindex="-1"></a>    old_settings <span class="op">=</span> termios.tcgetattr(fd)</span>
+<span id="annotated-cell-13-4"><a href="#annotated-cell-13-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">try</span>:</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-13" data-target-annotation="2">2</button><span id="annotated-cell-13-5" class="code-annotation-target"><a href="#annotated-cell-13-5" aria-hidden="true" tabindex="-1"></a>        tty.setraw(fd)</span>
+<span id="annotated-cell-13-6"><a href="#annotated-cell-13-6" aria-hidden="true" tabindex="-1"></a>        </span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-13" data-target-annotation="3">3</button><span id="annotated-cell-13-7" class="code-annotation-target"><a href="#annotated-cell-13-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> select.select([sys.stdin], [], [], <span class="fl">0.1</span>)[<span class="dv">0</span>]:</span>
+<span id="annotated-cell-13-8"><a href="#annotated-cell-13-8" aria-hidden="true" tabindex="-1"></a>            ch <span class="op">=</span> sys.stdin.read(<span class="dv">1</span>)</span>
+<span id="annotated-cell-13-9"><a href="#annotated-cell-13-9" aria-hidden="true" tabindex="-1"></a>            </span>
+<span id="annotated-cell-13-10"><a href="#annotated-cell-13-10" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Recognize escape sequences</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-13" data-target-annotation="4">4</button><span id="annotated-cell-13-11" class="code-annotation-target"><a href="#annotated-cell-13-11" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> ch <span class="op">==</span> <span class="st">"</span><span class="ch">\x1b</span><span class="st">"</span>:</span>
+<span id="annotated-cell-13-12"><a href="#annotated-cell-13-12" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> select.select([sys.stdin], [], [], <span class="fl">0.1</span>)[<span class="dv">0</span>]:</span>
+<span id="annotated-cell-13-13"><a href="#annotated-cell-13-13" aria-hidden="true" tabindex="-1"></a>                    ch2 <span class="op">=</span> sys.stdin.read(<span class="dv">1</span>)</span>
+<span id="annotated-cell-13-14"><a href="#annotated-cell-13-14" aria-hidden="true" tabindex="-1"></a>                    <span class="cf">if</span> ch2 <span class="op">==</span> <span class="st">"["</span>:</span>
+<span id="annotated-cell-13-15"><a href="#annotated-cell-13-15" aria-hidden="true" tabindex="-1"></a>                        ch3 <span class="op">=</span> sys.stdin.read(<span class="dv">1</span>)</span>
+<span id="annotated-cell-13-16"><a href="#annotated-cell-13-16" aria-hidden="true" tabindex="-1"></a>                        <span class="cf">return</span> {<span class="st">"A"</span>: <span class="st">"up"</span>, <span class="st">"B"</span>: <span class="st">"down"</span>, </span>
+<span id="annotated-cell-13-17"><a href="#annotated-cell-13-17" aria-hidden="true" tabindex="-1"></a>                                <span class="st">"C"</span>: <span class="st">"right"</span>, <span class="st">"D"</span>: <span class="st">"left"</span>}[ch3]</span>
+<span id="annotated-cell-13-18"><a href="#annotated-cell-13-18" aria-hidden="true" tabindex="-1"></a>            </span>
+<span id="annotated-cell-13-19"><a href="#annotated-cell-13-19" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> {<span class="st">"q"</span>: <span class="st">"q"</span>, <span class="st">"</span><span class="ch">\r</span><span class="st">"</span>: <span class="st">"enter"</span>, <span class="st">"</span><span class="ch">\x7f</span><span class="st">"</span>: <span class="st">"backspace"</span>}[ch]</span>
+<span id="annotated-cell-13-20"><a href="#annotated-cell-13-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">finally</span>:</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-13" data-target-annotation="5">5</button><span id="annotated-cell-13-21" class="code-annotation-target"><a href="#annotated-cell-13-21" aria-hidden="true" tabindex="-1"></a>        termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-13" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-13" data-code-lines="3" data-code-annotation="1">Save current terminal settings</span>
+</dd>
+<dt data-target-cell="annotated-cell-13" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-13" data-code-lines="5" data-code-annotation="2">Enter raw mode (no line buffering)</span>
+</dd>
+<dt data-target-cell="annotated-cell-13" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-cell="annotated-cell-13" data-code-lines="7" data-code-annotation="3">Non-blocking check for input with 0.1s timeout</span>
+</dd>
+<dt data-target-cell="annotated-cell-13" data-target-annotation="4">4</dt>
+<dd>
+<span data-code-cell="annotated-cell-13" data-code-lines="11" data-code-annotation="4">Escape sequences for arrow keys</span>
+</dd>
+<dt data-target-cell="annotated-cell-13" data-target-annotation="5">5</dt>
+<dd>
+<span data-code-cell="annotated-cell-13" data-code-lines="21" data-code-annotation="5">Restore original terminal settings</span>
+</dd>
+</dl>
+<p>This captures arrows, Enter, Backspace, and special combinations like Ctrl+Enter.</p>
+</section>
+</section>
+<section id="filtering-and-search" class="level2">
+<h2 class="anchored" data-anchor-id="filtering-and-search">Filtering and Search</h2>
+<p>One of the most powerful features is the filtering system.</p>
+<section id="text-search" class="level3">
+<h3 class="anchored" data-anchor-id="text-search">Text Search</h3>
+<p>Search works in real-time—the tree rebuilds with each character:</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>show-links.py</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-14" data-filename="show-links.py"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-14-1"><a href="#annotated-cell-14-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> _apply_search(st: St) <span class="op">-&gt;</span> <span class="va">None</span>:</span>
+<span id="annotated-cell-14-2"><a href="#annotated-cell-14-2" aria-hidden="true" tabindex="-1"></a>    buf <span class="op">=</span> st.input_buf</span>
+<span id="annotated-cell-14-3"><a href="#annotated-cell-14-3" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="annotated-cell-14-4"><a href="#annotated-cell-14-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># If only digits entered — goto task by line number</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-14" data-target-annotation="1">1</button><span id="annotated-cell-14-5" class="code-annotation-target"><a href="#annotated-cell-14-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> buf.isdigit() <span class="kw">and</span> buf:</span>
+<span id="annotated-cell-14-6"><a href="#annotated-cell-14-6" aria-hidden="true" tabindex="-1"></a>        target <span class="op">=</span> st.ln2t.get(<span class="bu">int</span>(buf))</span>
+<span id="annotated-cell-14-7"><a href="#annotated-cell-14-7" aria-hidden="true" tabindex="-1"></a>        st.root_tid <span class="op">=</span> target.tid <span class="cf">if</span> target <span class="cf">else</span> <span class="st">""</span></span>
+<span id="annotated-cell-14-8"><a href="#annotated-cell-14-8" aria-hidden="true" tabindex="-1"></a>        st.flt_search <span class="op">=</span> <span class="st">""</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-14" data-target-annotation="2">2</button><span id="annotated-cell-14-9" class="code-annotation-target"><a href="#annotated-cell-14-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="annotated-cell-14-10"><a href="#annotated-cell-14-10" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Text search in titles</span></span>
+<span id="annotated-cell-14-11"><a href="#annotated-cell-14-11" aria-hidden="true" tabindex="-1"></a>        st.flt_search <span class="op">=</span> buf</span>
+<span id="annotated-cell-14-12"><a href="#annotated-cell-14-12" aria-hidden="true" tabindex="-1"></a>    </span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-14" data-target-annotation="3">3</button><span id="annotated-cell-14-13" class="code-annotation-target"><a href="#annotated-cell-14-13" aria-hidden="true" tabindex="-1"></a>    do_rebuild(st)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-14" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-14" data-code-lines="5" data-code-annotation="1">Numeric input = jump to line number</span>
+</dd>
+<dt data-target-cell="annotated-cell-14" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-14" data-code-lines="9" data-code-annotation="2">Text input = filter by title content</span>
+</dd>
+<dt data-target-cell="annotated-cell-14" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-cell="annotated-cell-14" data-code-lines="13" data-code-annotation="3">Rebuild entire tree with new filter</span>
+</dd>
+</dl>
+</section>
+<section id="building-branch-from-line" class="level3">
+<h3 class="anchored" data-anchor-id="building-branch-from-line">Building Branch from Line</h3>
+<p>“Goto” mode lets you enter a line number and build the tree from that task:</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>show-links.py</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-15" data-filename="show-links.py"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-15-1"><a href="#annotated-cell-15-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> st.input_buf.isdigit():</span>
+<span id="annotated-cell-15-2"><a href="#annotated-cell-15-2" aria-hidden="true" tabindex="-1"></a>    target <span class="op">=</span> st.ln2t.get(<span class="bu">int</span>(st.input_buf))</span>
+<span id="annotated-cell-15-3"><a href="#annotated-cell-15-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> target:</span>
+<span id="annotated-cell-15-4"><a href="#annotated-cell-15-4" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Find branch root (walk up parents)</span></span>
+<span id="annotated-cell-15-5"><a href="#annotated-cell-15-5" aria-hidden="true" tabindex="-1"></a>        root <span class="op">=</span> target</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-15" data-target-annotation="1">1</button><span id="annotated-cell-15-6" class="code-annotation-target"><a href="#annotated-cell-15-6" aria-hidden="true" tabindex="-1"></a>        seen <span class="op">=</span> {target.tid}</span>
+<span id="annotated-cell-15-7"><a href="#annotated-cell-15-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">while</span> root.tid <span class="kw">in</span> st.c2p:</span>
+<span id="annotated-cell-15-8"><a href="#annotated-cell-15-8" aria-hidden="true" tabindex="-1"></a>            pid <span class="op">=</span> st.c2p[root.tid]</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-15" data-target-annotation="2">2</button><span id="annotated-cell-15-9" class="code-annotation-target"><a href="#annotated-cell-15-9" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> pid <span class="kw">in</span> seen:</span>
+<span id="annotated-cell-15-10"><a href="#annotated-cell-15-10" aria-hidden="true" tabindex="-1"></a>                <span class="cf">break</span>  <span class="co"># cycle detected!</span></span>
+<span id="annotated-cell-15-11"><a href="#annotated-cell-15-11" aria-hidden="true" tabindex="-1"></a>            seen.add(pid)</span>
+<span id="annotated-cell-15-12"><a href="#annotated-cell-15-12" aria-hidden="true" tabindex="-1"></a>            root <span class="op">=</span> st.id2t[pid]</span>
+<span id="annotated-cell-15-13"><a href="#annotated-cell-15-13" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="annotated-cell-15-14"><a href="#annotated-cell-15-14" aria-hidden="true" tabindex="-1"></a>        st.root_tid <span class="op">=</span> root.tid</span>
+<span id="annotated-cell-15-15"><a href="#annotated-cell-15-15" aria-hidden="true" tabindex="-1"></a>        do_rebuild(st)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-15" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-15" data-code-lines="6" data-code-annotation="1">Track visited task IDs</span>
+</dd>
+<dt data-target-cell="annotated-cell-15" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-15" data-code-lines="9" data-code-annotation="2">Break if we encounter a cycle (A → B → C → A)</span>
+</dd>
+</dl>
+<p>This is very convenient for focusing on a specific subtask and all its dependencies.</p>
+</section>
+</section>
+<section id="interesting-technical-details" class="level2">
+<h2 class="anchored" data-anchor-id="interesting-technical-details">Interesting Technical Details</h2>
+<section id="tree-flattening-for-display" class="level3">
+<h3 class="anchored" data-anchor-id="tree-flattening-for-display">Tree Flattening for Display</h3>
+<p>The tree structure is rendered through “flattening”—converting the tree into a flat list with parent indices:</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>show-links.py</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-16" data-filename="show-links.py"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-16-1"><a href="#annotated-cell-16-1" aria-hidden="true" tabindex="-1"></a><span class="at">@dataclass</span></span>
+<span id="annotated-cell-16-2"><a href="#annotated-cell-16-2" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> FlatItem:</span>
+<span id="annotated-cell-16-3"><a href="#annotated-cell-16-3" aria-hidden="true" tabindex="-1"></a>    node: Node</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-16" data-target-annotation="1">1</button><span id="annotated-cell-16-4" class="code-annotation-target"><a href="#annotated-cell-16-4" aria-hidden="true" tabindex="-1"></a>    depth: <span class="bu">int</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-16" data-target-annotation="2">2</button><span id="annotated-cell-16-5" class="code-annotation-target"><a href="#annotated-cell-16-5" aria-hidden="true" tabindex="-1"></a>    parent_idx: <span class="bu">int</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-16" data-target-annotation="3">3</button><span id="annotated-cell-16-6" class="code-annotation-target"><a href="#annotated-cell-16-6" aria-hidden="true" tabindex="-1"></a>    index: <span class="bu">int</span></span>
+<span id="annotated-cell-16-7"><a href="#annotated-cell-16-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="annotated-cell-16-8"><a href="#annotated-cell-16-8" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> flatten(roots: List[Node]) <span class="op">-&gt;</span> List[FlatItem]:</span>
+<span id="annotated-cell-16-9"><a href="#annotated-cell-16-9" aria-hidden="true" tabindex="-1"></a>    flat: List[FlatItem] <span class="op">=</span> []</span>
+<span id="annotated-cell-16-10"><a href="#annotated-cell-16-10" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="annotated-cell-16-11"><a href="#annotated-cell-16-11" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> walk(node: Node, depth: <span class="bu">int</span>, parent_idx: <span class="bu">int</span>):</span>
+<span id="annotated-cell-16-12"><a href="#annotated-cell-16-12" aria-hidden="true" tabindex="-1"></a>        idx <span class="op">=</span> <span class="bu">len</span>(flat)</span>
+<span id="annotated-cell-16-13"><a href="#annotated-cell-16-13" aria-hidden="true" tabindex="-1"></a>        flat.append(FlatItem(node, depth, parent_idx, idx))</span>
+<span id="annotated-cell-16-14"><a href="#annotated-cell-16-14" aria-hidden="true" tabindex="-1"></a>        </span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-16" data-target-annotation="4">4</button><span id="annotated-cell-16-15" class="code-annotation-target"><a href="#annotated-cell-16-15" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> node.expanded:</span>
+<span id="annotated-cell-16-16"><a href="#annotated-cell-16-16" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> child <span class="kw">in</span> node.children:</span>
+<span id="annotated-cell-16-17"><a href="#annotated-cell-16-17" aria-hidden="true" tabindex="-1"></a>                walk(child, depth <span class="op">+</span> <span class="dv">1</span>, idx)</span>
+<span id="annotated-cell-16-18"><a href="#annotated-cell-16-18" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="annotated-cell-16-19"><a href="#annotated-cell-16-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> root <span class="kw">in</span> roots:</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-16" data-target-annotation="5">5</button><span id="annotated-cell-16-20" class="code-annotation-target"><a href="#annotated-cell-16-20" aria-hidden="true" tabindex="-1"></a>        walk(root, <span class="dv">0</span>, <span class="op">-</span><span class="dv">1</span>)</span>
+<span id="annotated-cell-16-21"><a href="#annotated-cell-16-21" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="annotated-cell-16-22"><a href="#annotated-cell-16-22" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> flat</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-16" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-16" data-code-lines="4" data-code-annotation="1">Indentation level for rendering</span>
+</dd>
+<dt data-target-cell="annotated-cell-16" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-16" data-code-lines="5" data-code-annotation="2">Index of parent in flat list (-1 for roots)</span>
+</dd>
+<dt data-target-cell="annotated-cell-16" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-cell="annotated-cell-16" data-code-lines="6" data-code-annotation="3">Own index in flat list</span>
+</dd>
+<dt data-target-cell="annotated-cell-16" data-target-annotation="4">4</dt>
+<dd>
+<span data-code-cell="annotated-cell-16" data-code-lines="15" data-code-annotation="4">Only recurse into expanded nodes</span>
+</dd>
+<dt data-target-cell="annotated-cell-16" data-target-annotation="5">5</dt>
+<dd>
+<span data-code-cell="annotated-cell-16" data-code-lines="20" data-code-annotation="5">Roots have depth 0, no parent</span>
+</dd>
+</dl>
+<p>This enables: - List display with scrolling (cursor = index in <code>flat</code>) - Quick parent lookup via <code>parent_idx</code> - Easy node expand/collapse</p>
+</section>
+<section id="handling-ansi-codes" class="level3">
+<h3 class="anchored" data-anchor-id="handling-ansi-codes">Handling ANSI Codes</h3>
+<p>Rich generates ANSI escape codes for colors. When calculating string widths, these need to be ignored:</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>show-links.py</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-17" data-filename="show-links.py"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><button class="code-annotation-anchor" data-target-cell="annotated-cell-17" data-target-annotation="1">1</button><span id="annotated-cell-17-1" class="code-annotation-target"><a href="#annotated-cell-17-1" aria-hidden="true" tabindex="-1"></a>_RE_ANSI <span class="op">=</span> re.<span class="bu">compile</span>(<span class="vs">r"</span><span class="ch">\x1b\[</span><span class="pp">[0-9;]</span><span class="op">*</span><span class="vs">m"</span>)</span>
+<span id="annotated-cell-17-2"><a href="#annotated-cell-17-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="annotated-cell-17-3"><a href="#annotated-cell-17-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> _vlen(s: <span class="bu">str</span>) <span class="op">-&gt;</span> <span class="bu">int</span>:</span>
+<span id="annotated-cell-17-4"><a href="#annotated-cell-17-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Visual length of string (excluding ANSI codes)"""</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-17" data-target-annotation="2">2</button><span id="annotated-cell-17-5" class="code-annotation-target"><a href="#annotated-cell-17-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">len</span>(_RE_ANSI.sub(<span class="st">""</span>, s))</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-17" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-17" data-code-lines="1" data-code-annotation="1">Pattern for ANSI escape sequences</span>
+</dd>
+<dt data-target-cell="annotated-cell-17" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-17" data-code-lines="5" data-code-annotation="2">Strip ANSI codes before counting characters</span>
+</dd>
+</dl>
+<p>Without this, colored strings would be counted as longer than they appear in the terminal.</p>
+</section>
+</section>
+<section id="conclusions" class="level2">
+<h2 class="anchored" data-anchor-id="conclusions">Conclusions</h2>
+<p><code>show-links.py</code> transforms flat todo.txt into an interactive dependency graph with fast navigation and powerful filtering. It’s a great example of how you can take a simple text format and add rich visualization without abandoning its advantages (plain text, version control, grep-friendly).</p>
+<p><strong>Key features:</strong> - Tree visualization — task relationships are immediately visible - Two display modes — Tree for structure, Day for planning - Powerful filtering — by status, context, tags, text search - Editor integration — one click to edit task or note - Color coding — priorities and statuses are instantly distinguishable - Fast navigation — all keyboard-driven, no mouse needed</p>
+<p><strong>Interesting patterns demonstrated:</strong> - Building a tree from a flat list via stack - Tree flattening for scrollable display - Low-level key reading via <code>termios</code> - Rendering accounting for ANSI escape codes - Cycle protection in dependency graphs</p>
+<p>This approach can be applied to any data with tree structure—git commits, directory structures, mind maps, dependency graphs.</p>
+</section>
+<section id="full-source-code" class="level2">
+<h2 class="anchored" data-anchor-id="full-source-code">Full Source Code</h2>
+<p>The complete source code (1235 lines) is available for download:</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>📥 Download
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><a href="show-links.py"><strong>show-links.py</strong></a> — Full Python script (1235 lines)</p>
+<p>Place this file alongside your <code>todo.txt</code> in <code>~/Documents/todo/</code> and run:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> show-links.py</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+
+
+</section>
+
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        const annoteTargets = window.document.querySelectorAll('.code-annotation-anchor');
+        for (let i=0; i<annoteTargets.length; i++) {
+          const annoteTarget = annoteTargets[i];
+          const targetCell = annoteTarget.getAttribute("data-target-cell");
+          const targetAnnotation = annoteTarget.getAttribute("data-target-annotation");
+          const contentFn = () => {
+            const content = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+            if (content) {
+              const tipContent = content.cloneNode(true);
+              tipContent.classList.add("code-annotation-tip-content");
+              return tipContent.outerHTML;
+            }
+          }
+          const config = {
+            allowHTML: true,
+            content: contentFn,
+            onShow: (instance) => {
+              selectCodeLines(instance.reference);
+              instance.reference.classList.add('code-annotation-active');
+              window.tippy.hideAll();
+            },
+            onHide: (instance) => {
+              unselectCodeLines();
+              instance.reference.classList.remove('code-annotation-active');
+            },
+            maxWidth: 300,
+            delay: [50, 0],
+            duration: [200, 0],
+            offset: [5, 10],
+            arrow: true,
+            appendTo: function(el) {
+              return el.parentElement.parentElement.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'quarto',
+            placement: 'right',
+            popperOptions: {
+              modifiers: [
+              {
+                name: 'flip',
+                options: {
+                  flipVariations: false, // true by default
+                  allowedAutoPlacements: ['right'],
+                  fallbackPlacements: ['right', 'top', 'top-start', 'top-end', 'bottom', 'bottom-start', 'bottom-end', 'left'],
+                },
+              },
+              {
+                name: 'preventOverflow',
+                options: {
+                  mainAxis: false,
+                  altAxis: false
+                }
+              }
+              ]        
+            }      
+          };
+          window.tippy(annoteTarget, config); 
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Enopheron 2026</p>
+</div>   
+    <div class="nav-footer-center">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/Enopheron">
+      <i class="bi bi-github" role="img">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://t.me/Enopheron">
+      <i class="bi bi-telegram" role="img">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="mailto:Vladimir Vladimirovich+enopheron@gmx.com">
+      <i class="bi bi-envelope-fill" role="img">
+</i> 
+    </a>
+  </li>  
+</ul>
+    </div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+<script src="../../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>
