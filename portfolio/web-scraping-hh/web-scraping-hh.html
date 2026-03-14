@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.26">
+<meta name="generator" content="quarto-1.8.27">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -74,7 +74,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-ac1a48248070c8bfbae4244efd7728e4.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-2a367172f4fe7d9182ebf8e09f85cb4e.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../../site_libs/bootstrap/bootstrap-9fbb3af37ca9569285579dd0d384ea3c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
@@ -221,7 +221,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 2. <strong><code>bs4</code> (BeautifulSoup)</strong>: An HTML parsing tool that traverses the raw HTML DOM string returned by <code>requests</code>, allowing us to search for specific tags and classes.<br>
 3. <strong><code>polars</code></strong>: High-performance data manipulation to store and prepare the scraped data.<br>
 4. <strong><code>xlsxwriter</code></strong>: Exports our final Polars DataFrame to a styled Excel spreadsheet.</p>
-<div id="cded6197" class="cell" data-execution_count="1">
+<div id="c50dc0fd" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> requests</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> bs4 <span class="im">import</span> BeautifulSoup</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> polars <span class="im">as</span> pl</span>
@@ -266,7 +266,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="validating-extracted-pages" class="level2">
 <h2 class="anchored" data-anchor-id="validating-extracted-pages">Validating Extracted Pages</h2>
 <p>Modern web pages are complicated, and scraping requests occasionally return incomplete or broken domestic DOM trees (due to lazy-loading or server load). This function attempts to re-fetch a page up to 9 times if the core structural identifiers (like the <code>vacancy-title</code> container) fail to render.</p>
-<div id="6c687ac5" class="cell" data-execution_count="2">
+<div id="bb0d0192" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> check_correctly(url):</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">9</span>):         </span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>        response <span class="op">=</span> requests.get(url, headers<span class="op">=</span>headers) </span>
@@ -284,7 +284,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="extracting-the-job-profile" class="level2">
 <h2 class="anchored" data-anchor-id="extracting-the-job-profile">Extracting the Job Profile</h2>
 <p>This function dissects the specific job posting, scraping the title, salary, skills, and checking for our pre-defined keywords.</p>
-<div id="9c8e334a" class="cell" data-execution_count="3">
+<div id="cd55dcc8" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> visit_and_check(url, soup, response):</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">global</span> df                     </span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -330,7 +330,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="iterating-over-the-search-results" class="level2">
 <h2 class="anchored" data-anchor-id="iterating-over-the-search-results">Iterating over the Search Results</h2>
 <p>This loop controls the pagination across the main search results. It iterates over the pages, extracts the individual vacancy URLs sequentially, and hands them off to the validation and extraction functions above.</p>
-<div id="77cda477" class="cell" data-execution_count="4">
+<div id="625967dd" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Iterate through the first 9 pages of search results</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> p <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">9</span>):              </span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> p <span class="op">&gt;</span> <span class="dv">0</span>:</span>

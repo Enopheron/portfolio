@@ -153,3 +153,208 @@ a,
   color: white;
   border-color: #cc7b29;
 }
+
+/* --- Улучшенная типографика заголовков --- */
+.gradient-text {
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+h4.text-primary {
+  font-size: 1.35rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.custom-card h4 {
+  font-size: 1.15rem;
+  font-weight: 600;
+}
+
+/* --- Улучшения для достижений --- */
+.achievement-list li {
+  margin-bottom: 0.75rem;
+  line-height: 1.6;
+}
+
+/* --- Визуальные улучшения для Tech Tags --- */
+.tech-tags .badge {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.tech-tags .badge:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* --- Адаптивность для мобильных устройств --- */
+@media (max-width: 768px) {
+  .gradient-text {
+    font-size: 1.5rem;
+  }
+  
+  h4.text-primary {
+    font-size: 1.2rem;
+  }
+  
+  .custom-card h4 {
+    font-size: 1rem;
+  }
+  
+  /* Уменьшаем фото профиля на мобильных */
+  img.rounded-circle {
+    width: 50% !important;
+  }
+  
+  /* Компактные бейджи на мобильных */
+  .tech-tags .badge {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
+  }
+  
+  /* Лучшие отступы для мобильных */
+  .custom-card {
+    padding: 1rem !important;
+    margin-bottom: 1rem !important;
+  }
+  
+  /* Компактные кнопки на мобильных */
+  .btn-sm {
+    font-size: 0.8rem;
+    padding: 0.35rem 0.7rem;
+  }
+}
+
+/* Даты переносятся под заголовок на очень маленьких экранах */
+@media (max-width: 576px) {
+  .d-flex.justify-content-between.align-items-baseline {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+  }
+  
+  .badge.bg-secondary.rounded-pill {
+    margin-top: 0.5rem;
+  }
+}
+
+/* --- Адаптивность для главной страницы (index.qmd) --- */
+
+/* Hero section - адаптивные размеры */
+.hero-section {
+  padding: 4rem 2rem !important;
+}
+
+.hero-section h1.display-3 {
+  font-size: 3.5rem;
+}
+
+.hero-section .lead {
+  font-size: 1.25rem;
+}
+
+/* Адаптивность кнопок на главной */
+.hero-section .btn-lg {
+  font-size: 1.1rem;
+  padding: 0.75rem 2rem;
+}
+
+@media (max-width: 992px) {
+  .hero-section h1.display-3 {
+    font-size: 2.5rem;
+  }
+  
+  .hero-section .lead {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-section {
+    padding: 3rem 1.5rem !important;
+  }
+  
+  .hero-section h1.display-3 {
+    font-size: 2rem;
+    letter-spacing: -1px !important;
+  }
+  
+  .hero-section .lead {
+    font-size: 1rem;
+  }
+  
+  /* Кнопки становятся меньше */
+  .hero-section .btn-lg {
+    font-size: 0.95rem;
+    padding: 0.65rem 1.5rem;
+  }
+  
+  /* Уменьшаем gap между кнопками */
+  .hero-section .d-flex {
+    gap: 0.75rem !important;
+  }
+}
+
+@media (max-width: 576px) {
+  .hero-section {
+    padding: 2rem 1rem !important;
+  }
+  
+  .hero-section h1.display-3 {
+    font-size: 1.75rem;
+  }
+  
+  .hero-section .lead {
+    font-size: 0.95rem;
+    margin-bottom: 2rem !important;
+  }
+  
+  /* Кнопки стекаются вертикально на очень маленьких экранах */
+  .hero-section .d-flex {
+    flex-direction: column !important;
+    gap: 0.75rem !important;
+  }
+  
+  .hero-section .btn-lg {
+    width: 100%;
+    font-size: 0.9rem;
+    padding: 0.6rem 1.25rem;
+  }
+}
+
+/* Адаптивность для grid портфолио */
+@media (max-width: 992px) {
+  /* 2 колонки на планшетах */
+  .quarto-listing-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+
+@media (max-width: 576px) {
+  /* 1 колонка на мобильных */
+  .quarto-listing-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* Заголовок Recent Work */
+@media (max-width: 768px) {
+  .text-center h2 {
+    font-size: 1.75rem;
+  }
+  
+  .text-center .fs-5 {
+    font-size: 1rem !important;
+  }
+}
+
+@media (max-width: 576px) {
+  .text-center h2 {
+    font-size: 1.5rem;
+  }
+  
+  .text-center .fs-5 {
+    font-size: 0.95rem !important;
+  }
+}
