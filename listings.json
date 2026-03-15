@@ -1,6 +1,6 @@
 [
   {
-    "listing": "/index.html",
+    "listing": "/portfolio/index.html",
     "items": [
       "/portfolio/todo-tree-viewer/todo-tree-viewer.html",
       "/portfolio/sales-binol-olive/sales-binol-olive.html",
@@ -11,7 +11,7 @@
     ]
   },
   {
-    "listing": "/portfolio/index.html",
+    "listing": "/index.html",
     "items": [
       "/portfolio/todo-tree-viewer/todo-tree-viewer.html",
       "/portfolio/sales-binol-olive/sales-binol-olive.html",
